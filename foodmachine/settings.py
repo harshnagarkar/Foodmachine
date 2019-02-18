@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import os
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
+TEMPLATE_DIRS = (
+	os.path.join(SETTINGS_PATH, 'templates'),
+)
+
 
 # Application definition
 
@@ -37,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'social_django',
+	'authentication',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +63,7 @@ ROOT_URLCONF = 'foodmachine.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(SETTINGS_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'social_django.context_processors.backends',  
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -118,3 +129,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+
+AUTHENTICATION_BACKENDS = (
+'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+ 'social_core.backends.google.GoogleOpenId',  # for Google authentication
+ 'social_core.backends.google.GoogleOAuth2',
+ 
+ 'django.contrib.auth.backends.ModelBackend',
+ )
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325186787105-ti7fjmlnptv5hv7gp9sj2gkmuigbgkhh.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n5a0u5mDWryFM3SikLsOBD0q'
