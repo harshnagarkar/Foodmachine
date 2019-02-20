@@ -29,7 +29,7 @@ cloudpickle==0.6.1
 clyent==1.2.1
 colorama==0.4.0
 comtypes==1.1.7
-conda==4.6.3
+conda==4.3.16
 conda-build==3.17.5
 conda-verify==3.1.1
 configparser==3.5.0
