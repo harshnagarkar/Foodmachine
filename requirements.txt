@@ -139,7 +139,6 @@ pycodestyle==2.4.0
 pycosat==0.6.3
 pycparser==2.19
 pycrypto==2.6.1
-pycurl==7.19.0
 pyFFTW==0.10.4
 pyflakes==2.0.0
 Pygments==2.2.0
