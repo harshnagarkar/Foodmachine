@@ -132,7 +132,6 @@ ply==3.11
 progress==1.4
 prometheus-client==0.4.2
 prompt-toolkit==1.0.15
-psf==2019.1.1
 psutil==5.4.8
 psycopg2==2.7.7
 py==1.7.0
