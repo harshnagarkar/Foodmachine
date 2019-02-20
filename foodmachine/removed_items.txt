@@ -1,5 +1,5 @@
 anaconda-client==1.2.2
 anaconda-navigator==1.8.4
-
+cdecimal==2.3
 anaconda-navigator==1.8.4
 anaconda-project==0.8.2
