@@ -1,1 +1,2 @@
 anaconda-client==1.2.2
+anaconda-navigator==1.8.4
