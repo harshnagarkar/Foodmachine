@@ -7,7 +7,6 @@ class Restaurant(models.Model):
     Res_Name = models.CharField(max_length=75)
     Res_Description = models.CharField(max_length=150, null=True)
     Res_Contact = PhoneNumberField(null=False, blank=False, unique=True)
-    Res_Location = models.CharField(max_length=25)
     Res_Address = models.CharField(max_length=75)
     Cuisine_Type = models.CharField(max_length=25)
     
