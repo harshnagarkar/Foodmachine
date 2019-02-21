@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Restaurant(models.Model):
     Res_Id = models.AutoField(primary_key=True)
     Res_Name = models.CharField(max_length=75)
-    Res_Description = models.CharField(max_length=150)
+    Res_Description = models.CharField(max_length=150, null=True)
     Res_Contact = PhoneNumberField(null=False, blank=False, unique=True)
     Res_Location = models.CharField(max_length=25)
     Res_Address = models.CharField(max_length=75)
@@ -19,4 +19,12 @@ class Menu(models.Model):
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
 class Review(models.Models):
-    
+    Review_Id = models.AutoField(primary_key=True)
+    Res_Id = models.ForeignKey(Restaurant,on_delete=models.CASCADE)
+    Review_Des = models.CharField(max_length = 75,blank=True)
+
+class Cuisine(models.Model):
+    Cuisine_Id = models.AutoField(primary_key=True)
+    Cusine_Sub = models.CharField(max_length=20)
+    Cusine_parent = models.CharField(max_length=20,null=True)
+    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
