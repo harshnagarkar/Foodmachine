@@ -25,3 +25,4 @@ backports.ssl-match-hostname==3.5.0.1
 beautifulsoup4==4.6.3
 django-phonenumber-field
 phonenumbers
+social-auth-app-django
