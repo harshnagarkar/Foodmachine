@@ -17,3 +17,6 @@ class Menu(models.Model):
     Menu_ItemPrice = models.IntegerField()
     Menu_Item_Description = models.CharField(max_length=100)
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+
+class Review(models.Models):
+    
