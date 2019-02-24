@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-import os
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 # Static files (CSS, JavaScript, Images)
@@ -56,10 +55,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
 	'social_django',
 	'authentication',
     'phonenumber_field',
     'restaurant',
+=======
+   	'social_django',
+   	'authentication',
+    'phonenumber_field',
+
+>>>>>>> 0b5ece96c795aa9f8d37601880dc271ee03972c5
 ]
 
 MIDDLEWARE = [
@@ -86,7 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-				'social_django.context_processors.backends',  
+            				'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
         },
@@ -150,12 +156,12 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 
 AUTHENTICATION_BACKENDS = (
-'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
- 'social_core.backends.google.GoogleOpenId',  # for Google authentication
- 'social_core.backends.google.GoogleOAuth2',
- 
- 'django.contrib.auth.backends.ModelBackend',
- )
+    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
+    'social_core.backends.google.GoogleOpenId',  # for Google authentication
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325186787105-ti7fjmlnptv5hv7gp9sj2gkmuigbgkhh.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n5a0u5mDWryFM3SikLsOBD0q'
