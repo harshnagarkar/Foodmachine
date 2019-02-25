@@ -58,9 +58,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'social_django',
 	'authentication',
+<<<<<<< HEAD
     'phonenumber_field',
     'restaurant',
+=======
+	'accounts.apps.AccountsConfig' #Added 2/23/2019
+
+>>>>>>> 2d685cd169503713d69c07a70adff22e44b71006
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,8 +153,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 LOGIN_URL = 'login'
+#LOGIN_URL = 'log'
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
 'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
