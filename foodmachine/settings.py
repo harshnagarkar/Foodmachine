@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'social_django',
 	'authentication',
-	'accounts.apps.AccountsConfig' #Added 2/23/2019
+	#'accounts.apps.AccountsConfig' #Added 2/23/2019
 
 ]
 
