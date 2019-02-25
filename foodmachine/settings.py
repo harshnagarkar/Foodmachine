@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 	'social_django',
 	'authentication',
     'phonenumber_field',
-
+    'restaurant',
 ]
 
 MIDDLEWARE = [
