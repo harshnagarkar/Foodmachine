@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 	'social_django',
     'phonenumber_field',
 	'authentication',
+    'restaurant',
 	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
 
 ]
