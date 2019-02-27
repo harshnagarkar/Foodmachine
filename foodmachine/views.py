@@ -12,6 +12,15 @@ def home(request):
 #def password_reset(request):
 #		return render (request, 're.html')
 
+def register(request):
+    return render(request, 'sgnup.html')
+
+def reset(request):
+    return render(request, 're.html')
+
+def forgot(request):
+    return render(request, 'for.html')
+
 # Attempted signup. So far, doesn't work.
 #class SignUp(generic.CreateView):
  #   form_class = UserCreationForm

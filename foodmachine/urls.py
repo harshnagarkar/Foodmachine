@@ -17,15 +17,17 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth import views
-from .views import home
+from .views import home, register, reset, forgot
 from django.views.generic.base import TemplateView
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('accounts/', include ('accounts.urls')), #Added 2/23/2019
-    #path('accounts/', include('django.contrib.auth.urls')),
+
+    path('registration/', register, name = 're'),
+    path('reset-password/', reset, name = 'reset'),
+    path('forgot-password/', forgot, name = 'forgot'),
     #path('', TemplateView.as_view(template_name='home.html'), name='home'),
     #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
@@ -36,6 +38,7 @@ urlpatterns = [
 	url(r'^logout/$', views.LogoutView.as_view(template_name='registration/login.html'), name='logout'),
     #url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
+
     url(r'^$', home, name='home'),
 	#url(r'^$', TemplateView.as_view(template_name = 'loginPageIndex.html'), name = 'login'), #<-- Set Root Page to Login; must change later to dashboard
 	#url(r'^S', views.LoginView.as_view(template_name = 'LoginPageIndex.html'), name = 'login'),
