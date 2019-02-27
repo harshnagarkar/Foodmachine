@@ -1,11 +1,13 @@
-{% extends layout.html %}
+{% extends "layout.html" %}{% load staticfiles %}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-{% block title %}<title>Sign up</title> {% unblock title %}
-<link href="sgnup.css" rel="stylesheet" type="text/css" />
+{% block title %}<title>Sign up</title> {% endblock title %}
+
+<link href="{% static 'sgnup.css' %}" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-    <style>
+   {% block style %}
+   <style>
     #msg {
     visibility: hidden;
     min-width: 250px;
@@ -48,6 +50,7 @@
     to {top: 0; opacity: 0;}
 }
     </style>
+{% endblock style %}
 </head>
 {% block content %}
 <body>

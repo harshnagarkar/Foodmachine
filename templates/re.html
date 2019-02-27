@@ -1,9 +1,11 @@
+{% extends 'layout.html' %} {% load static %}
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
-<link href="re.css" rel="stylesheet" type="text/css" />
+<link href="{% static 're.css' %}" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+    {% block style %}
     <style>
 #msg {
        visibility: hidden;
@@ -48,8 +50,9 @@
     to {top: 0; opacity: 0;}
 }
 </style>
+{% endblock style %}
 </head>
-
+{% block content %}
 <body>
 <div class="reset">
 
@@ -59,7 +62,7 @@
 <input type="password" name="username" placeholder="New password" /><br /><br />
 <input type="password" name="username" placeholder="Confirm new password" /><br /><br />
 <input type="button" value="Save" onclick="myFunction()"/><br /><br />
-<a href="logn.html" style="text-decoration:none;">Go back to Home page</a><br /><br />
+<a href="{% url 'login' %}" style="text-decoration:none;">Go back to Home page</a><br /><br />
 <div id="msg">Your password changed successfully!!</div>
 
 <script>
@@ -72,4 +75,5 @@ function myFunction() {
 </form>
 </div>
 </body>
+{% endblock content %}
 </html>
