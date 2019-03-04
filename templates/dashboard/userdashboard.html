@@ -23,8 +23,11 @@
         </tr>
         <tr><td>Profile</td></tr>
         {% load dashboardtags %}
-        {% set profile = user.username|getProfile %}
+        {% with user.username|getProfile as profile%}
         <tr><td>Gender: {{profile.gender}}</td><td>Phone: {{profile.phone}}</td></tr>
+        {% endwith %}
         </tbody>
     </tbody>
 </table>
+</div>
+{% endblock content %}
