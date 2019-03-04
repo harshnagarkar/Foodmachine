@@ -1,12 +1,6 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
-<h1>{{Res_Name}}</h1>
-{%for element in {menu}%}<table>
-    <tr>
-        <td>
-            <h5></h5>
-        </td>
-        <td>{{element.Menu_Item}}</td>
-    </tr>
-</table>{% endfor %}
+{{Res_Name}}
+{% for m in getMenu(1) %}
+{{m.Menu_Item}}
 {% endblock content %}
