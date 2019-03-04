@@ -68,6 +68,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'auth.User'
+# AUTH_PROFILE_MODULE = 'authentication.UserProfile'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
