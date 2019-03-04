@@ -60,9 +60,14 @@ INSTALLED_APPS = [
     'phonenumber_field',
 	'authentication',
     'restaurant',
+	#'users',
+
 	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
 
+	
 ]
+
+AUTH_USER_MODEL = 'auth.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
