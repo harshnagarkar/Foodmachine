@@ -11,7 +11,7 @@ class Restaurant(models.Model):
     Cuisine_Type = models.CharField(max_length=25)
 
     def __str__(self):              
-        return self.Restaurant
+        return self.Res_Name
     
 class Menu(models.Model):
     Menu_Item_Id = models.AutoField(primary_key=True)
@@ -21,7 +21,7 @@ class Menu(models.Model):
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Menu
+       return self.Menu_Item
 
 class Review(models.Model):
     Review_Id = models.AutoField(primary_key=True)
@@ -29,7 +29,7 @@ class Review(models.Model):
     Review_Des = models.CharField(max_length = 75,blank=True)
 
     def __str__(self):
-        return self.Review
+        return self.Review_Id
 
 class Cuisine(models.Model):
     Cuisine_Id = models.AutoField(primary_key=True)
@@ -38,4 +38,4 @@ class Cuisine(models.Model):
     Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Cuisine
+        return self.Cuisine_Id
