@@ -45,6 +45,7 @@ TEMPLATE_DIRS = (
 )
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,10 +55,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+	'social_django',
+	'authentication',
+    'phonenumber_field',
+    'restaurant',
+=======
    	'social_django',
    	'authentication',
     'phonenumber_field',
 
+>>>>>>> 0b5ece96c795aa9f8d37601880dc271ee03972c5
 ]
 
 MIDDLEWARE = [
