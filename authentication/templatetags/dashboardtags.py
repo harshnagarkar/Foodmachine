@@ -11,4 +11,4 @@ register = template.Library()
 def getProfile(usr):
     print(usr)
     context = User.objects.get(pk = (User.objects.get(username=usr).id))
-    return context.UserProfile.__dict__
+    return context.userprofile.__dict__
