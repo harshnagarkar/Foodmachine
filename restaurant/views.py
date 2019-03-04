@@ -5,7 +5,7 @@ from .models import Restaurant,Menu,Cuisine,Review
 
 
 def restaurantPage(request, restaurantName):
-    resDetail = Restaurant.objects.get(Res_Name=restaurantName)
-    menuItems = Menu.objects.filter(Menu_Res_Id=1).values()
-    context = {'menu':menuItems,**resDetail}
-    return render(request, 'restaurant/restaurant.html', context)
+    resDetail = Restaurant.objects.get(Res_Name=restaurantName).__dict__
+    return render(request, 'restaurant/restaurant.html', resDetail)
+
+
