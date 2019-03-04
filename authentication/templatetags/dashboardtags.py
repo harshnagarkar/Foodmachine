@@ -8,7 +8,7 @@ register = template.Library()
 
 
 @register.filter(name='getProfile')
-def getMenu(usr):
+def getProfile(usr):
     print(usr)
     context = User.objects.get(pk = (User.objects.get(username=usr).id))
     return context.UserProfile.__dict__
