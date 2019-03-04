@@ -1,6 +1,16 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
-{{Res_Name}}
-{% for m in  %}
-{{m.Menu_Item}}
+<div style="  background: rgba(44,62,80,0.7);
+    padding: 40px;
+    width: 250px;
+    margin: auto;
+    margin-top: 90px;
+    height: 400px;
+    margin-left: 180x;
+">
+<h2 style="align-content: center;">{{Res_Name}}</h2><br>
+<h3 style="align-content: center">{{Res_Address}}</h3><br>
+<h3 style="align-content: center">{{Res_Contact}}</h3>
+<h4 style="align-content: center">{{Res_Description}} </h4>
+</div>
 {% endblock content %}
