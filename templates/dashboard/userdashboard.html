@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {extends "../layout.html"}
+{% block content %}
+<div style="  background: rgba(44,62,80,1);
+    padding: 40px;
+    margin: auto;
+    margin-top: 90px;
+    margin-left: 180x;
+">
+<h3>Hi {{user.first_name}} </h3>
+<table>
+    <tbody>
+        <tr>
+        <td>
+        <h5>username: {{user.username}}</h5></td><td><h5>email: {{user.email}}</h5></td>
+        </tr>
+        <tr>
+            <td>
+                <h5>First Name: {{user.first_name}}</h5>
+            </td>
+            <td>
+                <h5>Last Name: {{user.last_name}}</h5>
+            </td>
+        </tr>
+        <tr><td>Profile</td></tr>
+        {% load dashboardtags %}
+        {% with user.username|getProfile as profile%}
+        <tr><td>Gender: {{profile.gender}}</td><td>Phone: {{profile.phone}}</td></tr>
+        {% endwith %}
+        </tbody>
+    </tbody>
+</table>
+</div>
+{% endblock content %}
