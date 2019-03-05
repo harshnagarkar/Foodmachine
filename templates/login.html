@@ -23,8 +23,9 @@
     </div><br /><br /><br /><br /><br /><br />
 
 {% block content %}
+<divs >
   <h3>Login</h3>
-  <form method="post">
+  <form method="post" >
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
@@ -32,6 +33,7 @@
    <br>
   <p><strong>-- OR --</strong></p>
   <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+  
 {% endblock %}
 
 Don't have account?<a href="sgnup.html" style="font-family:'Play', sans-serif;">&nbsp;Sign Up</a>
