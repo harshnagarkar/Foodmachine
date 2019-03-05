@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+anaconda-client==1.7.2
+=======
+=======
+>>>>>>> restaurant_page
 anaconda-client==1.2.2
 anaconda-navigator==1.8.4
 cdecimal==2.3
@@ -11,6 +16,10 @@ conda-verify==3.1.1
 functools32==3.2.3.post2
 menuinst==1.4.14
 navigator-updater==0.2.0
+<<<<<<< HEAD
+>>>>>>> 0b5ece96c795aa9f8d37601880dc271ee03972c5
+=======
 =======
 anaconda-client==1.7.2
 >>>>>>> bcc3ca48b5b898b1bc502c4c20e5f10de53409db
+>>>>>>> restaurant_page
