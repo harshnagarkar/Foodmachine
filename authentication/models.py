@@ -8,8 +8,10 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    phone = models.CharField(max_length=256, blank=True, null=True)
-   gender = models.CharField(
-        max_length=1, choices=(('m',  ('Male')), ('f', ('Female'))),blank=True, null=True)
+   # gender = models.CharField(max_length=1, choices=(('m',  ('Male')), ('f', ('Female'))),blank=True, null=True)
+   
+   
+
 		
 		
 # @receiver(post_save, sender=User)
