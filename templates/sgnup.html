@@ -1,4 +1,5 @@
 <html>
+        {% csrf_token %}
 <head>
         {%load static%}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,6 +31,7 @@
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+
 @-webkit-keyframes fadein {
     from {top: 0; opacity: 0;} 
     to {top: 30px; opacity: 1;}
@@ -54,13 +56,13 @@
 
 <body>
 <div class="signup">
-    <form>
+    <form action="" method="post">
     <h2 style="color: #fff;">Sign Up</h2>
     <input type = "text" name = "username" placeholder="Username"><br><br>
     <input type="text" name="FirstName" placeholder="First name"><br><br>
     <input type="text" name="LastName" placeholder="Last name"><br><br>
     <input type="password" name="pass" placeholder="Password"><br><br>    
-    <input type="password" name="pass" placeholder="Confirm Password"><br><br>   
+    <!-- <input type="password" name="pass" placeholder="Confirm Password"><br><br>   -->
     <input type="email" name = "Email" placeholder="Email address"><br><br>  
     <input type="number" name = "phone" placeholder="Phone Number"><br><br>
     <input type="button" value="Sign up" onclick="myFunction()"><br><br>
