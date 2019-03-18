@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from django.contrib.auth import views
 from .views import home, register, reset, forgot
 from django.views.generic.base import TemplateView
-
+from restaurant.views import Menu
 
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     
+    path('Menus/', Menu, name = 'menu')
 	url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
 	#url(r'^loginPageIndex/$', views.LoginView.as_view(template_name = 'loginPageIndex.html'), name = 'log'),
 	#url(r'^login/$', views.login, name='login

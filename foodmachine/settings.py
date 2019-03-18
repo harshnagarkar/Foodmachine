@@ -55,22 +55,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
+
 	'social_django',
 	'authentication',
-<<<<<<< HEAD
-	#'accounts.apps.AccountsConfig' #Added 2/23/2019
 
-=======
+	#'accounts.aps.AccountsConfig' #Added 2/23/201
     'phonenumber_field',
     'restaurant',
-=======
-   	'social_django',
-   	'authentication',
+
+   
     'phonenumber_field',
 
->>>>>>> 0b5ece96c795aa9f8d37601880dc271ee03972c5
->>>>>>> dcc8bca6de7befb395c7a357cb91fbaa09f4d9cc
+
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
