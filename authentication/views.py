@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import User,UserProfile
-
+from django.http import HttpResponseRedirect
 from django.http import HttpResponsePermanentRedirect
 # Create your views here.
 
