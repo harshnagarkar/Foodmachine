@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 	'social_django',
+    'phonenumber_field',
 	'authentication',
+<<<<<<< HEAD
 
 	#'accounts.aps.AccountsConfig' #Added 2/23/201
     'phonenumber_field',
@@ -66,8 +68,18 @@ INSTALLED_APPS = [
    
     'phonenumber_field',
 
+=======
+    'restaurant',
+	#'users',
 
+	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
+>>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
+
+	
 ]
+
+AUTH_USER_MODEL = 'auth.User'
+# AUTH_PROFILE_MODULE = 'authentication.UserProfile'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -163,8 +175,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = 'login'
 #LOGIN_URL = 'log'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/dashboard/'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -175,7 +187,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325186787105-ti7fjmlnptv5hv7gp9sj2gkmuigbgkhh.apps.googleusercontent.com'
+<<<<<<< HEAD
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n5a0u5mDWryFM3SikLsOBD0q'
+=======
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'uwWgfg17E72ps7y5zsBnWSyb'
+>>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

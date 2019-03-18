@@ -31,3 +31,7 @@ class Cuisine(models.Model):
     Cusine_Sub = models.CharField(max_length=20)
     Cusine_parent = models.CharField(max_length=20,null=True)
     Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
+    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Cuisine_Id

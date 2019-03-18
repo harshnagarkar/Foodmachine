@@ -5,7 +5,6 @@ body
     background: url(pic1.jpg);
     background-size: cover;
 }
-<<<<<<< HEAD
 
 .topnav {
     overflow: hidden;
@@ -25,7 +24,7 @@ body
   
   /* Change the color of links on hover */
   .topnav a:hover {
-    background-color: skyblue;
+    background-color: black;
     color: white;
   }
   
@@ -61,8 +60,6 @@ body
   }
 
 
-=======
->>>>>>> restaurant_page
 .signin
 {
     background: rgba(44,62,80,0.7);
@@ -131,7 +128,4 @@ a:hover
     color:aliceblue;
     opacity: 0.8; /* Firefox */
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> restaurant_page

@@ -1,5 +1,11 @@
 from django.shortcuts import render
-from .models import Restaurant, Menu
+from itertools import chain
 # Create your views here.
-def Menu(request):
-    return render(request, 'retaurant-menu')
+from .models import Restaurant,Menu,Cuisine,Review
+
+
+def restaurantPage(request, restaurantName):
+    resDetail = Restaurant.objects.get(Res_Name=restaurantName).__dict__
+    return render(request, 'restaurant/restaurant.html', resDetail)
+
+
