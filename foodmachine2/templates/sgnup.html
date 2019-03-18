@@ -1,27 +1,13 @@
-<<<<<<< HEAD
 {% extends "layout.html" %}{% load staticfiles %}
-=======
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 <html>
-        {% csrf_token %}
 <head>
-        {%load static%}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<<<<<<< HEAD
 {% block title %}<title>Sign up</title> {% endblock title %}
 
 <link href="{% static 'sgnup.css' %}" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
    {% block style %}
    <style>
-=======
-<title>Untitled Document</title>
-<link rel="stylesheet" rel="stylesheet" type="text/css" href="{%static 'stylesheets/sgnup.css'}" />
-<link href="stylesheets/sgnup.css" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-<link rel="shortcut icon" type="image/favicon" href="{%static 'img/favicon.ico'}">
-    <style>
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
     #msg {
     visibility: hidden;
     min-width: 250px;
@@ -43,7 +29,6 @@
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
 
 @-webkit-keyframes fadein {
     from {top: 0; opacity: 0;} 
@@ -67,18 +52,18 @@
     </style>
 {% endblock style %}
 </head>
-
+{% block content %}
 <body>
 <div class="signup">
-    <form action="" method="post">
+    <form method = "POST">
     <h2 style="color: #fff;">Sign Up</h2>
-    <input type = "text" name = "username" placeholder="Username"><br><br>
-    <input type="text" name="FirstName" placeholder="First name"><br><br>
-    <input type="text" name="LastName" placeholder="Last name"><br><br>
-    <input type="password" name="pass" placeholder="Password"><br><br>    
-    <!-- <input type="password" name="pass" placeholder="Confirm Password"><br><br>   -->
-    <input type="email" name = "Email" placeholder="Email address"><br><br>  
-    <input type="number" name = "phone" placeholder="Phone Number"><br><br>
+    <!---<input type="text" name="username" placeholder="First name"><br><br>
+    <input type="text" name="username" placeholder="Last name"><br><br>-->
+    {% csrf_token %}
+    <!--<input type="password" name="pass" placeholder="Password"><br><br>    
+    <input type="password" name="pass" placeholder="Confirm Password"><br><br>-->
+    {% form.as_p %}   
+    <input type="text" placeholder="Email address"><br><br>  
     <input type="button" value="Sign up" onclick="myFunction()"><br><br>
         <div id="msg">Congratulations You Sign Up successfully!!</div>
         <script>
@@ -88,9 +73,10 @@ function myFunction() {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 </script>
-        Already have account?<a href="logn.html" style="text-decoration: none; font-family: 'Play', sans-serif; color: blue;">&nbsp;Log In</a>
+        Already have account?<a href="{% url 'login' %}" style="text-decoration: none; font-family: 'Play', sans-serif; color: yellow;">&nbsp;Log In</a>
     </form>
     
     </div>
 </body>
+{% endblock content %}
 </html>
