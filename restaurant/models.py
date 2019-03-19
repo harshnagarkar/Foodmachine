@@ -18,7 +18,7 @@ class Menu(models.Model):
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
 class Label(models.Model):
-    Label_Name = models.CharField(max_length=20, null = false, blank = false)
+    Label_Name = models.CharField(max_length=20, null = False, blank = False)
     Label_Id = models.AutoField(primary_key = True)
     
 class Review(models.Model):

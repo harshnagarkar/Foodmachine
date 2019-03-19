@@ -59,21 +59,10 @@ INSTALLED_APPS = [
 	'social_django',
     'phonenumber_field',
 	'authentication',
-<<<<<<< HEAD
-
-	#'accounts.aps.AccountsConfig' #Added 2/23/201
-    'phonenumber_field',
-    'restaurant',
-
-   
-    'phonenumber_field',
-
-=======
     'restaurant',
 	#'users',
 
 	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 
 	
 ]
@@ -187,11 +176,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325186787105-ti7fjmlnptv5hv7gp9sj2gkmuigbgkhh.apps.googleusercontent.com'
-<<<<<<< HEAD
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n5a0u5mDWryFM3SikLsOBD0q'
-=======
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'uwWgfg17E72ps7y5zsBnWSyb'
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
