@@ -17,22 +17,22 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth import views
-from .views import home, register, reset, forgot
+from .views import home
 from django.views.generic.base import TemplateView
 from restaurant.views import Menu
 
-
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('registration/', register, name = 're'),
-    path('reset-password/', reset, name = 'reset'),
-    path('forgot-password/', forgot, name = 'forgot'),
+    # path('registration/', register, name = 're'),
+    # path('reset-password/', reset, name = 'reset'),
+    # path('forgot-password/', forgot, name = 'forgot'),
     #path('', TemplateView.as_view(template_name='home.html'), name='home'),
     #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     
-    path('Menus/', Menu, name = 'menu'),
+    # path('Menus/', Menu, name = 'menu'),
 	url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard/', include('authentication.urls')),
