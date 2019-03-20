@@ -18,23 +18,25 @@ def userView(request):
 from .forms import SignUpForm
 #class SignUpView():
 #	template_name = 'templates/sgnup.html'
-#form = SignUpForm(request.POST)
+# form = SignUpForm(request.POST)
 
 def makeUser(request):
 	username = "N/A"
 	if request.method == "POST":	
 		form = SignUpForm(request.POST)
+		print (form.errors)
+		print (form.is_valid())
 		if form.is_valid():
-			username = form.cleaned_data['username']
-			fname = form.cleaned_data['FirstName']
-			lname = form.cleaned_data['LastName']
-			passw = form.cleaned_data['pass']
-			email = form.cleaned_data['Email']
-			phone = form.cleaned_data['phone']
+			username = form.cleaned_data.get('username')
+			fname = form.cleaned_data.get('FirstName')
+			lname = form.cleaned_data.get('LastName')
+			passw = form.cleaned_data.get('pass')
+			email = form.cleaned_data.get('Email')
+			phone = form.cleaned_data.get('phone')
 			print (username)
-	
+
 	else:
 		form = SignUpForm()
 
-	return render(request, 'sgnup.html', {"username" : username})
+	return render(request, 'cong.html', {"username" : username})
 	#return HttpResponse(username)
