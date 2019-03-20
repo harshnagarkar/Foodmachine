@@ -32,7 +32,7 @@ urlpatterns = [
     #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     
-    path('Menus/', Menu, name = 'menu')
+    path('Menus/', Menu, name = 'menu'),
 	url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard/', include('authentication.urls')),
