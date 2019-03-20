@@ -16,10 +16,12 @@ class Menu(models.Model):
     Menu_ItemPrice = models.IntegerField()
     Menu_Item_Description = models.CharField(max_length=100)
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    #Menu_Label_Id = models.ForeignKey(Label, on_delete = models.CASCADE)
 
 class Label(models.Model):
-    Label_Name = models.CharField(max_length=20, null = False, blank = False)
+    Label_Name = models.CharField(max_length=20)#, null = false, blank = false)
     Label_Id = models.AutoField(primary_key = True)
+    Label_Menu_Id = models.ForeignKey(Menu, on_delete = models.CASCADE)
     
 class Review(models.Model):
     Review_Id = models.AutoField(primary_key=True)

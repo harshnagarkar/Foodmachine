@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action = "/sucess.html" method="POST">
+   Create Menu Item: <input type = 'text' name = 'item' placeholder = 'Item'>
+   <br>
+   Create Item Price: <input type = 'number' name = 'price' placeholder = '$0.00'>
+   <br>
+   Create Item Label: <input type = 'text' name = 'label' placeholder = 'Appetizer'>
+   <br>
+   Create Cuisine Type: <input type = 'text' name = 'cuisine' placeholder = 'Fast food'>
+   <br>
+    <input type="submit" name="Submit">
+</form>
+
+
+{% endblock content %}
