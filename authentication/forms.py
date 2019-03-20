@@ -13,11 +13,11 @@ class SignUpForm(forms.Form):
 
     class Meta:
         model = User
-        fields = ['username','Email','phone','FirstName','LastName','passw' ]
-        widgets = {
-            # telling Django your password field in the mode is a password input on the template
-            'password': forms.PasswordInput()
-        }
+        fields = ('username','Email','phone','FirstName','LastName','passw')
+        # widgets = {
+        #     # telling Django your password field in the mode is a password input on the template
+        #     'password': forms.PasswordInput()
+        # }
         
     # email = forms.EmailField(label = 'email')
     # phone = forms.CharField(label='phone', max_length = 10)
