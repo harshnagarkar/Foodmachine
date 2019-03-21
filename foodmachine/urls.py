@@ -33,7 +33,7 @@ urlpatterns = [
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     
     path('Menus/', Menu, name = 'menu')
-	url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
+	#url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard/', include('authentication.urls')),
   	url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
