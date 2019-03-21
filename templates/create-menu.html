@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    
+</style>
+<form action = "/sucess.html" method="POST">
+   Create Menu Item: <input type = 'text' name = 'Item' placeholder = 'Item'>
+   <br>
+   Create Item Description: <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
+   <br>
+   Create Item Price: <input type = 'number' name = 'Price' placeholder = '$0.00'>
+   <br>
+   Create Item Label: <input type = 'text' name = 'Label' placeholder = 'Appetizer'>
+   <br>
+   Create Cuisine Type: <input type = 'text' name = 'Cuisine' placeholder = 'Fast food'>
+   <br>
+    <input id = 'success' type="submit" name="Submit" onclick="add()">
+    <script>
+       function add(){
+            var x = document.getElementById('success')
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+</form>
+
+
+{% endblock content %}

@@ -1,5 +1,6 @@
 from django.urls import path
-
+from django.conf.urls import url
+from django.views.generic.base import TemplateView
 from . import views
 
 urlpatterns = [
@@ -11,4 +12,6 @@ urlpatterns = [
     # path('<int:question_id>/results/', views.results, name='results'),
     # ex: /polls/5/vote/
     path('<slug:restaurantName>', views.restaurantPage),
+    url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
+    url('sucess.html',views.processMenu),
 ]
