@@ -20,7 +20,7 @@ from django.contrib.auth import views
 from .views import home
 from django.views.generic.base import TemplateView
 from restaurant.views import Menu
-
+from django.contrib.auth import views as auth_views
  
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,11 +31,12 @@ urlpatterns = [
     #path('', TemplateView.as_view(template_name='home.html'), name='home'),
     #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
 	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    
+    # url(r'^login/$', auth_views.login),
+    # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
     # path('Menus/', Menu, name = 'menu'),
-	url(r'^login/$', views.LoginView.as_view(template_name = 'registration/login.html'), name = 'login'),
-    url('restaurant/', include('restaurant.urls')),
-    url('dashboard/', include('authentication.urls')),
+	url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
+    url('restaurant', include('restaurant.urls')),
+    url('dashboard', include('authentication.urls')),
   	# url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
 	#url(r'^loginPageIndex/$', views.LoginView.as_view(template_name = 'loginPageIndex.html'), name = 'log'),
 	#url(r'^login/$', views.login, name='login
