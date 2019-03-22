@@ -4,6 +4,7 @@ from authentication.forms import *
 from django.http import HttpResponse
 from .apps import userCreate,updatePassword
 
+
 from django.http import HttpResponsePermanentRedirect
 # Create your views here.
 
@@ -12,7 +13,7 @@ def home(request):
 
 def userView(request):
 	# if request.user.is_authenticated():
-	
+
 	return render(request, 'dashboard/userdashboard.html')
 	# else:
 		# return HttpResponsePermanentRedirect("/login")
@@ -45,6 +46,22 @@ def makeUser(request):
 		form = SignUpForm()
 
 	return render(request, 'cong.html', {"username" : username})
+
+
+def loginUser(request):
+	if request.method == "POST":
+		form = LoginForm(request.POST)
+		print(form.errors)
+		print(form.is_valid)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			passw = form.cleaned_data.get('password')
+
+			loginUser()
+			return render(request, 'userdashboard.html')
+		else:
+			form = LoginForm()
+		
 
 # def updatePass(request):
 

@@ -4,7 +4,7 @@ from django.apps import AppConfig
 from authentication.models import UserProfile,User
 import datetime
 from django.utils import timezone 
-
+from django.contrib.auth import authenticate, login
 
 def userCreate(UserName,Password,Email,First_Name,Last_Name,Answer,Question,Is_Staff='0'):
     try:
@@ -15,6 +15,18 @@ def userCreate(UserName,Password,Email,First_Name,Last_Name,Answer,Question,Is_S
         return 'success'
     except:
         return "Username exsist"
+
+
+def loginUser(request):
+    username = request.POST('username')
+    password = request.POST('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return 'success'
+
+    else:
+        return 'Invalid Login details. Please try again!'
 
 
 
