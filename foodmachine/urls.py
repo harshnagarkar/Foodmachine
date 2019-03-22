@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from django.contrib.auth import views
+# from django.contrib.auth import views
 from .views import home
 from django.views.generic.base import TemplateView
 from restaurant.views import Menu
@@ -34,13 +34,14 @@ urlpatterns = [
     # url(r'^login/$', auth_views.login),
     # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
     # path('Menus/', Menu, name = 'menu'),
-	url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
-    url('restaurant', include('restaurant.urls')),
+    url(r'^login/$', auth_views.LoginView.as_view(template_name='logn.html'),name='login'),
+	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
+    url('restaurant/', include('restaurant.urls')),
     url('dashboard', include('authentication.urls')),
   	# url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
 	#url(r'^loginPageIndex/$', views.LoginView.as_view(template_name = 'loginPageIndex.html'), name = 'log'),
 	#url(r'^login/$', views.login, name='login
-	url(r'^logout/$', views.LogoutView.as_view(template_name='login.html'), name='logout'),
+	url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
     #url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
