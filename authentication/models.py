@@ -14,6 +14,8 @@ class UserProfile(models.Model):
     #    max_length=1, choices=(('m',  ('Male')), ('f', ('Female'))),blank=True, null=True)
    #res_id_user = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
    
+def __str__(self):
+    return self.user.username
 		
 		
 # @receiver(post_save, sender=User)

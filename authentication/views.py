@@ -3,6 +3,7 @@ from .models import User,UserProfile
 from authentication.forms import *
 from django.http import HttpResponse
 from .apps import userCreate,updatePassword
+from django.contrib.auth import login, authenticate
 
 
 from django.http import HttpResponsePermanentRedirect
@@ -48,21 +49,51 @@ def makeUser(request):
 	return render(request, 'cong.html', {"username" : username})
 
 
-def loginUser(request):
+def loginUser(request, template_name = 'templates/logn.html'):
+	
 	if request.method == "POST":
-		form = LoginForm(request.POST)
-		print(form.errors)
-		print(form.is_valid)
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			passw = form.cleaned_data.get('password')
+		# form = LoginForm(request.POST)
+		# print(form.errors)
+		# print(form.is_valid)
+		# if form.is_valid():
+		postdata = request.POST.copy()
+		username = postdata.get('username', '')
+		password = postdata.get('password', '')
 
-			loginUser()
-			return render(request, 'userdashboard.html')
+		try:
+			user = authenticate(username=username, password=password)
+			login(request, user)
+
+		except:
+			error = True
+
+	return render(request, template_name, loginUser(request))
+			# username = form.cleaned_data.get('username')
+			# passw = form.cleaned_data.get('password')
+			# user = loginuser(request)
+		# 	loginUser(username, passw)
+		# 	return render(request, 'userdashboard.html')
+		# else:
+		# 	form = LoginForm()
+def logUser(request):		
+	context = request.POST
+	if request.user.is_authenticated():
+		return HttpResponse("Logged in")
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		print(user)
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponse("Success")
+			else:
+				return HttpResponse("Not active")
 		else:
-			form = LoginForm()
-		
-
+			return HttpResponse("Invalid")
+	else:
+		return render(request, 'templates/logn.html', {}, context)
 # def updatePass(request):
 
 # 	if request.method == "POST":
