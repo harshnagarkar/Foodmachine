@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 
 
 urlpatterns = [
-    path('', userView),
+    path('/', userView),
     url('registration/', TemplateView.as_view(template_name = 'sgnup.html')),
     url('cong.html', makeUser)
 ]

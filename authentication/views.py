@@ -3,8 +3,12 @@ from .models import User,UserProfile
 from authentication.forms import *
 from django.http import HttpResponse
 from .apps import userCreate,updatePassword
+<<<<<<< HEAD
 from django.contrib.auth import login, authenticate
 
+=======
+from django.contrib.auth.models import AnonymousUser
+>>>>>>> 66a5d31b97636fbe2677b3e7f19bb51ccd5c64d6
 
 from django.http import HttpResponsePermanentRedirect
 # Create your views here.
@@ -14,7 +18,7 @@ def home(request):
 
 def userView(request):
 	# if request.user.is_authenticated():
-
+	print(request.POST)
 	return render(request, 'dashboard/userdashboard.html')
 	# else:
 		# return HttpResponsePermanentRedirect("/login")
@@ -49,6 +53,7 @@ def makeUser(request):
 	return render(request, 'cong.html', {"username" : username})
 
 
+<<<<<<< HEAD
 def loginUser(request, template_name = 'templates/logn.html'):
 	
 	if request.method == "POST":
@@ -63,6 +68,23 @@ def loginUser(request, template_name = 'templates/logn.html'):
 		try:
 			user = authenticate(username=username, password=password)
 			login(request, user)
+=======
+# def loginUser(request):
+# 	if request.method == "POST":
+# 		form = LoginForm(request.POST)
+# 		print(form.errors)
+# 		print(form.is_valid)
+# 		if form.is_valid():
+# 			username = form.cleaned_data.get('username')
+# 			passw = form.cleaned_data.get('password')
+
+# 			user = loginuser(request)
+# 			print  (user)
+# 			return render(request, 'dashboard/userdashboard.html')
+# 		else:
+# 			form = LoginForm()
+		
+>>>>>>> 66a5d31b97636fbe2677b3e7f19bb51ccd5c64d6
 
 		except:
 			error = True
