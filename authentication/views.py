@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from .models import User,UserProfile
-from authentication.forms import SignUpForm
+from authentication.forms import *
 from django.http import HttpResponse
+from .apps import userCreate,updatePassword
+from django.contrib.auth.models import AnonymousUser
 
 from django.http import HttpResponsePermanentRedirect
 # Create your views here.
@@ -11,6 +13,7 @@ def home(request):
 
 def userView(request):
 	# if request.user.is_authenticated():
+	print(request.POST)
 	return render(request, 'dashboard/userdashboard.html')
 	# else:
 		# return HttpResponsePermanentRedirect("/login")
@@ -31,12 +34,44 @@ def makeUser(request):
 			fname = form.cleaned_data.get('FirstName')
 			lname = form.cleaned_data.get('LastName')
 			passw = form.cleaned_data.get('pass')
+			confirmpass = form.cleaned_data.get('confirmPass')
 			email = form.cleaned_data.get('Email')
-			phone = form.cleaned_data.get('phone')
-			print (username)
+			answer = form.cleaned_data.get('secAnswer')
+			questions = form.cleaned_data.get('questions')
+			# print(question)
+			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,Answer = answer,Question=questions)
+			
 
 	else:
 		form = SignUpForm()
 
 	return render(request, 'cong.html', {"username" : username})
-	#return HttpResponse(username)
+
+
+# def loginUser(request):
+# 	if request.method == "POST":
+# 		form = LoginForm(request.POST)
+# 		print(form.errors)
+# 		print(form.is_valid)
+# 		if form.is_valid():
+# 			username = form.cleaned_data.get('username')
+# 			passw = form.cleaned_data.get('password')
+
+# 			user = loginuser(request)
+# 			print  (user)
+# 			return render(request, 'dashboard/userdashboard.html')
+# 		else:
+# 			form = LoginForm()
+		
+
+# def updatePass(request):
+
+# 	if request.method == "POST":
+# 		form = UpdatePassword(request.POST)
+# 		print(form.error)
+# 		if(form.is_valid()):
+# 			confirmPass= form.cleaned_data.get('confirmPass')
+# 			username = form.cleaned_data.get('username')
+# 			updatePassword(username,confirmPass)
+# 		else:
+# 			form = UpdatePassword()

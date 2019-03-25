@@ -37,12 +37,8 @@ def createMenuItems(request):
     #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
     return render(request, 'create-menu.html')
-   
-def createLabel(request):
-    if request.method == 'POST':
-        Label_Name = request.POST['Label']
-        labelCreate = Label.objects.create(Label_Name = Label_Name)
-        labelCreate.save()
-        return labelCreate
+
+# def createLabel(request):
+#     labelCreate = Label.objects.create(Label_Name = '')
 
 

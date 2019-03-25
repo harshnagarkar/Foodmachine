@@ -8,8 +8,8 @@ def home(request):
 	return render(request, 'home.html')
 
 # Attempted reset password.
-#def password_reset(request):
-#		return render (request, 're.html')
+def password_reset(request):
+	return render (request, 're.html')
 
 def register(request):
     return render(request, 'sgnup.html')
