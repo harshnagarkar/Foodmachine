@@ -10,3 +10,13 @@ class ProfileForm(forms.ModelForm)
 	class Meta:
 		model = UserProfile
 		fields = ('phone', 'gender')
+
+class MenuCreation(forms.ModelForm):
+	class Meta:
+		model = Menu
+		fields = ('Item', 'Price', 'Description')
+
+class LabelCreation(forms.ModelForm):
+	class Meta:
+		models = Label
+		fields = ('Label')
