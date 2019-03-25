@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 # from django.contrib.auth import views
-from .views import home, test
+from .views import home, testView
 from django.views.generic.base import TemplateView
 from restaurant.views import Menu
 from django.contrib.auth import views as auth_views
@@ -34,7 +34,7 @@ urlpatterns = [
     # url(r'^login/$', auth_views.login),
     # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
     # path('Menus/', Menu, name = 'menu'),
-    url('test', test,name='test')
+    url('test', testView,name='test'),
     url(r'^login/$', auth_views.LoginView.as_view(template_name='logn.html'),name='login'),
 	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),

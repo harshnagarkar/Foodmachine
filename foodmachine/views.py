@@ -7,6 +7,9 @@ from django.views import generic
 def home(request):
 	return render(request, 'home.html')
 
+def testView(request):
+    return render(request, 'test/test.html')  
+
 # Attempted reset password.
 #def password_reset(request):
 #		return render (request, 're.html')
