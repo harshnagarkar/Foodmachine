@@ -13,5 +13,6 @@ urlpatterns = [
     # ex: /polls/5/vote/
     path('<slug:restaurantName>', views.restaurantPage),
     url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
-    url('sucess.html',views.processMenu),
+    url('sucess.html',views.createMenuItems),
+    url('create-restaurant.html', views.createRestaurant),
 ]

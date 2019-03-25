@@ -13,9 +13,9 @@ class Restaurant(models.Model):
 class Menu(models.Model):
     Menu_Item_Id = models.AutoField(primary_key=True)
     Menu_Item = models.CharField(max_length=50)
-    Menu_ItemPrice = models.IntegerField()
+    Menu_ItemPrice = models.DecimalField(max_digits = 30, decimal_places = 2)
     Menu_Item_Description = models.CharField(max_length=100)
-    Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null = 'false', blank = 'false')
     #Menu_Label_Id = models.ForeignKey(Label, on_delete = models.CASCADE)
 
 class Label(models.Model):
