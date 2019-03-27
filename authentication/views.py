@@ -12,9 +12,17 @@ def home(request):
 		return render(request, 'home.html')
 
 def userView(request):
-	# if request.user.is_authenticated():
-	print(request.POST)
-	return render(request, 'dashboard/userdashboard.html')
+	print (request.user)
+	if request.user.is_authenticated:
+		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+		if context.userprofile.userType== 'c':
+			return render(request, 'dashboard/userdashboard.html')
+		elif context.userprofile.userType == 'r':
+			return render(request, 'dashboard/restaurantdashboard.html')
+		elif context.userprofile.userType == 'd':
+			return render(request, 'dashboard/deliverydashboard.html')
+	else:
+		HttpResponseRedirect("/")
 	# else:
 		# return HttpResponsePermanentRedirect("/login")
 
