@@ -7,18 +7,21 @@ from django.views import generic
 def home(request):
 	return render(request, 'home.html')
 
+def testView(request):
+    return render(request, 'test/test.html')  
+
 # Attempted reset password.
-#def password_reset(request):
-#		return render (request, 're.html')
+def password_reset(request):
+	return render (request, 're.html')
 
-# def register(request):
-#     return render(request, 'sgnup.html')
+def register(request):
+    return render(request, 'sgnup.html')
 
-# def reset(request):
-#     return render(request, 're.html')
+def reset(request):
+    return render(request, 're.html')
 
-# def forgot(request):
-#     return render(request, 'for.html')
+def forgot(request):
+    return render(request, 'for.html')
 
 # Attempted signup. So far, doesn't work.
 #class SignUp(generic.CreateView):
