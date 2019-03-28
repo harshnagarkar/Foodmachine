@@ -5,8 +5,8 @@ from .models import Restaurant,Menu,Cuisine,Review, Label
 
 
 def restaurantPage(request, restaurantName):
-    resDetail = Restaurant.objects.get(Res_Name=restaurantName).__dict__
-    return render(request, 'restaurant/restaurant.html', resDetail)
+    resDetail = Restaurant.objects.get(Res_Name=restaurantName)
+    return render(request, 'restaurant/restaurant.html', {'Restaurant':resDetail})
 
 def createRestaurant(request):
     if request.method == 'POST':

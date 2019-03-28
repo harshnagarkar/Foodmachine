@@ -3,12 +3,19 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Restaurant(models.Model):
+    
+    def upload_image(self, filename):
+        return 'post/{}/{}'.format(self.title, filename)
+
     Res_Id = models.AutoField(primary_key=True)
     Res_Name = models.CharField(max_length=75)
     Res_Description = models.CharField(max_length=150, null=True)
     Res_Contact = PhoneNumberField(null=False, blank=False, unique=True)
     Res_Address = models.CharField(max_length=75)
     Cuisine_Type = models.CharField(max_length=25)
+    Res_Pic = models.ImageField(upload_to=upload_image, default='/media/defaultimage.png')
+
+
     
 class Menu(models.Model):
     Menu_Item_Id = models.AutoField(primary_key=True)
