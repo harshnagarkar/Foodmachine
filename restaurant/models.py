@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MaxValueValidator
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -34,6 +35,7 @@ class Review(models.Model):
     Review_Id = models.AutoField(primary_key=True)
     Res_Id = models.ForeignKey(Restaurant,on_delete=models.CASCADE)
     Review_Des = models.CharField(max_length = 75,blank=True)
+    Review_Rating = models.IntegerField(null=True, validators=[MaxValueValidator(5)])
 
 class Cuisine(models.Model):
     Cuisine_Id = models.AutoField(primary_key=True)
