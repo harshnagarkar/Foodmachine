@@ -14,8 +14,6 @@ def createRestaurant(request):
     return render(request, 'create-restaurant.html')
 
 def processMenu(request):
-
-    print (request.POST)
     return render(request,'create-menu.html')
 
 def createMenuItems(request):

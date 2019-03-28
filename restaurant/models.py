@@ -39,10 +39,10 @@ class Review(models.Model):
 
 class Cuisine(models.Model):
     Cuisine_Id = models.AutoField(primary_key=True)
-    Cusine_Sub = models.CharField(max_length=20)
+    Cusine_Sub = models.CharField(max_length=20,null= True)
     Cusine_parent = models.CharField(max_length=20,null=True)
-    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
-    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE)
+    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE,null= True)
+    Menu_Item_Id = models.ForeignKey(Menu,on_delete=models.CASCADE,null = True)
 
     def __str__(self):
         return self.Cuisine_Id
