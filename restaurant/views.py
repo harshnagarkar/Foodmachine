@@ -2,7 +2,28 @@ from django.shortcuts import render
 from itertools import chain
 # Create your views here.
 from .models import Restaurant,Menu,Cuisine,Review, Label
+from restaurant.forms import *
 
+def createRestaurant(request):
+     if request.method == 'POST':
+        #Rest = request.POST['Rest']
+        if request.method == "POST":
+            form = RestaurantCreation(request.POST, request.FILES)
+            print(form.errors)
+            print(form.is_valid())
+            if form.is_valid():
+                resname = form.cleaned_data.get('resname')
+                resdescription = form.cleaned_data.get('resdescription')
+                rescontact = form.cleaned_data.get('rescontact')
+                rescusine = form.cleaned_data.get('recusine')
+                respic = form.respic
+                restaurant = Restaurant(Res_Name=resname,Res_description=resdescription,Res_contact=rescontact,Res_cusine=rescusine,Res_Pic = respic)
+                restaurant.save()
+                user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+                user.userprofile.userRestaurant = Restaurant.objects.get(Res_Name=resname)
+                user.save()
+        else:
+            RestaurantCreation()
 
 def restaurantPage(request, restaurantName):
     resDetail = Restaurant.objects.get(Res_Name=restaurantName)
