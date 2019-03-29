@@ -21,7 +21,8 @@ from .views import home #test
 from django.views.generic.base import TemplateView
 from restaurant.views import Menu
 from django.contrib.auth import views as auth_views
- 
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -34,11 +35,7 @@ urlpatterns = [
     # url(r'^login/$', auth_views.login),
     # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
     # path('Menus/', Menu, name = 'menu'),
-<<<<<<< HEAD
-    url('test', testView,name='test'),
-=======
     #url('test', test,name='test'),
->>>>>>> d542e5369d137c2d87960259cf19bc91b4e18942
     url(r'^login/$', auth_views.LoginView.as_view(template_name='logn.html'),name='login'),
 	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
@@ -51,10 +48,14 @@ urlpatterns = [
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
     url(r'^$', home, name='home'),
-	#url(r'^$', TemplateView.as_view(template_name = 'loginPageIndex.html'), name = 'login'), #<-- Set Root Page to Login; must change later to dashboard
-	#url(r'^S', views.LoginView.as_view(template_name = 'LoginPageIndex.html'), name = 'login'),
+    
 	
 	#url(r'^password_reset/$', password_reset, name = 'password_reset'),  #Working on password reset here
-	
-]
-	
+	# url('',
+    #  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
+    #   {'document_root': settings.MEDIA_ROOT}),
+    #  )
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
