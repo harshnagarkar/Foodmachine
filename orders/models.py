@@ -6,3 +6,5 @@ class Orders(models.Model):
     Order_Id = models.AutoField(primary_key=True)
     Restaurant_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     Preferences = models.CharField(max_length=300)
+
+class Cart(models.Model):
