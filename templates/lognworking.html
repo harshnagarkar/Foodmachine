@@ -1,0 +1,33 @@
+<html>
+<head>
+        {%load static%}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Foodmachine</title>
+<link rel="stylesheet" rel="stylesheet" type="text/css" href="{%static 'stylesheets/logn.css'}" />
+<link href="logn.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+<link rel="shortcut icon" type="image/favicon" href="{%static 'img/favicon.ico'}">
+</head>
+
+<body>
+
+        <section>
+                <div class="topnav">
+                    <a href="home.html">Home</a>
+                    <a class="active" href="logn.html">Log In</a>
+                    <a href="#contact">Contact</a>
+                    <input type="text" placeholder="Search..">
+                </div>
+            </section>
+
+   <div class="signin">
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+</div>
+
+</body>
+</html>

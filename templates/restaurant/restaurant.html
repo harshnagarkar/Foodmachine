@@ -6,17 +6,18 @@
     margin-top: 90px;
     margin-left: 180x;
 ">
-<h2 style="align-content: center;">{{Res_Name}}</h2><br>
-<h3 style="align-content: center">{{Res_Address}}</h3><br>
-<h3 style="align-content: center">{{Res_Contact}}</h3>
-<h4 style="align-content: center">{{Res_Description}} </h4>
+<img src="{{ Restaurant.Res_Pic.url }}" alt="" height="">
+<h2 style="align-content: center;">{{Restaurant.Res_Name}}</h2><br>
+<h3 style="align-content: center">{{Restaurant.Res_Address}}</h3><br>
+<h3 style="align-content: center">{{Restaurant.Res_Contact}}</h3>
+<h4 style="align-content: center">{{Restaurant.Res_Description}} </h4>
 <h5> We Serve</h5>
 <table>
  <tbody>   
-    <tr><td>Title</td><td>Descrption</td><td>Price($)</td></tr>
+    <tr><td>Title</td><td>Description</td><td>Price($)</td></tr>
 {% load restags %}
 {% for element in Res_Id|getMenu %}
-<tr><td>{{element.Menu_Item}}</td><td>{{element.Menu_Item_Desription}}</td><td>{{element.Menu_ItemPrice}}</td></tr>
+<tr><td>{{element.Menu_Item}}</td><td>{{element.Menu_Item_Description}}</td><td>{{element.Menu_ItemPrice}}</td></tr>
 {%endfor%}
 </tbody>
 </table>

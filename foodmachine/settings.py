@@ -16,6 +16,7 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+APPEND_SLASH = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -44,6 +45,16 @@ TEMPLATE_DIRS = (
 	os.path.join(SETTINGS_PATH, 'templates'),
 )
 
+SERVE_MEDIA = DEBUG
+
+LOGIN_URL = 'login'
+#LOGIN_URL = 'log'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/dashboard/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 
 # Application definition
@@ -55,25 +66,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 	'social_django',
     'phonenumber_field',
 	'authentication',
-<<<<<<< HEAD
-
-	#'accounts.aps.AccountsConfig' #Added 2/23/201
-    'phonenumber_field',
-    'restaurant',
-
-   
-    'phonenumber_field',
-
-=======
     'restaurant',
 	#'users',
 
 	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 
 	
 ]
@@ -109,6 +108,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             				'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -165,18 +165,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'static'),
-)
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-LOGIN_URL = 'login'
-#LOGIN_URL = 'log'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/dashboard/'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
@@ -187,11 +175,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '325186787105-ti7fjmlnptv5hv7gp9sj2gkmuigbgkhh.apps.googleusercontent.com'
-<<<<<<< HEAD
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'n5a0u5mDWryFM3SikLsOBD0q'
-=======
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'uwWgfg17E72ps7y5zsBnWSyb'
->>>>>>> e849f1aae801ff9255528a25a9d8d413ba7eb8c8
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

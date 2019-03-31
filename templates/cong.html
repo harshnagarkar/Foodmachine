@@ -1,0 +1,25 @@
+<html>
+    {% csrf_token %}
+<head>
+        {%load static%}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Registration sucessfull</title>
+<link rel="stylesheet" rel="stylesheet" type="text/css" href="{%static 'stylesheets/cong.css'}" />
+<link href="stylesheets/cong.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+<link rel="shortcut icon" type="image/favicon" href="{%static 'img/favicon.ico'}">
+</head>
+
+<body>
+
+<div class="cong">
+    <form>
+        <h2>Congratulations you Registration In successfully!!!</h2>
+        {{username}}
+        <a href="logn.html" style="text-decoration: none">Go back to Home page</a>
+        <br><br>
+    </form>
+    
+    </div>
+</body>
+</html>
