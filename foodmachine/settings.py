@@ -45,6 +45,7 @@ TEMPLATE_DIRS = (
 	os.path.join(SETTINGS_PATH, 'templates'),
 )
 
+SERVE_MEDIA = DEBUG
 
 LOGIN_URL = 'login'
 #LOGIN_URL = 'log'
@@ -65,7 +66,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 	'social_django',
     'phonenumber_field',
 	'authentication',

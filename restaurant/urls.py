@@ -10,9 +10,10 @@ urlpatterns = [
     # path('<int:question_id>/', views.detail, name='detail'),
     # ex: /polls/5/results/
     # path('<int:question_id>/results/', views.results, name='results'),
-    # ex: /polls/5/vote/
+
     path('<slug:restaurantName>', views.restaurantPage),
     url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
+    url('createrestaurant',TemplateView.as_view(template_name='createRestaurant'), name = "create Restaurant"),
+    url('sucessRestaurant', views.createRestaurant),
     url('sucess.html',views.createMenuItems),
-    url('create-restaurant.html', views.createRestaurant),
 ]

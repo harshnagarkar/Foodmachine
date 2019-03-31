@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from .models import Restaurant,Menu,Cuisine,Review, Label
+from .models import Restaurant,Cuisine,Review, Label
 from restaurant.forms import *
 
 def createRestaurant(request):
@@ -57,7 +57,7 @@ def createMenuItems(request):
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
     return render(request, 'create-menu.html')
 
-# def createLabel(request):
-#     labelCreate = Label.objects.create(Label_Name = '')
+def createLabel(request):
+    labelCreate = Label.objects.create(Label_Name = '')
 
 
