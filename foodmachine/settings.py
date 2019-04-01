@@ -45,6 +45,16 @@ TEMPLATE_DIRS = (
 	os.path.join(SETTINGS_PATH, 'templates'),
 )
 
+SERVE_MEDIA = DEBUG
+
+LOGIN_URL = 'login'
+#LOGIN_URL = 'log'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/dashboard/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 
 # Application definition
@@ -56,7 +66,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 	'social_django',
     'phonenumber_field',
 	'authentication',
@@ -99,6 +108,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             				'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -155,18 +165,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'static'),
-)
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-LOGIN_URL = 'login'
-#LOGIN_URL = 'log'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/dashboard/'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication

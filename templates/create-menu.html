@@ -1,25 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
 <style>
-    
+    h3{
+        color: white;
+    }
+    label{
+        color: white;
+    }
 </style>
-<form action = "/sucess.html" method="POST">
-   Create Menu Item: <input type = 'text' name = 'Item' placeholder = 'Item'>
+<form action = "sucess.html" method="POST">
+    {% csrf_token %}
+    <label>Enter your Restaurant's Name</label>
+    <input type = 'text' name = 'Rest' placeholder = 'Ajax'>
+    
+   <!-- <label for = 'Rest'>Choose your Restaurant</label>
+    <select>
+      {% for i in Res_Name %}
+      <option name = 'Rest'>{{i.Res_Name}}</option>
+      {% endfor %}
+  </select>-->
+  
+  <br>
+  <label for = "Item"> Create Menu Item: </label>
+  <input type = 'text' name = 'Item' placeholder = 'Item'>
    <br>
-   Create Item Description: <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
+  <label for = "Description"> Create Item Description:</label>
+  <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
    <br>
-   Create Item Price: <input type = 'number' name = 'Price' placeholder = '$0.00'>
+   <label for = "Price">Create Item Price: </label><input type = 'number' step = 'any' name = 'Price' placeholder = '0.00'>
    <br>
-   Create Item Label: <input type = 'text' name = 'Label' placeholder = 'Appetizer'>
+   <label for = "Label">Create Item Label:</label> 
+   <input type = 'text' name = 'Label' placeholder = 'Appetizer'>
    <br>
-   Create Cuisine Type: <input type = 'text' name = 'Cuisine' placeholder = 'Fast food'>
-   <br>
-    <input id = 'success' type="submit" name="Submit" onclick="add()">
+  <!-- Create Cuisine Type: <input type = 'text' name = 'Cuisine' placeholder = 'Fast food'>
+   <br>-->
+    <input  type="submit" name="Submit" onclick="add()">
+    <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
     <script>
        function add(){
             var x = document.getElementById('success')
             x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 200);
         }
     </script>
 </form>
