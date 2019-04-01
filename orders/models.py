@@ -1,5 +1,5 @@
 from django.db import models
-
+from restaurant.models import *
 # Create your models here.
 class Orders(models.Model):
     Menu_Item = models.CharField(max_length=300)
@@ -7,4 +7,4 @@ class Orders(models.Model):
     Restaurant_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     Preferences = models.CharField(max_length=300)
 
-class Cart(models.Model):
+# class Cart(models.Model):

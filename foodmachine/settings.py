@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
 	'authentication',
     'restaurant',
+    'orders',
 	#'users',
 
 	# 'accounts.apps.AccountsConfig' #Added 2/23/2019
