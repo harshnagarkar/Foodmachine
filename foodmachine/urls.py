@@ -25,23 +25,12 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # path('registration/', register, name = 're'),
-    # path('reset-password/', reset, name = 'reset'),
-    # path('forgot-password/', forgot, name = 'forgot'),
-    #path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
-	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    # url(r'^login/$', auth_views.login),
-    # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
-    # path('Menus/', Menu, name = 'menu'),
+    
     url(r'^login/$', auth_views.LoginView.as_view(template_name='logn.html'),name='login'),
 	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard', include('authentication.urls')),
-  	# url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
-	#url(r'^loginPageIndex/$', views.LoginView.as_view(template_name = 'loginPageIndex.html'), name = 'log'),
-	#url(r'^login/$', views.login, name='login
-	url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
     #url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
@@ -51,5 +40,7 @@ urlpatterns = [
 	
 	#url(r'^password_reset/$', password_reset, name = 'password_reset'),  #Working on password reset here
 	
+    url(r^'password_reset_done.html', )
+    
 ]
 	
