@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url, include
 # from django.contrib.auth import views
 from .views import home #test
@@ -24,6 +24,8 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
+# from django.contrib.auth.views import password_reset, password_reset_done
+# from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,15 +40,11 @@ urlpatterns = [
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
     url(r'^$', home, name='home'),
-    
-	url('^', include('django.contrib.auth.urls'),
+    path('accounts/', include('django.contrib.auth.urls')),
+	url('^', include('django.contrib.auth.urls'))
 
-    url(r'^password_reset/$', auth_views.password_reset),
-    url(r'^password_reset/done/$', auth_views.password_reset_done))
-    # (r'^change-password/$', 'django.contrib.auth.views.password_change'), 
-    # (r'^password-changed/$', 'django.contrib.auth.views.password_change_done'))
-	#url(r'^password_reset/$', password_reset, name = 'password_reset'),  #Working on password reset here
-	# url('',
+    #url(r'^change-password/$', views.change_password, name = 'change_password')) 
+   
     #  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
     #   {'document_root': settings.MEDIA_ROOT}),
     #  )
