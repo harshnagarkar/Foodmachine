@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url, include
 # from django.contrib.auth import views
 from .views import home #test
@@ -22,36 +22,36 @@ from django.views.generic.base import TemplateView
 from restaurant.views import Menu
 from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
+# from django.contrib.auth.views import password_reset, password_reset_done
+# from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # path('registration/', register, name = 're'),
-    # path('reset-password/', reset, name = 'reset'),
-    # path('forgot-password/', forgot, name = 'forgot'),
-    #path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    #url(r'^signup/$', views.SignUp.as_view(), name = 'signup'),
-	#url(r'^login/$', views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    # url(r'^login/$', auth_views.login),
-    # url(r'^login/$', auth_views.login, {'template_name': 'logn.html'}),
-    # path('Menus/', Menu, name = 'menu'),
-    #url('test', test,name='test'),
+    
     url(r'^login/$', auth_views.LoginView.as_view(template_name='logn.html'),name='login'),
 	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard', include('authentication.urls')),
+<<<<<<< HEAD
   	# url(r'^login/$', views.LoginView.as_view(template_name='login.html'), name='login'),
 	#url(r'^loginPageIndex/$', views.LoginView.as_view(template_name = 'loginPageIndex.html'), name = 'log'),
 	#url(r'^login/$', views.login, name='login
 	url(r'^logout/$', auth_views.LogoutView.as_view(template_name='home.html'), name='logout'),
+=======
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
+>>>>>>> 466bf1b7afa3b0f6b35e3383178a03f69914602e
     #url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
     url(r'^$', home, name='home'),
-    
-	
-	#url(r'^password_reset/$', password_reset, name = 'password_reset'),  #Working on password reset here
-	# url('',
+    path('accounts/', include('django.contrib.auth.urls')),
+	url('^', include('django.contrib.auth.urls'))
+
+    #url(r'^change-password/$', views.change_password, name = 'change_password')) 
+   
     #  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
     #   {'document_root': settings.MEDIA_ROOT}),
     #  )

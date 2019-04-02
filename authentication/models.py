@@ -13,6 +13,8 @@ class UserProfile(models.Model):
    userType = models.CharField(max_length=1, choices=(('c',  ('Client')), ('r', ('Restaurant')),('d',  ('Delivery'))),default='c')
    userRestaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE,null=True)
    
+def __str__(self):
+    return self.user.username
 		
 		
 # @receiver(post_save, sender=User)

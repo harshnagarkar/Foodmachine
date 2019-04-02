@@ -72,6 +72,34 @@ def makeUser(request):
 # 			form = LoginForm()
 		
 
+
+	# return render(request, template_name, loginUser(request))
+			# username = form.cleaned_data.get('username')
+			# passw = form.cleaned_data.get('password')
+			# user = loginuser(request)
+		# 	loginUser(username, passw)
+		# 	return render(request, 'userdashboard.html')
+		# else:
+		# 	form = LoginForm()
+# def logUser(request):		
+# 	context = request.POST
+# 	if request.user.is_authenticated():
+# 		return HttpResponse("Logged in")
+# 	if request.method == 'POST':
+# 		username = request.POST['username']
+# 		password = request.POST['password']
+# 		user = authenticate(username=username, password=password)
+# 		print(user)
+# 		if user:
+# 			if user.is_active:
+# 				login(request, user)
+# 				return HttpResponse("Success")
+# 			else:
+# 				return HttpResponse("Not active")
+# 		else:
+# 			return HttpResponse("Invalid")
+# 	else:
+# 		return render(request, 'templates/logn.html', {}, context)
 # def updatePass(request):
 
 # 	if request.method == "POST":
