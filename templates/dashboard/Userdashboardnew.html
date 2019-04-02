@@ -3,25 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Userdashboard</title>
-    <link href="dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/boostrapHomePg.css' %}" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-    <link rel="shortcut icon" type="image/favicon" href="img/favicon.ico">
+    <<link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
 </head>
 
 <body>
     <div id="w">
-       <!-- <div id="content" class="clearfix">
-            <div id="userphoto"><img src="img/avatar.png" alt="default avatar"></div>
-            <nav id="profiletabs">
-                <ul class="clearfix">
-                    <li><a href="#orders" class="orders">Orders</a></li>
-                    <li><a href="#activity">Activity</a></li>
-                    <li><a href="#settings">Settings</a></li>
-                </ul>
-            </nav>
-            -->
-
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Orders</a>
@@ -30,7 +19,7 @@
                       <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+                      <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Profile</a>
                     </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
