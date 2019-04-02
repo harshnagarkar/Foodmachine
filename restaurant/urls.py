@@ -13,7 +13,7 @@ urlpatterns = [
 
     path('<slug:restaurantName>', views.restaurantPage),
     url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
-    url('createrestaurant',TemplateView.as_view(template_name='createRestaurant'), name = "create Restaurant"),
+    url('createRestaurant',TemplateView.as_view(template_name='restaurant/createRestaurant.html'), name = "create Restaurant"),
     url('sucessRestaurant', views.createRestaurant),
     url('sucess.html',views.createMenuItems),
 ]

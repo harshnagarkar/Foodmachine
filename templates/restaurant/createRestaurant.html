@@ -1,24 +1,27 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
 {% if user.is_authenticated %}
-<div class="signup">
-    <form action="/dashboard/cong.html" method="POST" enctype="multipart/form-data">
+<div style="align-self: center;">
+    <form action="/dashboard/cong.html" method="POST" enctype="multipart/form-data" style ="align-self: center;">
         {% csrf_token %}
-        <h2 style="color: #fff;">Sign Up</h2>
+        <h2 style="color: #fff;">Create Restaurant</h2>
         <input type="text" name="resname" placeholder="Username"><br><br>
         <input type="text" name="resdescription" placeholder="First name"><br><br>
         <input type="tel" name="rescontact" placeholder="Last name"><br><br>
         <!-- <input type="number" name = "phone" placeholder="Phone Number"><br><br> -->
         <select name="rescusine">
+            Please choose a Cuisine Below
             {% for cusine in Cusine %}
             <option value= {{cusine.Cuisine_parent}}></option>
             {% endfor %}
         </select>
+        <br>
         <input id="id_image" type="file" class="" name="respic">
+        <br>
         <input type="Submit" value="Submit"><br><br>
     </form>
 {% else %}
-
+You need to login
 {% endif %}
 
 {% endblock content%}
