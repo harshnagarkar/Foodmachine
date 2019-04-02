@@ -47,7 +47,7 @@ def makeUser(request):
 			answer = form.cleaned_data.get('secAnswer')
 			questions = form.cleaned_data.get('questions')
 			# print(question)
-			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,Answer = answer,Question=questions)
+			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,Answer = answer,Question=questions,UserType='c',UserRestaurant=None)
 			
 
 	else:

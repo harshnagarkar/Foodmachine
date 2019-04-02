@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {extends "../layout.html"}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="signup">
+    <form action="/dashboard/cong.html" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 style="color: #fff;">Sign Up</h2>
+        <input type="text" name="resname" placeholder="Username"><br><br>
+        <input type="text" name="resdescription" placeholder="First name"><br><br>
+        <input type="tel" name="rescontact" placeholder="Last name"><br><br>
+        <!-- <input type="number" name = "phone" placeholder="Phone Number"><br><br> -->
+        <select name="rescusine">
+            {% for cusine in Cusine %}
+            <option value= {{cusine.Cuisine_parent}}></option>
+            {% endfor %}
+        </select>
+        <input id="id_image" type="file" class="" name="respic">
+        <input type="Submit" value="Submit"><br><br>
+    </form>
+{% else %}
+
+{% endif %}
+
+{% endblock content%}

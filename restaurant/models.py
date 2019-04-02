@@ -11,7 +11,7 @@ class Cuisine(models.Model):
     Cuisine_Id = models.AutoField(primary_key=True)
     Cuisine_Sub = models.CharField(max_length=20, null=True)
     Cuisine_parent = models.CharField(max_length=20,null=True)
-    Cuisine_Pic = models.ImageField(upload_to=upload_image, default='/media/defaultimage.png')
+    Cuisine_Pic = models.ImageField(upload_to='media/', default='/media/defaultimage.png')
 
 class Label(models.Model):
     # , null = false, blank = false)
@@ -31,7 +31,7 @@ class Restaurant(models.Model):
     Res_Contact = PhoneNumberField(null=False, blank=False, unique=True)
     Res_Address = models.CharField(max_length=75)
     Cuisine_Type = models.ForeignKey(Cuisine,on_delete=models.SET_NULL,null=True,default=None)
-    Res_Pic = models.ImageField(upload_to=upload_image, default='/media/defaultimage.png')
+    Res_Pic = models.ImageField(upload_to='media/', default='/media/defaultimage.png')
 
 
 class Menu(models.Model):
@@ -46,7 +46,7 @@ class Menu(models.Model):
     Menu_Res_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=False, blank=False,default=None)
     Menu_Cuisine = models.ForeignKey( Cuisine, on_delete=models.SET_NULL, null=True,default=None)
     Menu_Label_Id = models.ForeignKey(Label, on_delete = models.SET_NULL,null=True)
-    Menu_Pic = models.ImageField(upload_to=upload_image, default='/media/defaultimage.png')
+    Menu_Pic = models.ImageField(upload_to='media/', default='/media/defaultimage.png')
 
 
 class Review(models.Model):
