@@ -19,7 +19,7 @@
 			<input type="text" placeholder="Search..">
 			{% if user.is_authenticated %}
 			<a class="active" href = "/dashboard">{{user.username}}</a>
-			<a class="" href="/logout"> Logout/ </a>
+			<a class="" href="logout/"> Logout </a>
 			{%else%}
 			<a class="active" href="login/">Login</a>
 			{% endif %}
