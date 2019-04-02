@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
 
     url(r'^$', home, name='home'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
 	url('^', include('django.contrib.auth.urls'))
 
     #url(r'^change-password/$', views.change_password, name = 'change_password')) 
