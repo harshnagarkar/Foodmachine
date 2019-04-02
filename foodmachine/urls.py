@@ -22,7 +22,9 @@ from django.views.generic.base import TemplateView
 from restaurant.views import Menu
 from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -37,7 +39,12 @@ urlpatterns = [
 
     url(r'^$', home, name='home'),
     
-	
+	url('^', include('django.contrib.auth.urls'),
+
+    url(r'^password_reset/$', auth_views.password_reset),
+    url(r'^password_reset/done/$', auth_views.password_reset_done))
+    # (r'^change-password/$', 'django.contrib.auth.views.password_change'), 
+    # (r'^password-changed/$', 'django.contrib.auth.views.password_change_done'))
 	#url(r'^password_reset/$', password_reset, name = 'password_reset'),  #Working on password reset here
 	# url('',
     #  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
