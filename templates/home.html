@@ -1,24 +1,6 @@
-<html>
-
-<head>
-    {%load static%}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Foodmachine</title>
-    <link href="{% static 'stylesheets/home.css' %}" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-    <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
-</head>
-
+{% extends 'layout.html' %}{% block content %}
+{% load static %}
 <body background = "{% static 'img/pic1.jpg' %}">
-    <section>
-        <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="login/">Log In</a>
-            <a href="#contact">Contact</a>
-            <input type="text" placeholder="Search..">
-        </div>
-    </section>
-
     <section>
         <!-- The grid: four columns -->
         <div class="row">
@@ -39,6 +21,11 @@
                 <button class="btn">Dessert Menu</button>
             </div>
         </div>
+        {% if user.is_authenticated %}
+        <a class="active" href="/dashboard">{{user.username}}</a>
+        {%else%}
+        Nothing
+        {% endif %}
 
     </section>
 
@@ -47,4 +34,4 @@
 
 </body>
 
-</html>
+{% endblock content %}
