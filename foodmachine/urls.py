@@ -41,7 +41,7 @@ urlpatterns = [
 
     url(r'^$', home, name='home'),
     # path('accounts/', include('django.contrib.auth.urls')),
-	url('^', include('django.contrib.auth.urls'))
+	# url('^', include('django.contrib.auth.urls'))
 
     #url(r'^change-password/$', views.change_password, name = 'change_password')) 
    

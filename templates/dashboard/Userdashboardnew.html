@@ -1,14 +1,15 @@
-<!doctype html>
-
+<{% extends '../layout.html'%}
+{% block content  %}
+{% load static %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Userdashboard</title>
-    <link href="{% static 'css/boostrapHomePg.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'stylesheets/dashboard.css' %}" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
     <<link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
 </head>
-
+<
 <body>
     <div id="w">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -84,3 +85,4 @@
     </script>
 
 </body>
+{% endblock content %}

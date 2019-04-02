@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from .apps import userCreate,updatePassword
 from django.contrib.auth.models import AnonymousUser
 
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
 # Create your views here.
 
 def home(request):
@@ -16,7 +16,7 @@ def userView(request):
 	if request.user.is_authenticated:
 		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
 		if context.userprofile.userType== 'c':
-			return render(request, 'dashboard/userdashboard.html')
+			return render(request, 'dashboard/Userdashboardnew.html')
 		elif context.userprofile.userType == 'r':
 			return render(request, 'dashboard/restaurantdashboard.html')
 		elif context.userprofile.userType == 'd':
