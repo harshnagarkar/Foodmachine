@@ -47,11 +47,12 @@ def createMenuItems(request):
         
         #Cuisine_Type = request.POST.get('Cuisine', '')
         #Label_Name = request.POST.get('Label', '')
-        itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
-         Menu_Item_Description = Menu_Description, Menu_Res_Id = Res)
-        itemCreate.save()
-        labelCreate = Label(Label_Name = Name, Label_Menu_Id = itemCreate.objects.get(Menu_Item_Id))
+        labelCreate = Label(Label_Name = Name)
         labelCreate.save()
+        lab = Label.objects.get(Label_Name = request.POST['Label'])
+        itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
+        Menu_Item_Description = Menu_Description, Menu_Label_Id = lab, Menu_Res_Id = Res)
+        itemCreate.save()
     #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
     return render(request, 'create-menu.html')
