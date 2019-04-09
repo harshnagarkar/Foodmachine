@@ -9,13 +9,14 @@ class UserForm(forms.ModelForm):
 		fields = ('first_name', 'last_name', 'email')
 		
 class MenuCreation(forms.ModelForm):
-	Rest = forms.CharField(max_length = 75)
-	Item = forms.CharField(max_length = 50)
-	Description = forms.CharField()
-	Price = forms.DecimalField(max_digits = 30, decimal_places = 2)
-	Cuisine = forms.CharField(max_length = 20, required = False)
+	Rest = forms.CharField(label = 'Rest', max_length = 75)
+	Item = forms.CharField(label = 'Item', max_length = 50)
+	Description = forms.CharField(label = 'Description', max_length = 100)
+	Price = forms.DecimalField(label = 'Price', max_digits = 30, decimal_places = 2)
+	Cuisine = forms.CharField(label = 'Cuisine', max_length = 20, required = False)
 	Label = forms.CharField(max_length = 20, required = True)
-	Picture = forms.ImageField(help_text = "Upload image: ", required = False)
+	Picture = forms.ImageField(label = 'Picture', help_text = "Upload image: ", required = False)
+
 	class Meta:
 		model = Menu
 		fields = ('Rest' ,'Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
