@@ -9,9 +9,16 @@ class UserForm(forms.ModelForm):
 		fields = ('first_name', 'last_name', 'email')
 		
 class MenuCreation(forms.ModelForm):
+	Rest = forms.CharField(max_length = 75)
+	Item = forms.CharField(max_length = 50)
+	Description = forms.CharField()
+	Price = forms.DecimalField(max_digits = 30, decimal_places = 2)
+	Cuisine = forms.CharField(max_length = 20, required = False)
+	Label = forms.CharField(max_length = 20, required = True)
+	Picture = forms.ImageField(help_text = "Upload image: ", required = False)
 	class Meta:
 		model = Menu
-		fields = ('Menu_Item', 'Menu_ItemPrice', 'Menu_Item_Description')
+		fields = ('Rest' ,'Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
 
 # class LabelCreation(forms.ModelForm):
 # 	class Meta:

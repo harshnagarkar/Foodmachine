@@ -38,17 +38,18 @@ def createMenuItems(request):
     if request.method == 'POST':
         #Rest = request.POST['Rest']
         Menu_Item = request.POST['Item']
-        
+        form = MenuCreation()
         Res = Restaurant.objects.get(Res_Name = request.POST['Rest'])
         Menu_Description = request.POST['Description']
         Menu_ItemPrice = request.POST["Price"]
         Name = request.POST['Label']
+        
         #Cuisine_Type = request.POST.get('Cuisine', '')
         #Label_Name = request.POST.get('Label', '')
         itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
          Menu_Item_Description = Menu_Description, Menu_Res_Id = Res)
         itemCreate.save()
-        labelCreate = Label(Label_Name = Name, Label_Menu_Id = itemCreate)
+        labelCreate = Label(Label_Name = Name, Label_Menu_Id = itemCreate.objects.get(Menu_Item_Id))
         labelCreate.save()
     #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
