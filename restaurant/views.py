@@ -29,7 +29,8 @@ def createRestaurant(request):
 
 def restaurantPage(request, restaurantName):
     resDetail = Restaurant.objects.get(Res_Name=restaurantName)
-    return render(request, 'restaurant/restaurant.html', {'Restaurant':resDetail})
+    menuDetail = Menu.objects.filter(Menu_Res_Id=resDetail)
+    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail},{'Menu':menuDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')

@@ -31,7 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     
-    url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'),name='login'),
+    url(r'^login/$', auth_views.LoginView.as_view(template_name='registration/lognn.html'),name='login'),
 	# url(r'^login/$', views.LoginView.as_view(template_name = 'logn.html'), name = 'login'),
     url('restaurant/', include('restaurant.urls')),
     url('dashboard', include('authentication.urls')),

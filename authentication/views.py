@@ -4,8 +4,13 @@ from authentication.forms import *
 from django.http import HttpResponse
 from .apps import userCreate,updatePassword
 from django.contrib.auth.models import AnonymousUser
-
+from django.contrib.auth.models import AnonymousUser
+import os
+from sendgrid.helpers.mail import *
+import sendgrid
+from django.http import HttpResponse
 from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
+from authentication.tests import emails
 # Create your views here.
 
 def home(request):
@@ -46,8 +51,12 @@ def makeUser(request):
 			email = form.cleaned_data.get('Email')
 			answer = form.cleaned_data.get('secAnswer')
 			questions = form.cleaned_data.get('questions')
+			Emailuser = email
+			print (Emailuser)
 			# print(question)
 			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,Answer = answer,Question=questions,UserType='c',UserRestaurant=None)
+			emails(email)
+			return render(request, 'cong.html', {"username": username})
 			
 
 	else:

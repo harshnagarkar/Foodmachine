@@ -10,5 +10,5 @@ register = template.Library()
 @register.filter(name='getMenu')
 def getMenu(resID):
     print(resID)
-    context = Menu.objects.filter(Menu_Res_Id=1).values()
+    context = Menu.objects.filter(Menu_Res_Id=resID)
     return context
