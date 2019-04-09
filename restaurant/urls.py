@@ -15,5 +15,5 @@ urlpatterns = [
     url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
     url('createRestaurant',TemplateView.as_view(template_name='restaurant/createRestaurant.html'), name = "create Restaurant"),
     url('sucessRestaurant', views.createRestaurant),
-    url('sucess.html',views.createMenuItems),
+    url('create-menu.html',views.createMenuItems),
 ]

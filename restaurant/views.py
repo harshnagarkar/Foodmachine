@@ -37,21 +37,27 @@ def processMenu(request):
 
 def createMenuItems(request):
     if request.method == 'POST':
+        form = MenuCreation(request.POST, request.FILES)
         #Rest = request.POST['Rest']
-        Menu_Item = request.POST['Item']
-        form = MenuCreation()
-        Res = Restaurant.objects.get(Res_Name = request.POST['Rest'])
-        Menu_Description = request.POST['Description']
-        Menu_ItemPrice = request.POST["Price"]
-        Name = request.POST['Label']
+        Menu_Item = form.cleaned_data.get('Item')
+        #Menu_Item = request.POST['Item']
+        #form = MenuCreation()
+        Res = form.cleaned_data.get('Rest')
+        #Res = Restaurant.objects.get(Res_Name = request.POST['Rest'])
+        Menu_Description = form.cleaned_data.get('Description')
+        #Menu_Description = request.POST['Description']
+        Menu_ItemPrice = form.cleaned_data.get('Price')
+        #Menu_ItemPrice = request.POST["Price"]
+        Name = form.cleaned_data.get('Label')
+        #Name = request.POST['Label']
         
         #Cuisine_Type = request.POST.get('Cuisine', '')
         #Label_Name = request.POST.get('Label', '')
         labelCreate = Label(Label_Name = Name)
         labelCreate.save()
-        lab = Label.objects.get(Label_Name = request.POST['Label'])
+        #lab = Label.objects.get(Label_Name = request.POST['Label'])
         itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
-        Menu_Item_Description = Menu_Description, Menu_Label_Id = lab, Menu_Res_Id = Res)
+        Menu_Item_Description = Menu_Description, Menu_Label_Id = , Menu_Res_Id = Res)
         itemCreate.save()
     #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
