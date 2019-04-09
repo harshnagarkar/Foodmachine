@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from .models import Restaurant,Cuisine,Review, Label
+from .models import *
 from restaurant.forms import *
 
 def createRestaurant(request):
