@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}{% block content %}
+{% load restags %}
+<h1>{{Restaurant.Res_Name}}</h1>
+<h2>{{Restaurant.Res_Description}}</h2>
+<br>
+<div>
+<div class= "row">
+            {% for M in Restaurant|getMenu %}
+            <div class="column">
+                <div class="container" style=" height:300px; width:200px">
+                    <div class="card">
+                        <img src="{{M.Menu_Pic.url}}">
+                        <h2>{{M.Menu_Item}}</h2>
+                        <p class="price">{{M.Menu_ItemPrice}}</p>
+                        <p>{{M.Menu_Item_Description}}</p>
+                        <p><button class="button">Menu</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor%}
+</div>
+</div>
+{% endblock content %}
