@@ -8,7 +8,7 @@
         color: white;
     }
 </style>
-<form action = "create-menu.html" method="POST">
+<form action = "/restaurant/createdmenu" method="POST">
     {% csrf_token %}
     <label>Enter your Restaurant's Name</label>
     <input type = 'text' name = 'Rest' placeholder = 'Ajax'>

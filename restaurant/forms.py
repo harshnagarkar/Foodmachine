@@ -3,12 +3,12 @@ from authentication.models import *
 from django.contrib.auth.models import User, AbstractUser
 from restaurant.models import *
 
-class UserForm(forms.ModelForm):
+class UserForm(forms.Form):
 	class Meta:
 		model = User
 		fields = ('first_name', 'last_name', 'email')
 		
-class MenuCreation(forms.ModelForm):
+class MenuCreation(forms.Form):
 	Rest = forms.CharField(label = 'Rest', max_length = 75)
 	Item = forms.CharField(label = 'Item', max_length = 50)
 	Description = forms.CharField(label = 'Description', max_length = 100)

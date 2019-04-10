@@ -57,7 +57,7 @@ def createMenuItems(request):
         labelCreate.save()
         #lab = Label.objects.get(Label_Name = request.POST['Label'])
         itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
-        Menu_Item_Description = Menu_Description, Menu_Label_Id = , Menu_Res_Id = Res)
+        Menu_Item_Description = Menu_Description, Menu_Label_Id = Name , Menu_Res_Id = Res)
         itemCreate.save()
     #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
     #descriptCreate = Menu.objects.create(Menu_Description = 'test')
