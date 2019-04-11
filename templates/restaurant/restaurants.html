@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}{% block content %}
 {% load restags %}
+{% load static %}
+<div>
 <h1>{{Restaurant.Res_Name}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
 <br>
@@ -7,18 +9,22 @@
 <div class= "row">
             {% for M in Restaurant|getMenu %}
             <div class="column">
-                <div class="container" style=" height:300px; width:200px">
-                    <div class="card">
-                        <img src="{{M.Menu_Pic.url}}">
-                        <h2>{{M.Menu_Item}}</h2>
+                
+                    <div class="card" style=" height:500px; width:200px">
+                        <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
+                        <font size = "5" color = "black">{{M.Menu_Item}}</font>
                         <p class="price">{{M.Menu_ItemPrice}}</p>
-                        <p>{{M.Menu_Item_Description}}</p>
-                        <p><button class="button">Menu</button>
+                        <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
+                        <p style="position: absolute; bottom: 0px"><button class="button" style="width: 200px">Menu</button>
                         </p>
                     </div>
-                </div>
+                
             </div>
+            <br>
+            <br>
             {% endfor%}
+            
+</div>
 </div>
 </div>
 {% endblock content %}

@@ -65,6 +65,62 @@ def makeUser(request):
 	return render(request, 'cong.html', {"username" : username})
 
 
+def restaurantUser(request):
+	# context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+	if request.method == "POST":
+		form = RestaurantForm(request.POST)
+		print(form.errors)
+		print(form.is_valid())
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			fname = form.cleaned_data.get('FirstName')
+			lname = form.cleaned_data.get('LastName')
+			passw = form.cleaned_data.get('pass')
+			confirmpass = form.cleaned_data.get('confirmPass')
+			email = form.cleaned_data.get('Email')
+			answer = form.cleaned_data.get('secAnswer')
+			questions = form.cleaned_data.get('questions')
+			usertype = form.cleaned_data('usertype')
+			# print(question)
+			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,
+			                     Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
+
+	else:
+		form = RestaurantForm()
+
+	return render(request, 'restaurant/sucessRestaurant.html', {"username": request.user.username})
+
+
+def sendEmail(request):
+
+	if request.method == "POST":
+		form = ForgotPassword(request.POST)
+		print(form.errors)
+		print(form.is_valid())
+		if form.is_valid():
+			email = form.cleaned_data.get('email')
+			u = verifyEmail(email)
+
+			if u != None:
+				sg = sendgrid.SendGridAPIClient(
+                                    apikey='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')
+				from_email = Email("admin@foodmachine.ml")
+				to_email = Email(email)
+				subject = "Request to Reset Password for Food Machine"
+				content = Content(
+                                    "text/plain", "and easy to do anywhere, even with Python")
+				mail = Mail(from_email, subject, to_email, content)
+				response = sg.client.mail.send.post(request_body=mail.get())
+
+			else:
+				return 'Email does not exist. Please try again!'
+
+	else:
+		form = ForgotPassword()
+
+	return render(request, 'password_reset_confirm.html')
+
+
 # def loginUser(request):
 # 	if request.method == "POST":
 # 		form = LoginForm(request.POST)
