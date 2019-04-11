@@ -23,6 +23,7 @@ def createRestaurant(request):
                 restaurant = Restaurant(Res_Name=resname,Res_description=resdescription,Res_contact=rescontact,Res_cusine=rescusine,Res_Pic = respic)
                 restaurant.save()
                 user.userprofile.userRestaurant = Restaurant.objects.get(Res_Name=resname)
+                user.userprofile.userRestaurant = Restaurant.objects.get(userType='r')
                 user.save()
         else:
              return HttpResponseRedirect("/restaurant/createRestaurant/")
