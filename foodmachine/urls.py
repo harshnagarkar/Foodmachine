@@ -47,7 +47,7 @@ urlpatterns = [
    
     #  (r'^media/(?P<path>.*)$', 'django.views.static.serve',
     #   {'document_root': settings.MEDIA_ROOT}),
-    url(r'password_change/$', auth_views.PasswordChangeView.as_view(template_name='registration/password_reset_form.html', success_url='/password_change_done')),
+   url(r'password_change/$', auth_views.PasswordChangeView.as_view(template_name='registration/password_reset_form.html', success_url='/password_change_done')),
     url(r'password_change_done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_reset_done.html')),
     url(r'password_reset/$', auth_views.PasswordResetView.as_view(template_name='password_reset.html', email_template_name='registration/password_reset_email.html',  subject_template_name='registration/password_reset_email.html', success_url='/password_reset_done/', from_email='admin@foodmachine.ml')),
     url(r'password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html')),
