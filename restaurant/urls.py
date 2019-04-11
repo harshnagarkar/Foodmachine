@@ -12,8 +12,9 @@ urlpatterns = [
     # path('<int:question_id>/results/', views.results, name='results'),
 
     path('<slug:restaurantName>', views.restaurantPage),
-    url('createmenu', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu create'),
-    url('createRestaurant',TemplateView.as_view(template_name='restaurant/createRestaurant.html'), name = "create Restaurant"),
+    url('createmenu/', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu_create'),
+    url('createRestaurant',TemplateView.as_view(template_name='restaurant/createRestaurant.html'), name = "create_Restaurant"),
     url('sucessRestaurant', views.createRestaurant),
-    url('sucess.html',views.createMenuItems),
+    url('create-menu', TemplateView.as_view(template_name="create-menu.html"),name='createformmenu'),
+    url('createdmenu', views.createMenuItems, name='createdmenu'),
 ]
