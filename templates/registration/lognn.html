@@ -4,7 +4,8 @@
 <body background="{% static 'img/pic1.jpg' %}">
 <div class="signin">
 
-<form>
+<form method="post">
+    {% csrf_token %}
 <h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
 <input type="text" name="username" placeholder="Username" /><br /><br />
 <input type="password" name="password" placeholder="Password" /><br /><br />
