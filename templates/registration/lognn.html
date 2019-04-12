@@ -3,7 +3,7 @@
 {% load static %}
 <body background="{% static 'img/pic1.jpg' %}">
 <div class="signin">
-
+{% if not user.is_authenticated %}
 <form method="post">
     {% csrf_token %}
 <h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
@@ -17,8 +17,10 @@
     </div><br /><br />
     <!-- <a href="{% url 'social:begin' 'google' %}">Login with Google</a><br> -->
 Don't have account?<a href="/dashboard/registration/"  style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">&nbsp;Sign Up</a>
-
-
+{% else %}
+You have already logged in
+Go to Homepage <a href="/" >Click Here</a>
+{%endif%}
 </div>
 {% endblock %}
 </body>
