@@ -38,3 +38,4 @@ class RestaurantCreation(forms.Form):
 	class Meta:
 		model = Restaurant
 		fields = ('resname','resdescription','rescontact','resaddress','recusine','respic')
+
