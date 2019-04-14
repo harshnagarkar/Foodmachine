@@ -9,7 +9,7 @@ class UserForm(forms.Form):
 		fields = ('first_name', 'last_name', 'email')
 		
 class MenuCreation(forms.Form):
-	Rest = forms.CharField(label = 'Rest', max_length = 75)
+	# Rest = forms.CharField(label = 'Rest', max_length = 75)
 	Item = forms.CharField(label = 'Item', max_length = 50)
 	Description = forms.CharField(label = 'Description', max_length = 100)
 	Price = forms.DecimalField(label = 'Price', max_digits = 30, decimal_places = 2)
@@ -19,7 +19,7 @@ class MenuCreation(forms.Form):
 
 	class Meta:
 		model = Menu
-		fields = ('Rest' ,'Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
+		fields = ('Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
 
 # class LabelCreation(forms.ModelForm):
 # 	class Meta:

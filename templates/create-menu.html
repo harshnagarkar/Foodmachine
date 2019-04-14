@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{% load static%}
 <style>
     h3{
         color: white;
@@ -8,22 +9,14 @@
         color: white;
     }
 </style>
-<form action = "/restaurant/createdmenu" method="POST">
+<body background="{% static 'img/pic1.jpg' %}">
+    {% if user.is_authenticated %}
+<form action = "/restaurant/createdmenu/" method="POST">
     {% csrf_token %}
-    <label>Enter your Restaurant's Name</label>
-    <input type = 'text' name = 'Rest' placeholder = 'Ajax'>
+    <h2></h2>PLease enter details below</h2>
+    <label>Item</label>
+    <input type = 'text' name = 'Item' placeholder = 'Item Name'>
     
-   <!-- <label for = 'Rest'>Choose your Restaurant</label>
-    <select>
-      {% for i in Res_Name %}
-      <option name = 'Rest'>{{i.Res_Name}}</option>
-      {% endfor %}
-  </select>-->
-  
-  <br>
-  <label for = "Item"> Create Menu Item: </label>
-  <input type = 'text' name = 'Item' placeholder = 'Item'>
-   <br>
   <label for = "Description"> Create Item Description:</label>
   <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
    <br>
@@ -46,7 +39,10 @@
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 200);
         }
     </script>
+    {% else %}
+    Please login to add menu.
+    {%endif%}
 </form>
-
+</body>
 
 {% endblock content %}

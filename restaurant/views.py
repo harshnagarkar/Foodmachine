@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from .models import *
+from restaurant.models import Restaurant,Menu,Label,Review
 from restaurant.forms import *
-
+from django.http import HttpResponseRedirect
+# from django.shortcuts import get_object_or_404
 def createRestaurant(request):
      user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
      if (user.userprofile.userRestaurant!=None):
@@ -28,7 +29,35 @@ def createRestaurant(request):
         else:
              return HttpResponseRedirect("/restaurant/createRestaurant/")
 
+
+def createMenuItems(request):
+     if request.method == 'POST':
+        form = MenuCreation(request.POST, request.FILES)
+        print(form.errors)
+        user = User.objects.get(
+            pk=(User.objects.get(username=request.user.username).id))
+        if form.is_valid():
+            Item = form.cleaned_data.get('Item')
+            resname = user.userprofile.userRestaurant
+            print(resname)
+            Rest = resname
+            # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
+
+            Description = form.cleaned_data.get('Description')
+            Price = form.cleaned_data.get('Price')
+            Labelname = form.cleaned_data.get('Label')
+            labelCreate = Label(Label_Name=Labelname)
+            labelCreate.save()
+            labelId = Label.objects.get(Label_Name=Labelname)
+            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
+            itemCreate.save()
+
+        return render(request, 'createdmenu.html')
+     else:
+        return render(request, 'create-menu.html')
+
 def restaurantPage(request, restaurantName):
+    # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = Restaurant.objects.get(Res_Name=restaurantName)
     menuDetail = Menu.objects.filter(Menu_Res_Id=resDetail)
     return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail},{'Menu':menuDetail})
@@ -36,33 +65,7 @@ def restaurantPage(request, restaurantName):
 def processMenu(request):
     return render(request,'create-menu.html')
 
-def createMenuItems(request):
-    if request.method == 'POST':
-        form = MenuCreation(request.POST, request.FILES)
-        #Rest = request.POST['Rest']
-        Menu_Item = form.cleaned_data.get('Item')
-        #Menu_Item = request.POST['Item']
-        #form = MenuCreation()
-        Res = form.cleaned_data.get('Rest')
-        #Res = Restaurant.objects.get(Res_Name = request.POST['Rest'])
-        Menu_Description = form.cleaned_data.get('Description')
-        #Menu_Description = request.POST['Description']
-        Menu_ItemPrice = form.cleaned_data.get('Price')
-        #Menu_ItemPrice = request.POST["Price"]
-        Name = form.cleaned_data.get('Label')
-        #Name = request.POST['Label']
-        
-        #Cuisine_Type = request.POST.get('Cuisine', '')
-        #Label_Name = request.POST.get('Label', '')
-        labelCreate = Label(Label_Name = Name)
-        labelCreate.save()
-        #lab = Label.objects.get(Label_Name = request.POST['Label'])
-        itemCreate = Menu(Menu_Item = Menu_Item, Menu_ItemPrice = Menu_ItemPrice,
-        Menu_Item_Description = Menu_Description, Menu_Label_Id = Name , Menu_Res_Id = Res)
-        itemCreate.save()
-    #priceCreate = Menu.objects.create(Menu_ItemPrice = 0 )
-    #descriptCreate = Menu.objects.create(Menu_Description = 'test')
-    return render(request, 'create-menu.html')
+
 
 def createLabel(request):
     labelCreate = Label.objects.create(Label_Name = '')

@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='registration/lognn.html'), name='logout'),
     #url(r'^logout/$', views.logout, name='logout'),
     url(r'^auth/', include('social_django.urls', namespace='social')),  # <- Here
-
+    url('404',TemplateView.as_view(template_name='404.html'),name='404'),
     url(r'^$', home, name='home'),
     # path('accounts/', include('django.contrib.auth.urls')),
 	url('^', include('django.contrib.auth.urls')),
