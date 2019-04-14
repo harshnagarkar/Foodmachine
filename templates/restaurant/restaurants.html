@@ -1,11 +1,20 @@
 {% extends 'layout.html' %}{% block content %}
 {% load restags %}
 {% load static %}
-<div>
-<h1>{{Restaurant.Res_Name}}</h1>
+
+<h1>{{Restaurant.Res_Name}} {{slugname}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
 <br>
-<div>
+    <script>
+
+         function buttonfun(){
+            window.open("/restaurant/createmenu/", "mywindow","width=400,height=550");
+         }
+
+         window.onunload = refreshParent;
+        
+    </script>
+
 <div class= "row">
             {% for M in Restaurant|getMenu %}
             <div class="column">
@@ -23,7 +32,7 @@
             <br>
             <br>
             {% endfor%}
-            
+  <button  onclick="buttonfun()">Create a menu Item</button>
 </div>
 </div>
 </div>
