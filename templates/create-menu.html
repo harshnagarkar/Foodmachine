@@ -1,6 +1,12 @@
-{% extends "layout.html" %}
-{% block content %}
 {% load static%}
+<head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link href="{% static 'stylesheets/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+        <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
+</head>
+
 <style>
     h3{
         color: white;
@@ -10,8 +16,9 @@
     }
 </style>
 <body background="{% static 'img/pic1.jpg' %}">
+    <div class="container">
     {% if user.is_authenticated %}
-<form action = "/restaurant/createdmenu/" method="POST">
+<form action = "/restaurant/createdmenu/" method="POST" onsubmit="add()">
     {% csrf_token %}
     <h2></h2>PLease enter details below</h2>
     <label>Item</label>
@@ -30,7 +37,7 @@
    <label>Create Cuisine Type:</label> 
    <input type = 'text' name = 'Cuisine' placeholder = 'Fast food'>
    <br>-->
-    <input  type="submit" name="Submit" onclick="add()">
+    <input  type="submit" name="Submit" >
     <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
     <script>
        function add(){
@@ -42,7 +49,6 @@
     {% else %}
     Please login to add menu.
     {%endif%}
+    </div>
 </form>
 </body>
-
-{% endblock content %}
