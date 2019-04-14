@@ -59,8 +59,8 @@ def createMenuItems(request):
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = Restaurant.objects.get(Res_Name=restaurantName)
-    menuDetail = Menu.objects.filter(Menu_Res_Id=resDetail)
-    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail},{'Menu':menuDetail})
+    # menuDetail = Menu.objects.filter(Menu_Res_Id=resDetail)
+    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail,'slug':restaurantName})
 
 def processMenu(request):
     return render(request,'create-menu.html')
