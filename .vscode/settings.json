@@ -1,5 +1,13 @@
 {
     "python.linting.pylintEnabled": true,
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\bedro\\Anaconda2\\envs\\Djan2\\python.exe",
+=======
+<<<<<<< HEAD
+    "python.pythonPath": "C:\\Users\\dexro\\Anaconda3\\python.exe",
+=======
+    "python.pythonPath": "C:\\Users\\Owner\\Miniconda3\\python.exe",
+>>>>>>> 92d8be76f246b99a376df5cf4c6f6fa07253f32e
+>>>>>>> f2640ea233809bed0e7635e1ca189e37b0d28319
     "python.linting.enabled": true
 }

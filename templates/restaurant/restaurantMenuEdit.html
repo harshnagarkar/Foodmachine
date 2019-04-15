@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {extends "../layout.html"}
+{% block content %}
+{% if user.is_authenticated %}
+
+<table>
+    <tbody>   
+       <tr><td>Title</td>
+        <td>Description</td>
+        <td>Price($)</td></tr>
+   {% load restags %}
+   {% for element in Res_Id|getMenu %}
+   <tr>
+       <td>{{element.Menu_Item}}</td>
+        <td>{{element.Menu_Item_Description}}</td>
+        <td>{{element.Menu_ItemPrice}}</td>
+        <td> <input type = "button" name = "edit"> Edit </td>
+        <td> <input type = "button" name = "del"> Delete </td>
+    </tr>
+   {%endfor%}
+   </tbody>
+</table>
+{% endblock content %}
