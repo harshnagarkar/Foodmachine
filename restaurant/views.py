@@ -85,12 +85,7 @@ def restaurantPage(request, restaurantName):
 def processMenu(request):
     return render(request,'create-menu.html')
 
-@csrf_exempt
-def menuDelete(request):
-    if request.method == "POST":
-        Menu.objects.filter(id = )
-       
-def createLabel(request):
-    labelCreate = Label.objects.create(Label_Name = '')
-
-
+# @csrf_exempt
+# def menuDelete(request):
+#     if request.method == "POST":
+#         # Menu.objects.filter(id = )
