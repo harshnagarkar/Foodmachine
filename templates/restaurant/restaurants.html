@@ -7,7 +7,8 @@
 <br>
     <script>
 
-         function buttonfun(){
+         function buttonfun()
+         {
             window.open("/restaurant/createmenu/", "mywindow","width=400,height=550");
          }
 
@@ -15,17 +16,40 @@
         
     </script>
 
+    <script>
+        function confirmDelete()
+        {
+           
+            var conf = confirm("Are you sure you want to delete this menu item?");
+            if(conf == true)
+            {
+                var i = document.getElementById("menuID").value;
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/restaurant/delete_menu/', true);
+                xhr.send(JSON.stringify({
+                'value': i}));
+            }
+
+        }    
+    </script>
+
 <div class= "row">
             {% for M in Restaurant|getMenu %}
             <div class="column">
-                
+                    {% csrf_token %}
                     <div class="card" style=" height:500px; width:200px">
+                        {% csrf_token %}
                         <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
                         <font size = "5" color = "black">{{M.Menu_Item}}</font>
+                        <input type = "text" value = "{{M.Menu_Item_Id}}" id = "menuID" type = "hidden">
                         <p class="price">{{M.Menu_ItemPrice}}</p>
                         <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
+                        <p>
+                                <button onclick="confirmDelete()">Delete</button>
+                            </p>
                         <p style="position: absolute; bottom: 0px"><button class="button" style="width: 200px">Menu</button>
                         </p>
+                       
                     </div>
                 
             </div>
@@ -33,7 +57,5 @@
             <br>
             {% endfor%}
   <button  onclick="buttonfun()">Create a menu Item</button>
-</div>
-</div>
 </div>
 {% endblock content %}

@@ -4,6 +4,8 @@ from itertools import chain
 from restaurant.models import Restaurant,Menu,Label,Review
 from restaurant.forms import *
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
+
 # from django.shortcuts import get_object_or_404
 def createRestaurant(request):
      user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
@@ -28,6 +30,7 @@ def createRestaurant(request):
                 user.save()
         else:
              return HttpResponseRedirect("/restaurant/createRestaurant/")
+
 
 
 def createMenuItems(request):
@@ -65,6 +68,12 @@ def restaurantPage(request, restaurantName):
 def processMenu(request):
     return render(request,'create-menu.html')
 
+@csrf_exempt
+def menuDelete(request):
+    if request.method == "POST":
+        Menu.objects.filter(id = )
+       
+        
 
 
 def createLabel(request):
