@@ -6,7 +6,12 @@
         <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
         <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
 </head>
-
+<script>
+function refreshParent()
+{
+window.opener.location.reload(true);
+}
+</script>
 <style>
     h3{
         color: white;
@@ -15,7 +20,7 @@
         color: white;
     }
 </style>
-<body background="{% static 'img/pic1.jpg' %}">
+<body background="{% static 'img/pic1.jpg' %}"  onunload="javascript:refreshParent()">
     <div class="container">
     {% if user.is_authenticated %}
 <form action = "/restaurant/createdmenu/" method="POST" onsubmit="add()">
