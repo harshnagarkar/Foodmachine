@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from restaurant.models import Restaurant,Menu,Label,Review
+from restaurant.models import Restaurant,Menu,Label,Review,Cuisine
 from restaurant.forms import *
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 
-# from django.shortcuts import get_object_or_404
+
+def initialcreateRestaurant(request):
+    return render(request,'restaurant/createRestaurant.html')
+
 def createRestaurant(request):
      user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
      if (user.userprofile.userRestaurant!=None):
@@ -22,12 +27,25 @@ def createRestaurant(request):
                 resdescription = form.cleaned_data.get('resdescription')
                 rescontact = form.cleaned_data.get('rescontact')
                 rescusine = form.cleaned_data.get('recusine')
-                respic = form.clean_data('respic')
-                restaurant = Restaurant(Res_Name=resname,Res_description=resdescription,Res_contact=rescontact,Res_cusine=rescusine,Res_Pic = respic)
+                respic = form.cleaned_data.get('respic')
+                resaddress = form.cleaned_data.get('resaddress')
+                checkcuisine = ""
+                try:
+                    checkcuisine = Cuisine.objects.get(Cuisine_parent=rescusine)
+                except:
+                    newCuisine =Cuisine(Cuisine_parent=rescusine)
+                    newCuisine.save()
+                    checkcuisine = Cuisine.objects.get(Cuisine_parent=rescusine)
+                restaurant = Restaurant(Res_Name=resname, Res_Description=resdescription, Res_Contact=('+1'+rescontact), Res_Address=resaddress, Cuisine_Type=checkcuisine, Res_Pic=respic)
+                print(restaurant)
                 restaurant.save()
-                user.userprofile.userRestaurant = Restaurant.objects.get(Res_Name=resname)
-                user.userprofile.userRestaurant = Restaurant.objects.get(userType='r')
-                user.save()
+                userobject = UserProfile.objects.get(user=request.user)
+                userobject.userType = 'r'
+                userobject.userRestaurant = Restaurant.objects.get(Res_Name=resname)
+                userobject.save()
+                return HttpResponseRedirect("/restaurant/"+resname)
+            else:
+                return redirect("/restaurant/createRestaurant/",{'form':form})
         else:
              return HttpResponseRedirect("/restaurant/createRestaurant/")
 
@@ -55,15 +73,14 @@ def createMenuItems(request):
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
 
-        return render(request, 'createdmenu.html')
+        return redirect("/restaurant/createmenu/")
      else:
         return render(request, 'create-menu.html')
 
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
-    resDetail = Restaurant.objects.get(Res_Name=restaurantName)
-    # menuDetail = Menu.objects.filter(Menu_Res_Id=resDetail)
-    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail,'slug':restaurantName})
+    resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
+    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')
@@ -73,9 +90,6 @@ def menuDelete(request):
     if request.method == "POST":
         Menu.objects.filter(id = )
        
-        
-
-
 def createLabel(request):
     labelCreate = Label.objects.create(Label_Name = '')
 
