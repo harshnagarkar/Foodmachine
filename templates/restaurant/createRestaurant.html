@@ -1,27 +1,42 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
-{% if user.is_authenticated %}
+{% load restags %}
+{% with user.username|getProfile as finding %}
+
+{% if user.is_authenticated and  finding.userType != 'r'  %}
 <div style="align-self: center;">
-    <form action="/dashboard/cong.html" method="POST" enctype="multipart/form-data" style ="align-self: center;">
+    <form action="/restaurant/sucessRestaurant/" method="POST" enctype="multipart/form-data" style ="align-self: center;">
         {% csrf_token %}
         <h2 style="color: #fff;">Create Restaurant</h2>
-        <input type="text" name="resname" placeholder="Username"><br><br>
-        <input type="text" name="resdescription" placeholder="First name"><br><br>
-        <input type="tel" name="rescontact" placeholder="Last name"><br><br>
+        <input type="text" name="resname" placeholder="Restaurant Name"><br><br>
+        <input type="text" name="resaddress" placeholder="Address of the restaurant"><br><br>
+        <input type="text" name="resdescription" placeholder="Restaurant Description"><br><br>
+        <input type="tel" name="rescontact" placeholder="Contact phone number"><br><br>
         <!-- <input type="number" name = "phone" placeholder="Phone Number"><br><br> -->
-        <select name="rescusine">
-            Please choose a Cuisine Below
-            {% for cusine in Cusine %}
-            <option value= {{cusine.Cuisine_parent}}></option>
+        <label>Choose the list below or type
+        <input list="items" name="rescusine"></label>
+            <datalist id ="items">
+                {% getCuisine as Cpass %}
+            {% for cusine in Cpass %}
+            <option value= "{{cusine.Cuisine_parent}}"></option>{{cusine.Cuisine_parent}}</option>
             {% endfor %}
-        </select>
+        </datalist>
         <br>
         <input id="id_image" type="file" class="" name="respic">
         <br>
         <input type="Submit" value="Submit"><br><br>
     </form>
+    {% if form.non_field_errors %}
+    <font size="0.6">
+        <ul class='form-errors'>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </font>
 {% else %}
-You need to login
+You need to login, or you already own a restaurant.
 {% endif %}
-
+{%endwith%}
 {% endblock content%}

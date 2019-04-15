@@ -19,4 +19,10 @@ def getMenu(resID):
 def getProfile(usr):
     print(usr)
     context = User.objects.get(pk = (User.objects.get(username=usr).id))
+    print(context.userprofile.__dict__)
     return context.userprofile.__dict__
+
+@register.simple_tag
+def getCuisine():
+    cus = Cuisine.objects.values('Cuisine_parent')
+    return cus
