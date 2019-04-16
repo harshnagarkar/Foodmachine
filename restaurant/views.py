@@ -88,7 +88,7 @@ def processMenu(request):
 @csrf_exempt
 def menuDelete(request):
     if request.method == "POST":
-        Menu.objects.filter(id = )
+        Menu.objects.filter(id = '1')
        
 def createLabel(request):
     labelCreate = Label.objects.create(Label_Name = '')

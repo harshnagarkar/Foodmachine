@@ -43,9 +43,10 @@ window.opener.location.reload(true);
    <input type = 'file' name = 'Picture'>
    <br>
    <label>Pick a Cuisine Type: 
-   <input type = 'list' name = 'Cuisine' placeholder = 'Fast food'></label>
+   <input list = "" name = 'Cuisine' placeholder = 'Fast food'></label>
    <datalist>
-       <option></option>
+       {% for element in Cuisine_Id|getCuisine}
+       <option value = "{{element.Cuisine_parent}}">
    </datalist>
    <br>
     <input  type="submit" name="Submit" >
