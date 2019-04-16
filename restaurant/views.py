@@ -75,7 +75,7 @@ def createMenuItems(request):
 
         return redirect("/restaurant/createmenu/")
      else:
-        return render(request, 'create-menu.html')
+        return render(request, 'create-menu.html', {'Cuisine': Cuisine})
 
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
@@ -85,7 +85,6 @@ def restaurantPage(request, restaurantName):
 def processMenu(request):
     return render(request,'create-menu.html')
 
-<<<<<<< HEAD
 @csrf_exempt
 def menuDelete(request):
     if request.method == "POST":
@@ -95,9 +94,3 @@ def createLabel(request):
     labelCreate = Label.objects.create(Label_Name = '')
 
 
-=======
-# @csrf_exempt
-# def menuDelete(request):
-#     if request.method == "POST":
-#         # Menu.objects.filter(id = )
->>>>>>> 73514c37c3f7fa873c53fcabde461cd8fd56514f

@@ -43,11 +43,15 @@ window.opener.location.reload(true);
    <input type = 'file' name = 'Picture'>
    <br>
    <label>Pick a Cuisine Type: 
-   <input list = "" name = 'Cuisine' placeholder = 'Fast food'></label>
-   <datalist>
-       {% for element in Cuisine_Id|getCuisine}
+   <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
+   <datalist id = "cuisine">
+       {% for element in Menu|getCuisine  %}
        <option value = "{{element.Cuisine_parent}}">
+       
+      
+        {% endfor %}
    </datalist>
+  
    <br>
     <input  type="submit" name="Submit" >
     <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
