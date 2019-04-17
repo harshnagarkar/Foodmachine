@@ -54,28 +54,36 @@ def createRestaurant(request):
 def createMenuItems(request):
      if request.method == 'POST':
         form = MenuCreation(request.POST, request.FILES)
+        
         print(form.errors)
         user = User.objects.get(
             pk=(User.objects.get(username=request.user.username).id))
         if form.is_valid():
             Item = form.cleaned_data.get('Item')
             resname = user.userprofile.userRestaurant
-            print(resname)
+            #print(resname)
             Rest = resname
             # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
 
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price')
+            Cuisine = Cuisine.objects.all() 
+            
+          
+           
             Labelname = form.cleaned_data.get('Label')
             labelCreate = Label(Label_Name=Labelname)
+            label = Label.objects.all()
+            context = {'Cuisine': Cuisine, 'Label' : Label}
             labelCreate.save()
             labelId = Label.objects.get(Label_Name=Labelname)
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
 
-        return redirect("/restaurant/createmenu/")
+        return redirect("/restaurant/createmenu/", context)
+       
      else:
-        return render(request, 'create-menu.html', {'Cuisine': Cuisine})
+        return render(request, 'create-menu.html', context)
 
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
@@ -89,6 +97,7 @@ def processMenu(request):
 def menuDelete(request):
     if request.method == "POST":
         Menu.objects.filter(id = '1')
+
        
 def createLabel(request):
     labelCreate = Label.objects.create(Label_Name = '')

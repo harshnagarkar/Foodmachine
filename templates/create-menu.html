@@ -37,21 +37,23 @@ window.opener.location.reload(true);
    <label for = "Label">Choose Item Label: 
    <input type = 'list' name = 'Label' placeholder = 'Appetizer'></label>
    <datalist>
-     
+     {% for e in Label %}
+     <option>{{e.Label_Name}}</option>
+     {% endfor %}
    </datalist>
    <br>
    <input type = 'file' name = 'Picture'>
    <br>
    <label>Pick a Cuisine Type: 
    <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
+   
    <datalist id = "cuisine">
-       {% for element in Menu|getCuisine  %}
-       <option value = "{{element.Cuisine_parent}}">
-       
-      
+       {% for element in Cuisine  %}
+       <option>what</option>
+       <option>{{Cuisine.Cuisine_parent}}</option>
         {% endfor %}
    </datalist>
-  
+  <h3>{{Cuisine.Cuisine_parent}}</h3>
    <br>
     <input  type="submit" name="Submit" >
     <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
