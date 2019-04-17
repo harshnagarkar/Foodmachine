@@ -67,7 +67,7 @@ def createMenuItems(request):
 
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price')
-            Cuisine = Cuisine.objects.all() 
+            
             
           
            

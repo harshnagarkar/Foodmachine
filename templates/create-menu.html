@@ -35,8 +35,8 @@ window.opener.location.reload(true);
    <label for = "Price">Create Item Price: </label><input type = 'number' step = 'any' name = 'Price' placeholder = '0.00'>
    <br>
    <label for = "Label">Choose Item Label: 
-   <input type = 'list' name = 'Label' placeholder = 'Appetizer'></label>
-   <datalist>
+   <input list = 'label' name = 'Label' placeholder = 'Appetizer'></label>
+   <datalist id = 'label'>
      {% for e in Label %}
      <option>{{e.Label_Name}}</option>
      {% endfor %}
