@@ -80,6 +80,8 @@ def createMenuItems(request):
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
+    for key,value in request.session.items():
+        print (key+" ->"+value)
     return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
 
 def processMenu(request):

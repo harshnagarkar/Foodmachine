@@ -2,7 +2,7 @@
 {% load restags %}
 {% load static %}
 
-<h1>{{Restaurant.Res_Name}} {{slugname}}</h1>
+<h1>{{Restaurant.Res_Name}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
 <br>
     <script>
@@ -42,10 +42,10 @@
                     <div class="card" style=" height:500px; width:200px">
                         {% csrf_token %}
                         <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
-                        <font size = "5" color = "black">{{M.Menu_Item}}</font>
+                        <div style="height: 25px"><font size = "5" color = "black">{{M.Menu_Item}}</font></div>
                         <input type = "text" value = "{{M.Menu_Item_Id}}" id = "menuID" type = "hidden">
                         <p class="price">{{M.Menu_ItemPrice}}</p>
-                        <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
+                        <p style="font-size: 10px">{{M.Menu_Item_Description|truncatechars:69}} </p>
                         <p>
                                 <button onclick="confirmDelete()">Delete</button>
                             </p>
