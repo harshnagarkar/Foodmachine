@@ -1,4 +1,5 @@
-{% load static%}
+{% load static %}
+{% load restags %}
 <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -28,7 +29,7 @@ window.opener.location.reload(true);
     <h2></h2>PLease enter details below</h2>
     <label>Item</label>
     <input type = 'text' name = 'Item' placeholder = 'Item Name'>
-    
+   
   <label for = "Description"> Create Item Description:</label>
   <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
    <br>
@@ -37,7 +38,8 @@ window.opener.location.reload(true);
    <label for = "Label">Choose Item Label: 
    <input list = 'label' name = 'Label' placeholder = 'Appetizer'></label>
    <datalist id = 'label'>
-     {% for e in Label %}
+       {% getLabel as lab %}
+     {% for e in lab %}
      <option>{{e.Label_Name}}</option>
      {% endfor %}
    </datalist>
@@ -48,12 +50,13 @@ window.opener.location.reload(true);
    <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
    
    <datalist id = "cuisine">
-       {% for element in Cuisine  %}
-       <option>what</option>
-       <option>{{Cuisine.Cuisine_parent}}</option>
-        {% endfor %}
+    {% getCuisine as get %}  
+    {% for element in get  %}
+      
+    <option value = '{{element.Cuisine_parent}}'>'
+    {% endfor %}
    </datalist>
-  <h3>{{Cuisine.Cuisine_parent}}</h3>
+ 
    <br>
     <input  type="submit" name="Submit" >
     <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
