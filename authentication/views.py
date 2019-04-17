@@ -61,7 +61,7 @@ def makeUser(request):
 
 	else:
 		form = SignUpForm()
-
+	print (form.errors)
 	return render(request, 'cong.html', {"username" : username})
 
 

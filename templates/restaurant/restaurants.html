@@ -54,7 +54,7 @@
                         <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
                         <font size = "5" color = "black">{{M.Menu_Item}}</font>
                         <input type = "text" value = "{{M.Menu_Item_Id}}" id = "menuID" type = "hidden">
-                        <p class="price">{{M.Menu_ItemPrice}}</p>
+                        <p class="price">${{M.Menu_ItemPrice}}</p>
                         <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
                         <!-- <p>
                                 <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
@@ -70,7 +70,7 @@
             </div>
             <br>
             <br>
-            {% endfor%}
+            {% endfor %}
   <button  onclick="buttonfun()">Create a menu Item</button>
 </div>
 {% endblock content %}
