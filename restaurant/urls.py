@@ -17,5 +17,5 @@ urlpatterns = [
     url('sucessRestaurant', views.createRestaurant),
     url('createmenu', TemplateView.as_view(template_name="create-menu.html"),name='createformmenu'),
     url('createdmenu', views.createMenuItems, name='createdmenu'),
-    # url('delete_menu/', views.menuDelete, name = "menuDeleted")
+    url(r'^delete/(?P<part_id>[0-9]+)/$', views.menuDelete, name='delete_view')
 ]

@@ -89,3 +89,8 @@ def processMenu(request):
 # def menuDelete(request):
 #     if request.method == "POST":
 #         # Menu.objects.filter(id = )
+
+def menuDelete(request, part_id = None):
+    object = Menu.objects.get(id=part_id)
+    object.delete()
+    return render(request,'createmenu/')
