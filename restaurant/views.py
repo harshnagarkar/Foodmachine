@@ -68,19 +68,20 @@ def createMenuItems(request):
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price') 
             Labelname = form.cleaned_data.get('Label')
-            labelCreate = Label(Label_Name=Labelname)
-            label = Label.objects.all()
-            context = {'Cuisine': Cuisine, 'Label' : Label}
-            labelCreate.save()
+            exist = Label.objects.filter(Label_Name = Labelname).exists()
+            if(exist == False):
+                labelCreate = Label(Label_Name=Labelname)
+                labelCreate.save()
+            
             labelId = Label.objects.get(Label_Name=Labelname)
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
             
-        Cuisine = get_object_or_4-4(Cuisine)
-        return redirect("/restaurant/createmenu/", {'Cuisine': Cuisine})
+       
+        return redirect("/restaurant/createmenu/")
        
      else:
-        return render(request, 'create-menu.html', context)
+        return render(request, 'create-menu.html')
 
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
