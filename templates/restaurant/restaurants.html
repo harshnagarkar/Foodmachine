@@ -44,8 +44,13 @@
                         <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
                         <div style="height: 25px"><font size = "5" color = "black">{{M.Menu_Item}}</font></div>
                         <input type = "text" value = "{{M.Menu_Item_Id}}" id = "menuID" type = "hidden">
+<<<<<<< HEAD
                         <p class="price">{{M.Menu_ItemPrice}}</p>
                         <p style="font-size: 10px">{{M.Menu_Item_Description|truncatechars:69}} </p>
+=======
+                        <p class="price">${{M.Menu_ItemPrice}}</p>
+                        <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
+>>>>>>> 1bad094ef0deb95c506323d9434e495e073f541b
                         <p>
                                 <button onclick="confirmDelete()">Delete</button>
                             </p>
@@ -57,7 +62,7 @@
             </div>
             <br>
             <br>
-            {% endfor%}
+            {% endfor %}
   <button  onclick="buttonfun()">Create a menu Item</button>
 </div>
 {% endblock content %}
