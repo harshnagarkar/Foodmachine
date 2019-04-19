@@ -16,24 +16,34 @@
         
     </script>
 
-    <script>
-        function confirmDelete()
+    <!-- <script>
+        function confirmDelete(buttonID)
         {
            
             var conf = confirm("Are you sure you want to delete this menu item?");
             if(conf == true)
             {
-                // var i = document.getElementById("menuID").value;
-                // var xhr = new XMLHttpRequest();
-                // xhr.open("POST", '/restaurant/delete_menu/', true);
-                // xhr.send(JSON.stringify({
-                // 'value': i}));
-                var i = document.getElementById("menuID").value;
-                alert(i);
+              
+                var i = buttonID;
+                var idString = JSON.stringify(i);
+                
+
+                $.post("/restaurant/delete_menu",
+                {
+                    mId : idString
+                    
+                });
+                alert('success');
+//                 $.ajax({
+//    type: "POST",
+//    url: "/delete_menu", //the name and location of your php file
+//    data: idString,      //add the converted json string to a document.
+//    success: function() {alert('success');} //just to make sure it got to this point.
+// });
             }
 
         }    
-    </script>
+    </script> -->
 
 <div class= "row">
             {% for M in Restaurant|getMenu %}
@@ -44,16 +54,15 @@
                         <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;" >
                         <div style="height: 25px"><font size = "5" color = "black">{{M.Menu_Item}}</font></div>
                         <input type = "text" value = "{{M.Menu_Item_Id}}" id = "menuID" type = "hidden">
-<<<<<<< HEAD
                         <p class="price">{{M.Menu_ItemPrice}}</p>
                         <p style="font-size: 10px">{{M.Menu_Item_Description|truncatechars:69}} </p>
-=======
-                        <p class="price">${{M.Menu_ItemPrice}}</p>
-                        <p style="font-size: 10px">{{M.Menu_Item_Description}}</p>
->>>>>>> 1bad094ef0deb95c506323d9434e495e073f541b
+                        <!-- <p>
+                                <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
+                            </p> -->
+
                         <p>
-                                <button onclick="confirmDelete()">Delete</button>
-                            </p>
+                            <a href="/restaurant/delete/{{M.Menu_Item_Id}}/"><i class="delete">Delete</i></a>
+                        </p>
                         <p style="position: absolute; bottom: 0px"><button class="button" style="width: 200px">Menu</button>
                         </p>
                        

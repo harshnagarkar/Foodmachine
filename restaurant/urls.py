@@ -10,12 +10,11 @@ urlpatterns = [
     # path('<int:question_id>/', views.detail, name='detail'),
     # ex: /polls/5/results/
     # path('<int:question_id>/results/', views.results, name='results'),
-
     path('<slug:restaurantName>', views.restaurantPage),
     url('createmenu/', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu_create'),
     url('createRestaurant',views.initialcreateRestaurant, name = "create_Restaurant"),
     url('sucessRestaurant', views.createRestaurant),
     url('createmenu', TemplateView.as_view(template_name="create-menu.html"),name='createformmenu'),
     url('createdmenu', views.createMenuItems, name='createdmenu'),
-    # url('delete_menu/', views.menuDelete, name = "menuDeleted")
+    url(r'^delete/(?P<part_id>\d+)/$', views.menuDelete, name='delete_view')
 ]
