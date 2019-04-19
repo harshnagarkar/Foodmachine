@@ -100,8 +100,13 @@ def processMenu(request):
 #         # Menu.objects.filter(id = )
 
 def menuDelete(request, part_id = None):
-    object = Menu.objects.get(Menu_Item_Id=part_id)
-    resobject = object.Menu_Res_Id
-    object.delete()
-    restaurantname = "/restaurant/"+resobject.Res_Name
-    return redirect(restaurantname)
+    objects = Menu.objects.get(Menu_Item_Id=part_id)
+    user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+    resobject = objects.Menu_Res_Id
+    if(resobject==user.userprofile.userRestaurant):
+        objects.delete()
+        restaurantname = "/restaurant/"+resobject.Res_Name
+        return redirect(restaurantname)
+    else:
+        return HttpResponse("This is not your restaurant")
+    
