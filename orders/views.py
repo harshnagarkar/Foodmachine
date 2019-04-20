@@ -5,11 +5,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from restaurant.models import *
+# import ast
 @csrf_exempt
 def cartpricecalculator(request):
     if request.method == 'POST':
-        data = request.POST
-        data = data.dict()
+        data = json.loads(request.body)
+        # data = data.dict()
         total = 0
         mid = ""
         rid = ""
@@ -23,6 +24,7 @@ def cartpricecalculator(request):
         print("Tax" , tax)
         print("total",(total+tax) )
         print(mid)
+        print(rid)
 
     return HttpResponse('200 Okay')
 

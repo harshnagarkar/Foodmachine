@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from orders.models import *
 
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
@@ -103,4 +104,7 @@ def menuDelete(request, part_id = None):
         return redirect(restaurantname)
     else:
         return HttpResponse("This is not your restaurant")
+
+def updateStatus(request):
+    status = Orders.objects.get()
     
