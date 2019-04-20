@@ -3,11 +3,10 @@ from itertools import chain
 # Create your views here.
 from restaurant.models import Restaurant,Menu,Label,Review,Cuisine
 from restaurant.forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-
 
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
@@ -93,11 +92,6 @@ def restaurantPage(request, restaurantName):
 def processMenu(request):
     return render(request,'create-menu.html')
 
-
-# @csrf_exempt
-# def menuDelete(request):
-#     if request.method == "POST":
-#         # Menu.objects.filter(id = )
 
 def menuDelete(request, part_id = None):
     objects = Menu.objects.get(Menu_Item_Id=part_id)

@@ -24,7 +24,7 @@ window.opener.location.reload(true);
 <body background="{% static 'img/pic1.jpg' %}"  onunload="javascript:refreshParent()">
     <div class="container">
     {% if user.is_authenticated %}
-<form action = "/restaurant/createdmenu/" method="POST" onsubmit="add()">
+<form action = "/restaurant/createdmenu/" enctype="multipart/form-data" method="POST" onsubmit="add()">
     {% csrf_token %}
     <h2></h2>PLease enter details below</h2>
     <label>Item</label>
