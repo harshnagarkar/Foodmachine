@@ -96,7 +96,45 @@ def processMenu(request):
 #     if request.method == "POST":
 #         # Menu.objects.filter(id = )
 
+
+
 def menuDelete(request, part_id = None):
-    object = Menu.objects.get(id=part_id)
-    object.delete()
-    return render(request,'createmenu/')
+    objects = Menu.objects.get(Menu_Item_Id=part_id)
+    user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+    resobject = objects.Menu_Res_Id
+    if(resobject==user.userprofile.userRestaurant):
+        objects.delete()
+        restaurantname = "/restaurant/"+resobject.Res_Name
+        return redirect(restaurantname)
+    else:
+        return HttpResponse("This is not your restaurant")
+
+def menuEdit(request, part_id = None):
+    if request.method == 'POST':
+        form = MenuCreation(request.POST, request.FILES)
+        obj = Menu.objects.get(Menu_Item_Id = part_id)
+        user = User.objects.get(pk = (User.objects.get(username = request.user.username).id))
+        resObj = obj.Menu_Res_Id
+
+        if(resObj == user.userprofile.userRestaurant):
+            obj.Menu_Item = form.cleaned_data.get('Item')
+            obj.Menu_ItemPrice = form.cleaned_data.get('Price')
+            obj.Menu_Item_Description = form.cleaned_data.get('Description')
+            
+            lblName = form.cleaned_data.get('Label')
+            exist = Label.objects.filter(Label_Name = lblName).exists()
+            if(exist == False):
+                labelCreate = Label(Label_Name=Labelname)
+                labelCreate.save()
+
+            lbl = Label.objects.get(Label_Name = lblName)
+            obj.Menu_Label_Id = lbl.Label_Id
+            obj.Menu_Cuisine = form.cleaned_data.get('Cuisine')
+
+            obj.save()
+
+            return redirect("/restaurant")
+
+        else:
+            return render(request, 'User not verified. Please try logging in!')
+

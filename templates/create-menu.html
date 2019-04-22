@@ -26,7 +26,7 @@ window.opener.location.reload(true);
     {% if user.is_authenticated %}
 <form action = "/restaurant/createdmenu/" method="POST" onsubmit="add()">
     {% csrf_token %}
-    <h2></h2>PLease enter details below</h2>
+    <h2>PLease enter details below</h2>
     <label>Item</label>
     <input type = 'text' name = 'Item' placeholder = 'Item Name'>
    
