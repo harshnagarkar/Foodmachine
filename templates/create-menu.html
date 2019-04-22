@@ -24,14 +24,14 @@ window.opener.location.reload(true);
 <body background="{% static 'img/pic1.jpg' %}"  onunload="javascript:refreshParent()">
     <div class="container">
     {% if user.is_authenticated %}
-<form action = "/restaurant/createdmenu/" method="POST" onsubmit="add()">
+<form action = "/restaurant/createdmenu/" enctype="multipart/form-data" method="POST" onsubmit="add()">
     {% csrf_token %}
     <h2>PLease enter details below</h2>
     <label>Item</label>
     <input type = 'text' name = 'Item' placeholder = 'Item Name'>
    
   <label for = "Description"> Create Item Description:</label>
-  <input type = 'text' name = 'Description' placeholder = 'A delicate meat...'>
+  <input type = 'text' name = 'Description' placeholder = 'A delicate meat...' > 
    <br>
    <label for = "Price">Create Item Price: </label><input type = 'number' step = 'any' name = 'Price' placeholder = '0.00'>
    <br>
@@ -60,13 +60,13 @@ window.opener.location.reload(true);
    <br>
     <input  type="submit" name="Submit" >
     <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
-    <script>
+    <!-- <script>
        function add(){
             var x = document.getElementById('success')
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 200);
         }
-    </script>
+    </script> -->
     {% else %}
     Please login to add menu.
     {%endif%}

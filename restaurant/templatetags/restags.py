@@ -4,7 +4,7 @@ from itertools import chain
 # Create your views here.
 from restaurant.models import Restaurant, Menu, Cuisine, Review, Label
 from authentication.models import UserProfile,User
-
+import json
 register = template.Library()
 
 

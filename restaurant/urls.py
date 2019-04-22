@@ -10,7 +10,6 @@ urlpatterns = [
     # path('<int:question_id>/', views.detail, name='detail'),
     # ex: /polls/5/results/
     # path('<int:question_id>/results/', views.results, name='results'),
-
     path('<slug:restaurantName>', views.restaurantPage),
     url('createmenu/', TemplateView.as_view(template_name = 'create-menu.html'), name = 'menu_create'),
     url('createRestaurant',views.initialcreateRestaurant, name = "create_Restaurant"),
@@ -19,4 +18,6 @@ urlpatterns = [
     url('createdmenu', views.createMenuItems, name='createdmenu'),
     url(r'^delete/(?P<part_id>[0-9]+)/$', views.menuDelete, name='delete_view'),
     url(r'^edit/(?P<part_id>[0-9]+)/$', views.menuEdit, name = 'edit_view')
+    url(r'^status', views.updateStatus , name = 'update_status'),
+
 ]
