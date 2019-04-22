@@ -1,0 +1,118 @@
+{% load static%}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Checkout</title>
+
+<link href="{% static 'style(2).css'%} rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+<link rel="shortcut icon" type="image/favicon" href="img/favicon.ico">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<style>
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+
+<script language="JavaScript" type="text/javascript">
+  var jvar = {}
+      function ajaxcall() {
+          $.ajax(
+            {
+              type: "POST",
+              url: "/cart/total",
+              data: localStorage.getItem('cart'),
+              success: function (data) {
+                jvar = data
+                console.log(jvar)
+              }
+            })
+        }
+        function printdata() {
+          var items = localStorage.getItem('cart');
+          var paritem = JSON.parse(items);
+          for (var i = 0; i < paritem.length; i++) {
+            console.log(paritem);
+            document.writeln("Hello"+"<br>");
+            // document.write('<p><a href="#" style="color: black; ">'.concat(paritem[i]).concat('</a> <span class="price">'.concat(jvar[i]).concat('</span></p>')))
+
+
+          }
+        }
+        ajaxcall()
+        printdata()
+
+</script>
+  {% load restags %}
+  {% with user.username|getProfile as profile %}
+    <body>
+      <div id="containerr">
+            <h2 align="center" style="font-family: 'Play', sans-serif; font-size: 22px;" class="page-title">Checkout</h2>
+          </div>
+            <div class="row">
+              <div class="col-75">
+                <div class="card">
+                  <!-- <form action="/action_page.php"> -->
+                  
+                    <div class="row">
+                      <div class="col-50">
+                        <h1 style="color: black;" text-align= "center">Billing Address</h1>
+                        <label for="fname"><i class="fa fa-user"></i> Full Name{{request.user.first_name}}</label>
+                        <input style="color: black;" type="text" id="fname" name="firstname" placeholder="John M. Doe" disabled="disabled" value="{{ request.user.first_name }}">
+                        <label style="color: black;" for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="text" id="email" name="email" placeholder="john@example.com" disabled="disabled" value = "{{user.email}}">
+                        <label style="color: black;" for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street "disabled="disabled" value = "{{profile.Address}}">
+                        <label style="color: black;" for="city"><i class="fa fa-institution"></i> City</label>
+                        
+                         </div>
+                      </div>
+            
+                      <div class="col-50">
+                        <h1 style="color: black;">Payment</h1>
+                        <label style="color: black;" for="fname">Accepted Cards</label>
+                        <div class="icon-container">
+                          <i class="fa fa-cc-visa" style="color:navy;"></i>
+                          <i class="fa fa-cc-amex" style="color:blue;"></i>
+                          <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                          <i class="fa fa-cc-discover" style="color:orange;"></i>
+                        </div>
+                        <label style="color: black;" for="cname">Name on Card</label>
+                        <input type="text" id="cname" name="cardname" disabled="disabled" value="{{user.first_name}}{{user.last_name}}" placeholder="John More Doe">
+                        <label style="color: black;"for="ccnum">Credit card number</label>
+                        <input type="text" id="ccnum" name="cardnumber" disabled="disabled" value="{{profile.Address}}"  placeholder="1111-2222-3333-4444">
+                         </div>
+                      </div>
+              
+                    </div>
+                         <input type="submit" value="Order" class="button"  onclick="location.href = '/cart/order';">
+                  </form>
+                </div>
+              </div>
+              <div class="col-25">
+                <div class="card">
+                  <h1>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h1>
+                  <script  language="JavaScript">
+                  printdata()
+                  </script>
+                  <p><a href="#" style="color: black;">Product 1</a> <span class="price">$15</span></p>
+                  <p><a href="#" style="color: black;">Product 2</a> <span class="price">$5</span></p>
+                  <p><a href="#" style="color: black;">Product 3</a> <span class="price">$8</span></p>
+                  <p><a href="#" style="color: black;">Product 4</a> <span class="price">$2</span></p>
+                  <hr>
+                  <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          
+    </body>
+</html>
+{%endwith%}
