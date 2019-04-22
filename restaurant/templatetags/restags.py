@@ -2,9 +2,9 @@ from django import template
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from restaurant.models import Restaurant, Menu, Cuisine, Review
+from restaurant.models import Restaurant, Menu, Cuisine, Review, Label
 from authentication.models import UserProfile,User
-
+import json
 register = template.Library()
 
 
@@ -26,3 +26,14 @@ def getProfile(usr):
 def getCuisine():
     cus = Cuisine.objects.values('Cuisine_parent')
     return cus
+
+# @register.filter(name = 'getCuisine')
+# def getCuisine(cusID):
+#     print(cusID)
+#     context = Cuisine.objects.filter(Cuisine_Id = cusID)
+#     return context
+
+@register.simple_tag
+def getLabel():
+    context = Label.objects.values('Label_Name')
+    return context

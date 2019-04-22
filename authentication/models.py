@@ -3,15 +3,17 @@ from django.contrib.auth.models import AbstractUser, User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from restaurant.models import Restaurant
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 class UserProfile(models.Model):
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    # phone = models.CharField(max_length=256, blank=True, null=True)
-   question= models.CharField(max_length=60, null=True)
-   answer = models.CharField(max_length = 50, null=True)
    userType = models.CharField(max_length=1, choices=(('c',  ('Client')), ('r', ('Restaurant')),('d',  ('Delivery'))),default='c')
    userRestaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE,null=True)
+   Payment = models.IntegerField(max_length=15,null=True)
+   Address = models.CharField(max_length=100,null=True)
+   Phone = PhoneNumberField(null=True,blank=False)
    
 def __str__(self):
     return self.user.username

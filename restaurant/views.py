@@ -3,9 +3,11 @@ from itertools import chain
 # Create your views here.
 from restaurant.models import Restaurant,Menu,Label,Review,Cuisine
 from restaurant.forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
+from orders.models import *
 
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
@@ -48,35 +50,44 @@ def createRestaurant(request):
              return HttpResponseRedirect("/restaurant/createRestaurant/")
 
 
+
 def createMenuItems(request):
      if request.method == 'POST':
         form = MenuCreation(request.POST, request.FILES)
+        
         print(form.errors)
         user = User.objects.get(
             pk=(User.objects.get(username=request.user.username).id))
         if form.is_valid():
             Item = form.cleaned_data.get('Item')
             resname = user.userprofile.userRestaurant
-            print(resname)
+            #print(resname)
             Rest = resname
             # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
 
             Description = form.cleaned_data.get('Description')
-            Price = form.cleaned_data.get('Price')
+            Price = form.cleaned_data.get('Price') 
             Labelname = form.cleaned_data.get('Label')
-            labelCreate = Label(Label_Name=Labelname)
-            labelCreate.save()
+            exist = Label.objects.filter(Label_Name = Labelname).exists()
+            if(exist == False):
+                labelCreate = Label(Label_Name=Labelname)
+                labelCreate.save()
+            
             labelId = Label.objects.get(Label_Name=Labelname)
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
-
+            
+       
         return redirect("/restaurant/createmenu/")
+       
      else:
         return render(request, 'create-menu.html')
 
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
+    for key,value in request.session.items():
+        print (key+" ->"+value)
     return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
 
 def processMenu(request):
@@ -84,7 +95,48 @@ def processMenu(request):
 
 
 
-def createLabel(request):
-    labelCreate = Label.objects.create(Label_Name = '')
+def menuDelete(request, part_id = None):
+    objects = Menu.objects.get(Menu_Item_Id=part_id)
+    user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+    resobject = objects.Menu_Res_Id
+    if(resobject==user.userprofile.userRestaurant):
+        objects.delete()
+        restaurantname = "/restaurant/"+resobject.Res_Name
+        return redirect(restaurantname)
+    else:
+        return HttpResponse("This is not your restaurant")
 
+
+def menuEdit(request, part_id = None):
+    if request.method == 'POST':
+        form = MenuCreation(request.POST, request.FILES)
+        obj = Menu.objects.get(Menu_Item_Id = part_id)
+        user = User.objects.get(pk = (User.objects.get(username = request.user.username).id))
+        resObj = obj.Menu_Res_Id
+
+        if(resObj == user.userprofile.userRestaurant):
+            obj.Menu_Item = form.cleaned_data.get('Item')
+            obj.Menu_ItemPrice = form.cleaned_data.get('Price')
+            obj.Menu_Item_Description = form.cleaned_data.get('Description')
+            
+            lblName = form.cleaned_data.get('Label')
+            exist = Label.objects.filter(Label_Name = lblName).exists()
+            if(exist == False):
+                labelCreate = Label(Label_Name=Labelname)
+                labelCreate.save()
+
+            lbl = Label.objects.get(Label_Name = lblName)
+            obj.Menu_Label_Id = lbl.Label_Id
+            obj.Menu_Cuisine = form.cleaned_data.get('Cuisine')
+
+            obj.save()
+
+            return redirect("/restaurant")
+
+        else:
+            return render(request, 'User not verified. Please try logging in!')
+
+def updateStatus(request):
+    status = Orders.objects.get()
+    
 
