@@ -1,0 +1,71 @@
+{% load static %}
+{% load restags %}
+<head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link href="{% static 'stylesheets/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+        <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
+</head>
+<script>
+function refreshParent()
+{
+window.opener.location.reload(true);
+}
+</script>
+<style>
+    h3{
+        color: white;
+    }
+    label{
+        color: white;
+    }
+</style>
+<body background="{% static 'img/pic1.jpg' %}" onunload="javascript:refreshParent()">
+    <div class="container">
+    {% if user.is_authenticated %}
+
+
+    <form action = "/restaurant/updatedmenu/" method="POST">
+        {% csrf_token %}
+        <h2>PLease enter details below</h2>
+        {% getMenu as mnu &}
+        {% getLabel as lbl %}
+        <label>Item</label>
+        <input type = 'text' name = 'Item' value = "{{mnu.Menu_Item}}">
+
+        <label for = "Description"> Item Description:</label>
+        <input type = 'text' name = 'Description' value = "{{mnu.Menu_Item_Description}}">
+        <br>
+        <label for = "Price"> Item Price: </label><input type = 'number' step = 'any' name = 'Price' value = "{{mnu.Menu_Item_Price}}">
+        <br>
+        <label for = "Label"> Item Label: 
+        <input list = 'label' name = 'Label' value = "{{lbl.Label_Name}}"></label>
+        <datalist id = 'label'>
+            {% for e in lbl %}
+            <option>{{e.Label_Name}}</option>
+            {% endfor %}
+        </datalist>
+        <br>
+
+        <input type = 'file' name = 'Picture' value = "{{mnu.Menu_Pic}}">
+   <br>
+   <label>Pick a Cuisine Type: 
+   <input list = "cuisine" name = 'Cuisine' value = "{{mnu.Menu_Cuisine}}"></label>
+   
+   <datalist id = "cuisine">
+    {% getCuisine as c %}  
+    {% for element in c  %}
+    <option value = '{{element.Cuisine_parent}}'>'
+    {% endfor %}
+   </datalist>
+
+   <br>
+    <input  type="submit" name="Submit" value = "Save Changes">
+
+    {% else %}
+    Please login to edit menu.
+    {%endif%}
+    </div>
+</form>
+</body>

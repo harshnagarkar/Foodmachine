@@ -1,8 +1,9 @@
+{% load static %}
 body
 {
     font-family: Tahoma, Geneva, sans-serif;
     color: #fff;
-    background: url(img/pic1.jpg)no-repeat;
+    background: {% static 'img/pic1.jpg' %} no-repeat;
     background-size: cover;
 }
 
@@ -15,10 +16,26 @@ h1{
    font-size: 34px; 
 }
 
+p { margin: 0 0 20px; line-height: 1.7; }
+p:last-child { margin: 0px; }
+
+a { text-decoration: none; color: #8d8f90; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
+a:focus, a:hover { text-decoration: none; color: #f85759; }
+
+
+
+.page-header { background: url(img/pic1.jpg)no-repeat; position: relative; background-size: cover; }
+.page-caption { padding-top: 170px; padding-bottom: 174px; }
+.page-title { font-size: 46px; line-height: 1; color: #fff; font-weight: 600; text-align: center; }
+
+.card-section { position: relative; bottom: 60px; }
+.card-block { padding: 80px; }
+.section-title { margin-bottom: 60px; }
+
 .topnav {
     overflow: hidden;
     background-color:rgba(44,62,80,0.7);
-}
+  }
   
   /* Style the links inside the navigation bar */
   .topnav a {
@@ -43,7 +60,7 @@ h1{
     color: white;
   }
   
-  /* Style the search box inside the navigation bar  */
+  /* Style the search box inside the navigation bar */
   .topnav input[type=text] {
     float: right;
     padding: 6px;
@@ -52,7 +69,7 @@ h1{
     margin-right: 16px;
     font-size: 17px;
   }
- 
+  
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
@@ -68,12 +85,11 @@ h1{
     }
   }
 
-
 .signin
 {
     background: rgba(44,62,80,0.7);
     padding: 40px;
-    width: 250px;
+    width: fit-content;
     margin: auto;
     margin-top: 90px;
     height: 400px;
@@ -144,7 +160,7 @@ input[type=button]
 input[type=button]:hover
 {
     color: #fff;
-    background: black;
+    background-color: rgb(253, 222, 222);
 }
 
 .forget
@@ -237,7 +253,7 @@ a:hover
   
 }
 
-.container1
+.containerr
 {
     display: flex;
     flex-direction: row;
@@ -273,14 +289,6 @@ a:hover
 
 .container .btn:hover {
   background-color: black;
-}
-
-.containter3{
-  width:100%;
-  padding-right:15px;
-  padding-left:15px;
-  margin-right:auto;
-  margin-left:auto
 }
 
 * {
@@ -344,6 +352,28 @@ a:hover
   
   table { border-collapse: collapse; border-spacing: 0; }
   
+  #topbar {
+    background: #4f4a41;
+    padding: 10px 0 10px 0;
+    text-align: center;
+    height: 36px;
+    overflow: hidden;
+    -webkit-transition: height 0.5s linear;
+    -moz-transition: height 0.5s linear;
+    transition: height 0.5s linear;
+  }
+  #topbar a {
+    color: #fff;
+    font-size:1.3em;
+    line-height: 1.25em;
+    text-decoration: none;
+    opacity: 0.5;
+    font-weight: bold;
+  }
+  #topbar b:hover {
+    opacity: 1;
+  }
+  
   p {
     display: block;
     font-size: 1.4em;
@@ -354,6 +384,133 @@ a:hover
   
   
   .center { display: block; text-align: center; }
+  
+  /** page structure **/
+  #w {
+    display: block;
+    width: 750px;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 45px;
+  }
+  
+  #content {
+    display: block;
+    width: 100%;
+    background: #fff;
+    padding: 25px 20px;
+    padding-bottom: 35px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  }
+  
+  #userphoto {
+    display: block;
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 8px;
+  }
+  #userphoto img {
+    display: block;
+    padding: 2px;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  
+  
+  /** profile nav links **/
+  #profiletabs {
+    display: block;
+    margin-bottom: 4px;
+    height: 50px;
+  }
+  
+  #profiletabs ul { list-style: none; display: block; width: 70%; height: 50px; }
+  #profiletabls ul li { float: left; }
+  #profiletabs ul li a { 
+    display: block;
+    float: left;
+    padding: 8px 11px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #eae8db;
+    color: #666;
+    margin-right: 7px;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius: 5px;
+    -moz-border-radius-bottomleft: 0;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+  }
+  #profiletabs ul li a:hover {
+    text-decoration: none;
+    background: #dad7c2;
+    color: #565656;
+  }
+  
+  #profiletabs ul li a.sel {
+    background: #fff;
+    border-color: #d1cdb5;
+  }
+  
+  
+  /** profile content sections **/
+  .hidden {
+    display: none;
+  }
+  
+  .cart {
+    border-bottom: 1px solid #d6d1af;
+    padding-bottom: 4px;
+  }
+  
+  .setting {
+    display: block;
+    font-weight: normal;
+    padding: 7px 3px;
+    border-top: 1px solid #d6d1af;
+    margin-bottom: 5px;
+  }
+  .setting span {
+    float: left; 
+    width: 250px;
+    font-weight: bold;
+  }
+  .setting span img { 
+    cursor: pointer;
+  }
+  
+  
+  #orderslist {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  #orderslist li { line-height: 30px; }
+  #orderslist li b {
+    float: left;
+    height: 30px;
+    padding: 3px 6px;
+    line-height: 22px;
+     margin-right: 15px;
+    border: 1px solid #c9d8b8;
+  }
+  
+  #orderslist li a img { float: left; margin-right: 5px; }
+  
+  /** clearfix **/
+  .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+  .clearfix { display: inline-block; }
+   
+  html[xmlns] .clearfix { display: block; }
+  * html .clearfix { height: 1%; }
+
+
 
   .row {
     display: -ms-flexbox; /* IE10 */
@@ -405,8 +562,8 @@ a:hover
   }
 
   .card {
-    box-shadow: 0 4px 8px 0rgba(44,62,80,0.7);
-    max-width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 350px;
     margin: auto;
     text-align: center;
     font-family: "Play", sans-serif;
@@ -414,7 +571,7 @@ a:hover
   }
   
   .price {
-    color:blue;
+    color: grey;
     font-size: 22px;
   }
   
@@ -422,7 +579,7 @@ a:hover
     border: none;
     outline: 0;
     padding: 12px;
-    color: rgb(255, 255, 255);
+    color: white;
     background-color: #000;
     text-align: center;
     cursor: pointer;
@@ -433,26 +590,3 @@ a:hover
   .card button:hover {
     opacity: 0.7;
   }
-
-  .card2{
-    position:relative;
-    display:-webkit-box;
-    display:-ms-flexbox;
-    display:flex;-webkit-box-orient:vertical;
-    -webkit-box-direction:normal;
-    -ms-flex-direction:column;
-    flex-direction:column;
-    min-width:0;
-    word-wrap:break-word;
-    background-color:grey;
-    background-clip:border-box;
-    border:1px solid rgba(0,0,0,.125);
-    border-radius:.25rem
-  }
-
-.h9{
-  color: black;
-
-}
-
-  
