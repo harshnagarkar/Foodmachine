@@ -19,5 +19,7 @@ urlpatterns = [
     url(r'^delete/(?P<part_id>[0-9]+)/$', views.menuDelete, name='delete_view'),
     url(r'^edit/(?P<part_id>[0-9]+)/$', views.menuEdit, name = 'edit_view'),
     url(r'^status', views.updateStatus , name = 'update_status'),
+    url(r'^rest-list/', views.restList, name = 'rest-list'),
+    url(r'food-list/', views.foodList, name = 'food-list'),
 
 ]

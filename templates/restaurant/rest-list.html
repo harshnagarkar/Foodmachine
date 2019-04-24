@@ -1,4 +1,23 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
-
+<h1>Restaurant list webpage</h1>
+<table>
+    <tbody>
+        <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Address</td>
+            <td>Contact</td>
+        </tr>
+        <tr>
+            {% load restags %}
+            {% for ele in Res_Id|getRest %}
+                <td>{{ele.Res_Name}}</td>
+                <td>{{ele.Res_Address}}</td>
+                <td>{{ele.Res_Contact}}</td>
+                <td>{{ele.Res_Description</td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
 {% endblock content %}

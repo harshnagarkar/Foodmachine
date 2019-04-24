@@ -138,5 +138,10 @@ def menuEdit(request, part_id = None):
 
 def updateStatus(request):
     status = Orders.objects.get()
+
+def restList(request):
+    return render(request, 'restaurant/rest-list.html')
     
+def foodList(request):
+    return render(request, 'restaurant/food-list.html')
 
