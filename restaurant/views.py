@@ -143,6 +143,7 @@ def updateStatus(request):
          order = Orders.objects.get(Order_Id=orderno)
          order.Status = request.POST.status
          order.save()
+
 def restList(request):
     return render(request, 'restaurant/rest-list.html')
     
