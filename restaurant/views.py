@@ -65,6 +65,7 @@ def createMenuItems(request):
             Rest = resname
             # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
 
+
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price') 
             Labelname = form.cleaned_data.get('Label')
@@ -72,12 +73,11 @@ def createMenuItems(request):
             if(exist == False):
                 labelCreate = Label(Label_Name=Labelname)
                 labelCreate.save()
-            
+
             labelId = Label.objects.get(Label_Name=Labelname)
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
-            
-       
+      
         return redirect("/restaurant/createmenu/")
        
      else:
@@ -86,8 +86,6 @@ def createMenuItems(request):
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
-    for key,value in request.session.items():
-        print (key+" ->"+value)
     return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
 
 def processMenu(request):
@@ -138,7 +136,13 @@ def menuEdit(request, part_id = None):
 
 def updateStatus(request):
     status = Orders.objects.get()
-
+    if request.method == 'POST':
+         user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+         res = user.userprofile.userRestaurant
+         orderno = request.POST.get('on')
+         order = Orders.objects.get(Order_Id=orderno)
+         order.Status = request.POST.status
+         order.save()
 def restList(request):
     return render(request, 'restaurant/rest-list.html')
     

@@ -49,12 +49,12 @@ def makeUser(request):
 			passw = form.cleaned_data.get('pass')
 			confirmpass = form.cleaned_data.get('confirmPass')
 			email = form.cleaned_data.get('Email')
-			answer = form.cleaned_data.get('secAnswer')
-			questions = form.cleaned_data.get('questions')
+			# answer = form.cleaned_data.get('secAnswer')
+			# questions = form.cleaned_data.get('questions')
 			Emailuser = email
 			print (Emailuser)
 			# print(question)
-			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,Answer = answer,Question=questions,UserType='c',UserRestaurant=None)
+			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,UserType='c',UserRestaurant=None)
 			emails(email)
 			return render(request, 'cong.html', {"username": username})
 			
