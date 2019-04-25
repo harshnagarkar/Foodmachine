@@ -19,23 +19,24 @@ def cartpricecalculator(request):
     responsedata ={}
     if request.method == 'POST':
         data = json.loads(request.body)
-        # data = data.dict()
+        # print(data)
+        # print(data['MeatZZa'][1]['quantity'])
         total = 0
         mid = {}
         rid = ""
         for k,v in (data.items()):
-            priceval, mig, rig = priceCalculator(k,v)
+            priceval, mig, rig = priceCalculator(k,v[1]['quantity'])
             if not rid:
                 rid = rig
             else:
                 if not rig == rid:
                     return HttpResponseServerError()
             total += priceval
-            # mvdata = {mig:v}
-            mid[k] = {v:priceval}
-            print(mid)
+        #     # mvdata = {mig:v}
+            mid[k] = {v[1]['quantity']: priceval}
+            # print(mid)
             print(k+" ",priceval)
-            responsedata[k] = priceval
+        #   responsedata[k] = priceval
         tax = total*0.07
         request.session['pref'] =''
         request.session['mid'] = json.dumps(mid)
@@ -43,7 +44,8 @@ def cartpricecalculator(request):
         request.session['total'] = (total+tax)
         responsedata["Tax"] = tax
         responsedata["total"]=(total+tax) 
-        
+        print(total)
+        print(mid)
 
     return JsonResponse(responsedata)
 

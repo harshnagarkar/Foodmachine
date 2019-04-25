@@ -62,7 +62,7 @@ def makeUser(request):
 	else:
 		form = SignUpForm()
 	print (form.errors)
-	return render(request, 'cong.html', {"username" : username})
+	return render(request, 'cong.html', {"username" : 'Username exsisted Sorry.'})
 
 
 def restaurantUser(request):
