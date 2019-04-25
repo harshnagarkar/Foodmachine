@@ -14,6 +14,10 @@ def getMenu(resID):
     context = Menu.objects.filter(Menu_Res_Id=resID)
     return context
 
+@register.simple_tag
+def getRest():
+    context = Restaurant.objects.values('Res_Name', 'Res_Description', 'Res_Address', 'Res_Contact')
+    return context
 
 @register.filter(name='getProfile')
 def getProfile(usr):

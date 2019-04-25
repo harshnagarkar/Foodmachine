@@ -1,0 +1,426 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Shopping Cart</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+<link rel="shortcut icon" type="image/favicon" href="img/favicon.ico">
+</head>
+<style>
+    body
+    {
+        font-family: Tahoma, Geneva, sans-serif;
+        background: url(img/pic1.jpg)no-repeat;
+        background-size: cover;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    
+    .lighter-text {
+      color: #ABB0BE;
+    }
+    
+    .main-color-text {
+      color: $main-color;
+    }
+    .navbar-left {
+        float: left;
+      }
+      
+      .navbar-right {
+        float: right;
+      }
+      .topnav {
+        overflow: hidden;
+        background-color:rgba(44,62,80,0.7);
+      }
+      
+      /* Style the links inside the navigation bar */
+      .topnav a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      
+      /* Change the color of links on hover */
+      .topnav a:hover {
+        background-color: black;
+        color: white;
+      }
+      
+      /* Style the "active" element to highlight the current page */
+      .topnav a.active {
+        background-color: black;
+        color: white;
+      }
+      
+      /* Style the search box inside the navigation bar */
+      .topnav input[type=text] {
+        float: right;
+        padding: 6px;
+        border: none;
+        margin-top: 8px;
+        margin-right: 16px;
+        font-size: 17px;
+      }
+      
+      /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+      @media screen and (max-width: 600px) {
+        .topnav a, .topnav input[type=text] {
+          float: none;
+          display: block;
+          text-align: left;
+          width: 100%;
+          margin: 0;
+          padding: 14px;
+        }
+        .topnav input[type=text] {
+          border: 1px solid #ccc;
+        }
+      }
+    
+    
+    .container {
+      margin: auto;
+      width: 80%;
+    }
+    
+    .badge {
+        background-color: #6394F8;
+        border-radius: 10px;
+        color: white;
+        display: inline-block;
+        font-size: 12px;
+        line-height: 1;
+        padding: 3px 7px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+    
+    .shopping-cart {
+      margin: 20px 0;
+      float: right;
+      background: white;
+      width: 320px;
+      position: relative;
+      border-radius: 3px;
+      padding: 20px;
+      
+      
+      .shopping-cart-header {
+        border-bottom: 1px solid #E8E8E8;
+        padding-bottom: 15px;
+        
+        .shopping-cart-total {
+          float: right;
+        }
+      }
+      
+      .shopping-cart-items {
+        
+        padding-top: 20px;
+    
+          li {
+            margin-bottom: 18px;
+          }
+    
+        img {
+          float: left;
+          margin-right: 12px;
+        }
+        
+        .item-name {
+          display: block;
+          padding-top: 10px;
+          font-size: 16px;
+        }
+        
+        .item-price {
+          color: $main-color;
+          margin-right: 8px;
+        }
+        
+        .item-quantity {
+          color: $light-text;
+        }
+      }
+       
+    }
+    
+    .shopping-cart:after {
+      bottom: 100%;
+      left: 89%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-bottom-color: white;
+      border-width: 8px;
+      margin-left: -8px;
+    }
+    
+    .cart-icon {
+      color: #515783;
+      font-size: 24px;
+      margin-right: 7px;
+      float: left;
+    }
+    
+    .button {
+      background: $main-color;
+      color:white;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      display: block;
+      border-radius: 3px;
+      font-size: 16px;
+      margin: 25px 0 15px 0;
+      
+      &:hover {
+        background: lighten($main-color, 3%);
+      }
+    }
+    
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+	var actions = $("table td:last-child").html();
+	// Append table with add row form on add new button click
+    $(".add-new").click(function(){
+		$(this).attr("disabled", "disabled");
+		var index = $("table tbody tr:last-child").index();
+        var row = '<tr>' +
+            '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+            '<td><input type="text" class="form-control" name="department" id="description"></td>' +
+            '<td><input type="text" class="form-control" name="phone" id="price"></td>' +
+			'<td>' + actions + '</td>' +
+        '</tr>';
+    	$("table").append(row);		
+		$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+	// Add row on add button click
+	$(document).on("click", ".add", function(){
+		var empty = false;
+		var input = $(this).parents("tr").find('input[type="text"]');
+        input.each(function(){
+			if(!$(this).val()){
+				$(this).addClass("error");
+				empty = true;
+			} else{
+                $(this).removeClass("error");
+            }
+		});
+		$(this).parents("tr").find(".error").first().focus();
+		if(!empty){
+			input.each(function(){
+				$(this).parent("td").html($(this).val());
+			});			
+			$(this).parents("tr").find(".add, .edit").toggle();
+			$(".add-new").removeAttr("disabled");
+		}		
+    });
+	// Edit row on edit button click
+	$(document).on("click", ".edit", function(){		
+        $(this).parents("tr").find("td:not(:last-child)").each(function(){
+			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+		});		
+		$(this).parents("tr").find(".add, .edit").toggle();
+		$(".add-new").attr("disabled", "disabled");
+    });
+	// Delete row on delete button click
+	$(document).on("click", ".delete", function(){
+        $(this).parents("tr").remove();
+		$(".add-new").removeAttr("disabled");
+    });
+});
+(function(){
+ $(document).click(function() {
+    var $item = $(".shopping-cart");
+    if ($item.hasClass("active")) {
+      $item.removeClass("active");
+    }
+  });
+  
+  $('.shopping-cart').each(function() {
+    var delay = $(this).index() * 50 + 'ms';
+    $(this).css({
+        '-webkit-transition-delay': delay,
+        '-moz-transition-delay': delay,
+        '-o-transition-delay': delay,
+        'transition-delay': delay
+    });
+  });
+  $('#cart').click(function(e) {
+    e.stopPropagation();
+    $(".shopping-cart").toggleClass("");
+  });
+  
+  $('#addtocart').click(function(e) {
+    e.stopPropagation();
+    $(".shopping-cart").toggleClass("active");
+  });
+
+
+  
+})();
+</script>
+<body> 
+    <nav class="topnav">
+        <div class="container">
+          <ul class="navbar-left">
+            <a href="home.html">Home</a>
+            <a href="restaurants.html">Restaurants</a>
+            <a href="userdashboard.html">My Account</a>
+          </ul> <!--end navbar-left -->
+      
+          <ul class="navbar-right">
+            <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
+          </ul> <!--end navbar-right -->
+        </div> <!--end container -->
+      </nav>
+      
+      
+      <div class="container">
+        <div class="shopping-cart">
+          <div class="shopping-cart-header">
+            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+            <div class="shopping-cart-total">
+              <span class="lighter-text">Total:</span>
+              <span class="main-color-text">$2,229.97</span>
+            </div>
+          </div> <!--end shopping-cart-header -->
+      
+          <ul class="shopping-cart-items">
+            <li class="clearfix">
+              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
+              <span class="item-name">Sony DSC-RX100M III</span>
+              <span class="item-price">$849.99</span>
+              <span class="item-quantity">Quantity: 01</span>
+            </li>
+      
+          </ul>
+      
+          <a href="#" class="button">Checkout</a>
+        </div> <!--end shopping-cart -->
+      </div> <!--end container -->
+
+  <div class="container">
+    <div class="row">
+       <br>
+                <div class="col-md-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
+                        <!--REVIEW ORDER-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                <h4>Review Order</h4>
+                            </div>
+                            <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <strong>Subtotal (# item)</strong>
+                                        <div class="pull-right"><span>$</span><span>200.00</span></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <strong>Tax</strong>
+                                        <div class="pull-right"><span>$</span><span>200.00</span></div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <small>Shipping</small>
+                                        <div class="pull-right"><span>-</span></div>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <strong>Order Total</strong>
+                                        <div class="pull-right"><span>$</span><span>150.00</span></div>
+                                        <hr>
+                                    </div>
+                                    
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                                    
+                            </div>
+                            
+                        </div>
+                        <!--REVIEW ORDER END-->
+                    </div>
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+                        <!--SHIPPING METHOD-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center"><h4>Current Cart</h4></div>
+                            <div class="panel-body">
+                               <table class="table borderless">
+                    <thead>
+                                    <tr>
+                          <td><strong>Your Cart: # item</strong></td>
+                          <td>This iswhat is cart</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                                    </tr>
+                    </thead>
+                    <tbody>
+                      <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                      <tr>
+                        <td class="col-md-3">
+                            <div class="media">
+                                 <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://lorempixel.com/460/250/" style="width: 72px; height: 72px;"> </a>
+                                 <div class="media-body">
+                                     <h5 class="media-heading"> Product Name</h5>
+                                     <h5 class="media-heading"> Product Code</h5>
+                                 </div>
+                            </div>
+                        </td>
+                        <td class="text-center">$10.99</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">$32.99</td>
+                      <td><a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a></td>
+                      <td><a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+                      </tr>
+                                    <tr>
+                        <td class="col-md-3">
+                            <div class="media">
+                                 <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://lorempixel.com/460/250/" style="width: 72px; height: 72px;"> </a>
+                                 <div class="media-body">
+                                     <h5 class="media-heading"> Product Name</h5>
+                                     <h5 class="media-heading"> Product Code</h5>
+                                 </div>
+                            </div>
+                        </td>
+                        <td class="text-center">$10.99</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right"> $32.99</td>
+                      <td><a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a></td>
+                        <td><a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+                      </tr>
+                    </tbody>
+                  </table> 
+                            </div>
+                        </div>
+                        <!--SHIPPING METHOD END-->
+                    </div>
+                    </div>
+                    </div>
+    </div>>
+</body>
+</html>

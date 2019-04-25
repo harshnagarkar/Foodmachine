@@ -11,11 +11,9 @@ class SignUpForm(forms.Form):
     confirmPass = forms.CharField(widget=forms.PasswordInput)
     Email = forms.EmailField( max_length=70)
     # phone = forms.CharField(max_length=10)
-    questions = forms.CharField(label = 'questions', max_length = 100)
-    secAnswer = forms.CharField(label = 'secAnswer', max_length = 50)
     class Meta:
         model = User
-        fields = ('username','Email','FirstName','LastName','passw', 'confirmPass', 'questions', 'secAnswer')
+        fields = ('username','Email','FirstName','LastName','passw', 'confirmPass')
         
 
 class RestaurantForm(forms.Form):
@@ -26,9 +24,6 @@ class RestaurantForm(forms.Form):
     passw = forms.CharField(widget=forms.PasswordInput)
     confirmPass = forms.CharField(widget=forms.PasswordInput)
     Email = forms.EmailField(max_length=70)
-    # phone = forms.CharField(max_length=10)
-    questions = forms.CharField(label='questions', max_length=100)
-    secAnswer = forms.CharField(label='secAnswer', max_length=50)
     usertype = forms.CharField(max_length=1)
 
     def clean_email(self):
