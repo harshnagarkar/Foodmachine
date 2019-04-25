@@ -135,6 +135,7 @@ def menuEdit(request, part_id = None):
             return render(request, 'User not verified. Please try logging in!')
 
 def updateStatus(request):
+    status = Orders.objects.get()
     if request.method == 'POST':
          user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
          res = user.userprofile.userRestaurant
@@ -142,3 +143,10 @@ def updateStatus(request):
          order = Orders.objects.get(Order_Id=orderno)
          order.Status = request.POST.status
          order.save()
+
+def restList(request):
+    return render(request, 'restaurant/rest-list.html')
+    
+def foodList(request):
+    return render(request, 'restaurant/food-list.html')
+

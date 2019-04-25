@@ -1,0 +1,59 @@
+{% extends "layout.html" %} {extends "../layout.html"}
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Restaurant list webpage</h1>
+<div class= "row">
+        {% load restags %}
+        {% getRest as get %}
+        {% for ele in get %}
+        <div class="column">
+                {% csrf_token %}
+                <div class="card" style=" height:auto; width:auto; padding: 10px;">
+                    {% csrf_token %}
+                    <img src="{{ele.Res_Pic.url}}" style=" height: 200px; width: 200px;" >
+                    <div style="height: 25px"><font size = "5" color = "black">{{ele.Res_Name}}</font></div>
+                    <input type = "text"  id = "menuID" type = "hidden">
+                    <p class="price">{{ele.Res_Address}}</p>
+                    <p class = "price">{{ele.Res_Contact}} </p>
+                    <p style="font-size: 10px">{{ele.Res_Description}} </p>
+                    <!-- <p>
+                            <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
+                        </p> -->
+                        <p>
+                            <a href = "../{{ele.Res_Name}}"><i class = "edit">View Menu</i></a>
+                        </p>
+                    
+                   
+                </div>
+            
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+
+</div>
+<!-- <table>
+    <tbody>
+        <tr>
+            <td>Title</td>
+            <td>Address</td>
+            <td>Contact</td>
+            <td>Description</td>
+        </tr>
+        
+            {% load restags %}
+            {% getRest as get %}
+            {% for ele in get %}
+            <tr>
+                <td>{{ele.Res_Name}}</td>
+                <td>{{ele.Res_Address}}</td>
+                <td>{{ele.Res_Contact}}</td>
+                <td>{{ele.Res_Description}}</td>
+                <td><input type = 'button' name = 'view'>View Menu</td>
+            </tr> 
+        {% endfor %}
+
+    </tbody>
+</table> -->
+{% endif %}
+{% endblock content %}
