@@ -67,7 +67,8 @@ def createMenuItems(request):
 
 
             Description = form.cleaned_data.get('Description')
-            Price = form.cleaned_data.get('Price') 
+            Price = form.cleaned_data.get('Price')
+            CuisineName = form.cleaned_data.get('Cuisine')
             Labelname = form.cleaned_data.get('Label')
             exist = Label.objects.filter(Label_Name = Labelname).exists()
             if(exist == False):
@@ -75,7 +76,9 @@ def createMenuItems(request):
                 labelCreate.save()
 
             labelId = Label.objects.get(Label_Name=Labelname)
-            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
+            CuisineId = Cuisine.objects.get(Cuisine_parent = CuisineName)
+            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,
+             Menu_Label_Id=labelId, Menu_Cuisine = CuisineId, Menu_Res_Id=Rest)
             itemCreate.save()
       
         return redirect("/restaurant/createmenu/")
