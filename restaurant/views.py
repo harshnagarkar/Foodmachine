@@ -110,31 +110,37 @@ def menuDelete(request, part_id = None):
 def menuEdit(request, part_id = None):
     if request.method == 'POST':
         form = MenuCreation(request.POST, request.FILES)
-        obj = Menu.objects.get(Menu_Item_Id = part_id)
         user = User.objects.get(pk = (User.objects.get(username = request.user.username).id))
+        obj = Menu.objects.get(Menu_Item_Id = part_id)
         resObj = obj.Menu_Res_Id
-
         if(resObj == user.userprofile.userRestaurant):
-            obj.Menu_Item = form.cleaned_data.get('Item')
-            obj.Menu_ItemPrice = form.cleaned_data.get('Price')
-            obj.Menu_Item_Description = form.cleaned_data.get('Description')
-            
-            lblName = form.cleaned_data.get('Label')
-            exist = Label.objects.filter(Label_Name = lblName).exists()
-            if(exist == False):
-                labelCreate = Label(Label_Name=Labelname)
-                labelCreate.save()
+            if(form.is_valid()):
+                obj.Menu_Item = form.cleaned_data.get('Item')
+                obj.Menu_ItemPrice = form.cleaned_data.get('Price')
+                obj.Menu_Item_Description = form.cleaned_data.get('Description')
+                
+                lblName = form.cleaned_data.get('Label')
+                exist = Label.objects.filter(Label_Name = lblName).exists()
+                if(exist == False):
+                    labelCreate = Label(Label_Name=Labelname)
+                    labelCreate.save()
 
-            lbl = Label.objects.get(Label_Name = lblName)
-            obj.Menu_Label_Id = lbl.Label_Id
-            obj.Menu_Cuisine = form.cleaned_data.get('Cuisine')
+                lbl = Label.objects.get(Label_Name = lblName)
+                obj.Menu_Label_Id = lbl
+                # if(form.cleaned_data.get('Cuisine')!=None):
+                obj.Menu_Cuisine = Cuisine.objects.get(Cuisine_parent = form.cleaned_data.get('Cuisine'))
 
-            obj.save()
+                obj.save()
+            url = '/restaurant/'+str(resObj.Res_Name)
+            return redirect(url)
 
-            return redirect("/restaurant")
+    else:
+        obj = Menu.objects.get(Menu_Item_Id = part_id)
+        resObj = obj.Menu_Res_Id
+        return render(request, 'updateMenu.html',{'M':obj})
 
-        else:
-            return render(request, 'User not verified. Please try logging in!')
+
+
 
 def updateStatus(request):
     status = Orders.objects.get()

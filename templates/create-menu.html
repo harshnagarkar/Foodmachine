@@ -50,8 +50,8 @@ window.opener.location.reload(true);
    <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
    
    <datalist id = "cuisine">
-    {% getCuisine as get %}  
-    {% for element in get  %}
+    {% getCuisine as c %}  
+    {% for element in c %}
       
     <option value = '{{element.Cuisine_parent}}'>'
     {% endfor %}

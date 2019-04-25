@@ -17,7 +17,9 @@ urlpatterns = [
     url('createmenu', TemplateView.as_view(template_name="create-menu.html"),name='createformmenu'),
     url('createdmenu', views.createMenuItems, name='createdmenu'),
     url(r'^delete/(?P<part_id>[0-9]+)/$', views.menuDelete, name='delete_view'),
-    url(r'^edit/(?P<part_id>[0-9]+)/$', views.menuEdit, name = 'edit_view')
-    url(r'^status', views.updateStatus , name = 'update_status'),
+    # url('updateMenu/', TemplateView.as_view(template_name = 'updateMenu.html'), name = 'update_menu'),
+    # url('editMenu', Template.as_view(template_name = 'updateMenu.html'), name = 'update-menu'),
+    url(r'^edit/(?P<part_id>[0-9]+)/$', views.menuEdit, name = 'edit_view'),
+    url(r'^status', views.updateStatus , name = 'update_status')
 
 ]
