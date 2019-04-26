@@ -82,8 +82,7 @@ def restaurantUser(request):
 			questions = form.cleaned_data.get('questions')
 			usertype = form.cleaned_data('usertype')
 			# print(question)
-			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,
-			                     Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
+			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
 
 	else:
 		form = RestaurantForm()
@@ -100,10 +99,8 @@ def sendEmail(request):
 		if form.is_valid():
 			email = form.cleaned_data.get('email')
 			u = verifyEmail(email)
-
 			if u != None:
-				sg = sendgrid.SendGridAPIClient(
-                                    apikey='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')
+				sg = sendgrid.SendGridAPIClient( apikey='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')
 				from_email = Email("admin@foodmachine.ml")
 				to_email = Email(email)
 				subject = "Request to Reset Password for Food Machine"
