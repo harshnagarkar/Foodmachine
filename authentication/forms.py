@@ -9,6 +9,7 @@ class SignUpForm(forms.Form):
     LastName = forms.CharField(label = 'LastName', max_length = 100)
     passw = forms.CharField(widget=forms.PasswordInput)
     confirmPass = forms.CharField(widget=forms.PasswordInput)
+    types = forms.CharField(max_length=1, label='what type are you?')
     Email = forms.EmailField( max_length=70)
     # phone = forms.CharField(max_length=10)
     class Meta:

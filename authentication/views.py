@@ -49,12 +49,13 @@ def makeUser(request):
 			passw = form.cleaned_data.get('pass')
 			confirmpass = form.cleaned_data.get('confirmPass')
 			email = form.cleaned_data.get('Email')
+			types = form.cleaned_data.get('types')
 			# answer = form.cleaned_data.get('secAnswer')
 			# questions = form.cleaned_data.get('questions')
 			Emailuser = email
 			print (Emailuser)
 			# print(question)
-			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,UserType='c',UserRestaurant=None)
+			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,UserType=types,UserRestaurant=None)
 			emails(email)
 			return render(request, 'cong.html', {"username": username})
 			
@@ -65,29 +66,29 @@ def makeUser(request):
 	return render(request, 'cong.html', {"username" : 'Username exsisted Sorry.'})
 
 
-def restaurantUser(request):
-	# context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-	if request.method == "POST":
-		form = RestaurantForm(request.POST)
-		print(form.errors)
-		print(form.is_valid())
-		if form.is_valid():
-			username = form.cleaned_data.get('username')
-			fname = form.cleaned_data.get('FirstName')
-			lname = form.cleaned_data.get('LastName')
-			passw = form.cleaned_data.get('pass')
-			confirmpass = form.cleaned_data.get('confirmPass')
-			email = form.cleaned_data.get('Email')
-			answer = form.cleaned_data.get('secAnswer')
-			questions = form.cleaned_data.get('questions')
-			usertype = form.cleaned_data('usertype')
-			# print(question)
-			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
+# def restaurantUser(request):
+# 	# context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+# 	if request.method == "POST":
+# 		form = RestaurantForm(request.POST)
+# 		print(form.errors)
+# 		print(form.is_valid())
+# 		if form.is_valid():
+# 			username = form.cleaned_data.get('username')
+# 			fname = form.cleaned_data.get('FirstName')
+# 			lname = form.cleaned_data.get('LastName')
+# 			passw = form.cleaned_data.get('pass')
+# 			confirmpass = form.cleaned_data.get('confirmPass')
+# 			email = form.cleaned_data.get('Email')
+# 			answer = form.cleaned_data.get('secAnswer')
+# 			questions = form.cleaned_data.get('questions')
+# 			usertype = form.cleaned_data('usertype')
+# 			# print(question)
+# 			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
 
-	else:
-		form = RestaurantForm()
+# 	else:
+# 		form = RestaurantForm()
 
-	return render(request, 'restaurant/sucessRestaurant.html', {"username": request.user.username})
+# 	return render(request, 'restaurant/sucessRestaurant.html', {"username": request.user.username})
 
 
 def sendEmail(request):
@@ -118,51 +119,6 @@ def sendEmail(request):
 	return render(request, 'password_reset_confirm.html')
 
 
-# def loginUser(request):
-# 	if request.method == "POST":
-# 		form = LoginForm(request.POST)
-# 		print(form.errors)
-# 		print(form.is_valid)
-# 		if form.is_valid():
-# 			username = form.cleaned_data.get('username')
-# 			passw = form.cleaned_data.get('password')
-
-# 			user = loginuser(request)
-# 			print  (user)
-# 			return render(request, 'dashboard/userdashboard.html')
-# 		else:
-# 			form = LoginForm()
-		
-
-
-	# return render(request, template_name, loginUser(request))
-			# username = form.cleaned_data.get('username')
-			# passw = form.cleaned_data.get('password')
-			# user = loginuser(request)
-		# 	loginUser(username, passw)
-		# 	return render(request, 'userdashboard.html')
-		# else:
-		# 	form = LoginForm()
-# def logUser(request):		
-# 	context = request.POST
-# 	if request.user.is_authenticated():
-# 		return HttpResponse("Logged in")
-# 	if request.method == 'POST':
-# 		username = request.POST['username']
-# 		password = request.POST['password']
-# 		user = authenticate(username=username, password=password)
-# 		print(user)
-# 		if user:
-# 			if user.is_active:
-# 				login(request, user)
-# 				return HttpResponse("Success")
-# 			else:
-# 				return HttpResponse("Not active")
-# 		else:
-# 			return HttpResponse("Invalid")
-# 	else:
-# 		return render(request, 'templates/logn.html', {}, context)
-# def updatePass(request):
 
 # 	if request.method == "POST":
 # 		form = UpdatePassword(request.POST)

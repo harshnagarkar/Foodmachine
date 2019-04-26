@@ -14,7 +14,7 @@ def initialcreateRestaurant(request):
 
 def createRestaurant(request):
      user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-     if (user.userprofile.userRestaurant!=None):
+     if (user.userprofile.userRestaurant!=None and user.userprofile.userType=='r'):
          return render(request,'restaurant/restaurantProblem.html')
      if request.method == 'POST':
         #Rest = request.POST['Rest']
@@ -40,7 +40,6 @@ def createRestaurant(request):
                 print(restaurant)
                 restaurant.save()
                 userobject = UserProfile.objects.get(user=request.user)
-                userobject.userType = 'r'
                 userobject.userRestaurant = Restaurant.objects.get(Res_Name=resname)
                 userobject.save()
                 return HttpResponseRedirect("/restaurant/"+resname)
@@ -77,13 +76,7 @@ def createMenuItems(request):
                 labelCreate.save()
 
             labelId = Label.objects.get(Label_Name=Labelname)
-<<<<<<< HEAD
             itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,Menu_Cuisine=cuisine,Menu_Pic = respic,Menu_Label_Id=labelId, Menu_Res_Id=Rest)
-=======
-            CuisineId = Cuisine.objects.get(Cuisine_parent = CuisineName)
-            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,
-             Menu_Label_Id=labelId, Menu_Cuisine = CuisineId, Menu_Res_Id=Rest)
->>>>>>> 8bb49ec7ea75e49a6605506ae8416431ba8360fb
             itemCreate.save()
       
         return redirect("/restaurant/createmenu/")
