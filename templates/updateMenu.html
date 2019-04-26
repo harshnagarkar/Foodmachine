@@ -26,18 +26,17 @@ window.opener.location.reload(true);
     {% if user.is_authenticated %}
 
 
-    <form action = "/restaurant/updatedmenu/" method="POST">
+    <form action = "/restaurant/edit/{{M.Menu_Item_Id}}/" method="POST">
         {% csrf_token %}
         <h2>PLease enter details below</h2>
-        {% getMenu as mnu &}
         {% getLabel as lbl %}
         <label>Item</label>
-        <input type = 'text' name = 'Item' value = "{{mnu.Menu_Item}}">
+        <input type = 'text' name = 'Item' value = "{{M.Menu_Item}}">
 
         <label for = "Description"> Item Description:</label>
-        <input type = 'text' name = 'Description' value = "{{mnu.Menu_Item_Description}}">
+        <input type = 'text' name = 'Description' value = "{{M.Menu_Item_Description}}">
         <br>
-        <label for = "Price"> Item Price: </label><input type = 'number' step = 'any' name = 'Price' value = "{{mnu.Menu_Item_Price}}">
+        <label for = "Price"> Item Price: </label><input type = 'number' step = 'any' name = 'Price' value = "{{M.Menu_ItemPrice}}">
         <br>
         <label for = "Label"> Item Label: 
         <input list = 'label' name = 'Label' value = "{{lbl.Label_Name}}"></label>
@@ -48,10 +47,10 @@ window.opener.location.reload(true);
         </datalist>
         <br>
 
-        <input type = 'file' name = 'Picture' value = "{{mnu.Menu_Pic}}">
+        <input type = 'file' name = 'Picture' value = "{{M.Menu_Pic}}">
    <br>
    <label>Pick a Cuisine Type: 
-   <input list = "cuisine" name = 'Cuisine' value = "{{mnu.Menu_Cuisine}}"></label>
+   <input list = "cuisine" name = 'Cuisine' value = "{{M.Menu_Cuisine}}"></label>
    
    <datalist id = "cuisine">
     {% getCuisine as c %}  

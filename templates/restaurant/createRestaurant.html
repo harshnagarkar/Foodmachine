@@ -3,7 +3,7 @@
 {% load restags %}
 {% with user.username|getProfile as finding %}
 
-{% if user.is_authenticated and  finding.userType != 'r'  %}
+{% if user.is_authenticated and  finding.userType != 'c' and finding.userType != 'd' %}
 <div style="align-self: center;">
     <form action="/restaurant/sucessRestaurant/" method="POST" enctype="multipart/form-data" style ="align-self: center;">
         {% csrf_token %}
