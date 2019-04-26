@@ -17,18 +17,6 @@ def userCreate(UserName, Password, Email, First_Name, Last_Name, UserType,UserRe
     except:
         return "Username exsist"
 
-
-def restaurantUserCreate(UserName, Password, Email, First_Name, Last_Name, Answer, Question, UserType, UserRestaurant, Is_Staff='0'):
-    try:
-        user = User.objects.create_user(username=UserName, email=Email, password=Password, date_joined=datetime.datetime.now(), is_staff=Is_Staff, first_name=First_Name, last_name=Last_Name)
-        userid = User.objects.get(username=UserName).id
-        userprofiles = UserProfile.objects.create(user_id=userid, Payment=None, Address=None, Phone=None, userType=UserType, userRestaurant=UserRestaurant)
-        userprofiles.save()
-        return 'success'
-    except:
-        return "Username exsist"
-
-
 def loginuser(request):
     username = request.POST('username')
     password = request.POST('password')

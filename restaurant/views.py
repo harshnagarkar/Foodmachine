@@ -14,7 +14,7 @@ def initialcreateRestaurant(request):
 
 def createRestaurant(request):
      user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-     if (user.userprofile.userRestaurant!=None):
+     if (user.userprofile.userRestaurant!=None and user.userprofile.userType=='r'):
          return render(request,'restaurant/restaurantProblem.html')
      if request.method == 'POST':
         #Rest = request.POST['Rest']
@@ -40,7 +40,6 @@ def createRestaurant(request):
                 print(restaurant)
                 restaurant.save()
                 userobject = UserProfile.objects.get(user=request.user)
-                userobject.userType = 'r'
                 userobject.userRestaurant = Restaurant.objects.get(Res_Name=resname)
                 userobject.save()
                 return HttpResponseRedirect("/restaurant/"+resname)
@@ -65,7 +64,8 @@ def createMenuItems(request):
             Rest = resname
             # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
 
-
+            cuisine = Cuisine.objects.get(Cuisine_parent=form.cleaned_data.get('Cuisine'))
+            respic = form.cleaned_data.get('Picture')
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price')
             CuisineName = form.cleaned_data.get('Cuisine')
@@ -76,9 +76,7 @@ def createMenuItems(request):
                 labelCreate.save()
 
             labelId = Label.objects.get(Label_Name=Labelname)
-            CuisineId = Cuisine.objects.get(Cuisine_parent = CuisineName)
-            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,
-             Menu_Label_Id=labelId, Menu_Cuisine = CuisineId, Menu_Res_Id=Rest)
+            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,Menu_Cuisine=cuisine,Menu_Pic = respic,Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
       
         return redirect("/restaurant/createmenu/")
@@ -89,7 +87,12 @@ def createMenuItems(request):
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
-    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
+    if request.user.is_authenticated:
+         user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+         if(user.userprofile.userRestaurant==Restaurant.objects.get(Res_Name=restaurantName)):
+            return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
+         else:
+            return render(request, 'restaurant/nonadminsinglerestaurant.html', {'Restaurant':resDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')

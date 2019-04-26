@@ -46,7 +46,6 @@ def cartpricecalculator(request):
         responsedata["total"]=(total+tax) 
         print(total)
         print(mid)
-
     return JsonResponse(responsedata)
 
 
