@@ -26,10 +26,13 @@ def getProfile(usr):
     print(context.userprofile.__dict__)
     return context.userprofile.__dict__
 
+
+
 @register.simple_tag
 def getCuisine():
     cus = Cuisine.objects.values('Cuisine_parent')
     return cus
+
 
 # @register.filter(name = 'getCuisine')
 # def getCuisine(cusID):
@@ -41,3 +44,4 @@ def getCuisine():
 def getLabel():
     context = Label.objects.values('Label_Name')
     return context
+
