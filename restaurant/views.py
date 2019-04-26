@@ -65,7 +65,8 @@ def createMenuItems(request):
             Rest = resname
             # Rest = Restaurant.objects.only('Res_Id').get(Res_Name = form.cleaned_data.get('Rest')).id
 
-
+            cuisine = Cuisine.objects.get(Cuisine_parent=form.cleaned_data.get('Cuisine'))
+            respic = form.cleaned_data.get('Picture')
             Description = form.cleaned_data.get('Description')
             Price = form.cleaned_data.get('Price') 
             Labelname = form.cleaned_data.get('Label')
@@ -75,7 +76,7 @@ def createMenuItems(request):
                 labelCreate.save()
 
             labelId = Label.objects.get(Label_Name=Labelname)
-            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description, Menu_Label_Id=labelId, Menu_Res_Id=Rest)
+            itemCreate = Menu(Menu_Item=Item, Menu_ItemPrice=Price,Menu_Item_Description=Description,Menu_Cuisine=cuisine,Menu_Pic = respic,Menu_Label_Id=labelId, Menu_Res_Id=Rest)
             itemCreate.save()
       
         return redirect("/restaurant/createmenu/")
