@@ -87,7 +87,12 @@ def createMenuItems(request):
 def restaurantPage(request, restaurantName):
     # resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
     resDetail = get_object_or_404(Restaurant, Res_Name=restaurantName)
-    return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
+    if request.user.is_authenticated:
+         user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+         if(user.userprofile.userRestaurant==Restaurant.objects.get(Res_Name=restaurantName)):
+            return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
+         else:
+            return render(request, 'restaurant/nonadminsinglerestaurant.html', {'Restaurant':resDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')
