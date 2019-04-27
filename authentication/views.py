@@ -21,7 +21,7 @@ def userView(request):
 	if request.user.is_authenticated:
 		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
 		if context.userprofile.userType== 'c':
-			return render(request, 'dashboard/Userdashboardnew.html')
+			return render(request, 'dashboard/Userdashboard.html')
 		elif context.userprofile.userType == 'r':
 			return render(request, 'dashboard/restaurantdashboard.html')
 		elif context.userprofile.userType == 'd':
