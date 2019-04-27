@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from orders.models import *
+from .filters import CuisineFilter
 
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
@@ -157,7 +158,29 @@ def updateStatus(request):
          order.save()
 
 def restList(request):
-    return render(request, 'restaurant/rest-list.html')
+
+    if request.method == 'GET':
+        form = RestList(request.GET, request.FILES)
+        Cuis_list = Cuisine.objects.all()
+        Cuis_filt = CuisineFilter(request.GET, queryset = Cuis_list)
+        
+        if form.is_valid():
+            CuisineName = form.cleaned_data.get('Cuisine')
+            CuisineId = Cuisine.objects.get(cuisine_parent = CuisineName)
+            print (CuisineId)
+            
+            #RestaurantsID = Restaurant.get.all() 
+            return render(request, 'restaurant/rest-list.html', {'filter': Cuis_filt})
+        else: 
+            print(form.errors)
+            return render(request,'restaurant/rest-list.html')
+           
+    else:
+        
+        return render(request, 'restaurant/rest-list.html')
+    # for i in Restaurant.objects.order_by('Res_Name'):
+    #     print (i)
+  
     
 def foodList(request):
     return render(request, 'restaurant/food-list.html')

@@ -5,14 +5,21 @@
  {% load restags %}
 <div>
     <h2 style = "color: black"> Filter with Cuisine</h2>
-    <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
+    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'></label>
     <datalist id = "cuisine">
     {% getCuisine as c %}  
     {% for element in c %}
-      
     <option value = '{{element.Cuisine_parent}}'>'
     {% endfor %}
    </datalist>
+   <form method = 'GET'>
+       
+        <button type = "submit">Search</button>
+    </form>
+    <form method = 'GET'>
+        <button type = "submit">Alphabetical</button>
+    </form>
+  
 </div>
 
 <!--Need to filter; Default, Cuisines, Alphabetical order

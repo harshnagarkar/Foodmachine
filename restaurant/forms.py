@@ -55,3 +55,9 @@ class RestaurantCreation(forms.Form):
 		model = Restaurant
 		fields = ('resname','resdescription','rescontact','resaddress','recusine','respic')
 
+class RestList(forms.Form):
+
+	cuisine = forms.CharField(max_length = 20)
+	class Meta:
+		model = Cuisine
+		fields = ('Cuisine')
