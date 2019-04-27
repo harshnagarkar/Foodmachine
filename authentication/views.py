@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import User,UserProfile
 from authentication.forms import *
 from django.http import HttpResponse
-from .apps import userCreate,updatePassword
+from .apps import *
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.models import AnonymousUser
 import os
@@ -118,6 +118,19 @@ def sendEmail(request):
 
 	return render(request, 'password_reset_confirm.html')
 
+def updatePass(request):
+	if request.method == "POST":
+		form = UpdatePassword(request.POST)
+		print(form.errors)
+		if form.is_valid():
+			passw = form.cleaned_data.get('confirmPass')
+			
+			updatePassword(request.user, passw)
+			return redirect('/dashboard/updatePassword')
+
+	else:
+		return render(request, 'dashboard/updatePassword.html')
+			
 
 
 # 	if request.method == "POST":

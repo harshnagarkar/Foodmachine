@@ -63,13 +63,13 @@ class RestaurantForm(forms.Form):
 
 class UpdatePassword(forms.Form):
 
-    oldPassword = forms.CharField(widget=forms.PasswordInput)
+    # oldPassword = forms.CharField(widget=forms.PasswordInput)
     newPassword = forms.CharField(widget=forms.PasswordInput)
     confirmPassword = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('oldPassword', 'newPassword', 'confirmPassword')
+        fields = ('newPassword', 'confirmPassword')
 
 # class ForgotPassword(forms.Form):
 
