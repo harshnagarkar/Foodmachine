@@ -3,10 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Checkout</title>
-
-<link href="{% static 'style(2).css'%} rel="stylesheet" type="text/css" />
+<!-- 
+<link href="{% static 'style(2).css'%} rel="stylesheet" type="text/css" /> -->
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
 <link rel="shortcut icon" type="image/favicon" href="img/favicon.ico">
+<!-- import ajax library-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 <style>
@@ -20,6 +21,7 @@
 }
 </style>
 
+<!-- ajax works in from $.ajax. Function ajax is just a wrapper -->
 <script language="JavaScript" type="text/javascript">
   var jvar = {}
       function ajaxcall() {
@@ -27,8 +29,9 @@
             {
               type: "POST",
               url: "/cart/total",
-              data: localStorage.getItem('cart'),
+              data: localStorage.getItem('cart'), 
               success: function (data) {
+                //this when ajax gets sucessfull message from server
                 jvar = data
                 console.log(jvar)
               }
@@ -63,8 +66,8 @@
                     <div class="row">
                       <div class="col-50">
                         <h1 style="color: black;" text-align= "center">Billing Address</h1>
-                        <label for="fname"><i class="fa fa-user"></i> Full Name{{request.user.first_name}}</label>
-                        <input style="color: black;" type="text" id="fname" name="firstname" placeholder="John M. Doe" disabled="disabled" value="{{ request.user.first_name }}">
+                        <label for="fname"><i class="fa fa-user"></i> Full Name{{User.first_name}}</label>
+                        <input style="color: black;" type="text" id="fname" name="firstname" placeholder="John M. Doe" disabled="disabled" value="{{ user.first_name }}">
                         <label style="color: black;" for="email"><i class="fa fa-envelope"></i> Email</label>
                         <input type="text" id="email" name="email" placeholder="john@example.com" disabled="disabled" value = "{{user.email}}">
                         <label style="color: black;" for="adr"><i class="fa fa-address-card-o"></i> Address</label>
@@ -84,9 +87,9 @@
                           <i class="fa fa-cc-discover" style="color:orange;"></i>
                         </div>
                         <label style="color: black;" for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" disabled="disabled" value="{{user.first_name}}{{user.last_name}}" placeholder="John More Doe">
+                        <input type="text" id="cname" name="cardname" disabled="disabled" value="{{user.first_name}} {{user.last_name}}" placeholder="John More Doe">
                         <label style="color: black;"for="ccnum">Credit card number</label>
-                        <input type="text" id="ccnum" name="cardnumber" disabled="disabled" value="{{profile.Address}}"  placeholder="1111-2222-3333-4444">
+                        <input type="text" id="ccnum" name="cardnumber" disabled="disabled" value="{{User.userprofile.Payment}}"  placeholder="1111-2222-3333-4444">
                          </div>
                       </div>
               

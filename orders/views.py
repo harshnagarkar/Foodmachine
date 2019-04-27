@@ -57,12 +57,18 @@ def priceCalculator(mit,quantity):
       
 def databaseEntry(mig,rig,status,userorder,price,pref=""):
     res = Restaurant.objects.get(Res_Id = rig)
-    order = Orders(Menu_Item=str(mig),Preferences=pref,Status=status,Restaurant_Id=res,user=userorder,Price=price)
+    user = User.objects.get(pk=(User.objects.get(username=userorder.username).id))
+    order = Orders(Menu_Item=str(mig),Preferences=pref,Status=status,Restaurant_Id=res,user=userorder,Price=price, Payment=user.userprofile.Payment)
     order.save()
     return order.Order_Id
 
 def checkoutpage(request):
-    return render(request,"orders/checkout.html")
+    user = request.user
+    user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+    # if(user.userprofile.Payment != None and user.userprofile.Address != None and user.userprofile.Phone != None):
+    return render(request,"orders/checkout.html",{'User': user })
+    # else:
+    # return render(request,'orders/datamissing.html')
 
 def updatePref(request):
     if request.type =="POST":
@@ -73,7 +79,7 @@ def updatePref(request):
 def orderProcessing(request):
     user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
     if user.userprofile.userType == 'c':
-        orderId = databaseEntry(mig=request.session['mid'],pref=request.session['pref'],rig=request.session['rid'],status='s',userorder=request.user,Price=request.session['total'])
+        orderId = databaseEntry(mig=request.session['mid'],pref=request.session['pref'],rig=request.session['rid'],status='s',userorder=request.user,price=request.session['total'])
         rurl = '/cart/status/'+str(orderId)+"/"
         # subject = "You just placed an order right now"+str(orderId)
         # Message = "Your order has been submitted sucessfully. Your link to check status is \n"+ rurl

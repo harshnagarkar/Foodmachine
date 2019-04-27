@@ -93,6 +93,8 @@ def restaurantPage(request, restaurantName):
             return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
          else:
             return render(request, 'restaurant/nonadminsinglerestaurant.html', {'Restaurant':resDetail})
+    else:
+        return render(request,'restaurant/nonadminsinglerestaurant.html',{'Restaurant':resDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')
