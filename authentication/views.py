@@ -20,6 +20,7 @@ def userView(request):
 	print (request.user)
 	if request.user.is_authenticated:
 		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+
 		if request.method == "POST":
 			form = UpdateProfile(request.POST)
 			print("form")
@@ -45,6 +46,7 @@ def userView(request):
 				return render(request, 'dashboard/restaurantdashboard.html')
 			elif context.userprofile.userType == 'd':
 				return render(request, 'dashboard/deliverydashboard.html')
+
 	else:
 		HttpResponseRedirect("/")
 	# else:
