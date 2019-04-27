@@ -354,7 +354,7 @@ body
                         <div class="col-md-6">
                             <div class="profile-head">
                                         <h5>
-                                            FirstName LastName
+                                            {{user.username}}
                                         </h5>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
@@ -378,28 +378,43 @@ body
                         <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <form method = "POST" action = "/dashboard">
+                                      {% csrf_token %}
                                             <div class="row">
+                                              
                                                 <div class="col-md-6">
-                                                    <label>User Id</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Hello User!</p>
+                                                    <p>Hello {{user.first_name}} {{user.last_name}}!</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label>Name</label>
+                                                    <label>First Name</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>FirstName LastName</p>
+                                                    <p>
+                                                      <input type = "text" name = "fName" value = "{{user.first_name}}"> 
+                                                    </p>
                                                 </div>
+                                            </div>
+
+                                            <div class = "row">
+                                              <div class = "col-md-6">
+                                                <label>Last Name</label>
+                                              </div>
+                                              <div class = "col-md-6">
+                                                <p>
+                                                  <input type = "text" name = "lName" value = "{{user.last_name}}">
+                                                </p>
+                                              </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Email</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>user@gmail.com</p>
+                                                    <p>
+                                                      <input type = "email" name = "uEmail" value = "{{user.email}}">
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -407,16 +422,42 @@ body
                                                     <label>Phone</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>123 456 7890</p>
+                                                    <p>
+                                                      <input type = "text" value = "{{User.userprofile.Phone}}" name = "uPhone">
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Profession</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                </div>
+                                            <div class = "row">
+                                              <div class = "col-md-6">
+                                                <label>Address</label>
+                                              </div>
+                                              <div class = "col-md-6">
+                                                <p>
+                                                  <input type = "text" value = "{{User.userprofile.Address}}" name = "uAddress">
+                                                </p>
+                                              </div>
                                             </div>
+                                            <div class = "row">
+                                                <div class = "col-md-6">
+                                                  <label>Payment Details</label>    
+                                                </div>
+                                                <div class = "col-md-6">
+                                                  <p>
+                                                    <input type = "number" value = "{{User.userprofile.Payment}}" name = "uPayment">
+                                                  </p>
+                                                </div>
+                                              </div>
+                                            <div class = "row">
+                                              <div class = "col-md-6">
+                                                <a href = "updatePassword">Update Password</a>
+                                              </div>
+                                            </div>
+<br>
+                                            <div class = "row">
+                                              <input type = "submit" value = "Update Profile" name = "updateProfile">
+                                            </div>
+                                          </form>
+                                            
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                             <div class="row">
@@ -452,12 +493,6 @@ body
                                                 </div>
                                             </div>
                                             </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Your Bio</label><br/>
-                                            <p>Your detail description</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

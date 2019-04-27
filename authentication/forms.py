@@ -73,3 +73,15 @@ class UpdatePassword(forms.Form):
 
 # class ForgotPassword(forms.Form):
 
+class UpdateProfile(forms.Form):
+
+    firstName = forms.CharField(label='fName', max_length=100)
+    lastName = forms.CharField(label = 'lName', max_length = 100)
+    email = forms.EmailField(label = 'uEmail')
+    phone = forms.CharField(label = 'uPhone')
+    address = forms.CharField(label = 'uAddress')
+    payment = forms.CharField(label = 'uPayment')
+
+    class Meta:
+        model = User
+        fields = ('firstName', 'lastName', 'email', 'phone', 'address', 'payment')
