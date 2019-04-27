@@ -66,7 +66,7 @@ def checkoutpage(request):
     user = request.user
     user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
     # if(user.userprofile.Payment != None and user.userprofile.Address != None and user.userprofile.Phone != None):
-    return render(request,"orders/checkout.html",{'User': user })
+    return render(request, "orders/shoppinigCart.html", {'User': user})
     # else:
     # return render(request,'orders/datamissing.html')
 
