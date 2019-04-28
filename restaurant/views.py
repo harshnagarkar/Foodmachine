@@ -173,11 +173,12 @@ def restList(request):
     print(cuisId)
     print(comparison)
     try:
-        if  cuisId != '' and cuisId is not None:
+        if  cuisId != '' and cuis is not None:
             print("Success")
             qs = qs.filter(Cuisine_Type = cuisId)
         else:
             qs = qs
+            print("Test")
     except:
         print("Error")
 
