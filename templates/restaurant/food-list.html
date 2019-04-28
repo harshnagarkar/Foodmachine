@@ -1,4 +1,45 @@
 {% extends "layout.html" %} { extends "../layout.html" }
 {% block content %}
 <h1>food list webpage</h1>
+{% load restags %}
+{% getLabel as l %}
+<input list = "label" name = 'Label' placeholder = 'American'>
+<datalist id = "label">
+{% for element in l %}
+<option value = '{{element.Label_Name}}'>
+    {% endfor %}
+    </datalist>
+        <button type = "submit">Search</button> 
+    </form>
+
+    <div class="row">
+            {% for M in query_set %}
+            <div class="column">
+                {% csrf_token %}
+                <div class="card" style=" height:auto; width:auto; padding: 10px;">
+                    {% csrf_token %}
+                    <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;">
+                    <div style="height: 25px">
+                        <font size="5" color="black">{{M.Menu_Item}}</font>
+                    </div>
+                    <input type="text" value="{{M.Menu_Item_Id}}" id="menuID" type="hidden">
+                    <p class="price">${{M.Menu_ItemPrice}}</p>
+                    <p style="font-size: 10px">{{M.Menu_Item_Description|truncatechars:69}} </p>
+                    <!-- <p>
+                                        <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
+                                    </p> -->
+        
+                        <br>
+                        <div>
+                            <p style="position: relative; bottom: 0px"><button class="button" style="width: 200px"
+                                    onclick="addtocart( '{{M.Menu_Item}}', '{{M.Menu_ItemPrice}}' )">Add to cart</button>
+                        </div>
+        
+                </div>
+        
+            </div>
+            <br>
+            <br>
+            {% endfor %}
+        </div>
 {% endblock content %}

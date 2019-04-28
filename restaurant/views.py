@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from restaurant.models import Restaurant,Menu,Label,Review,Cuisine
+from restaurant.models import Restaurant,Menu, Label, Review, Cuisine
 from restaurant.forms import *
 from django.http import HttpResponseRedirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from orders.models import *
-from .filters import CuisineFilter
+
 
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
@@ -182,16 +182,31 @@ def restList(request):
     except:
         print("Error")
 
+    # print(request.GET.get('sort'))
+    # if(request.GET.get('sort')):
+       
+    #     qs = qs.order_by('Res_Name')
+    #     print ("Did it work?")
+
+    
+    # for i in qs.order_by('Res_Name'):
+    #     print(i)
+        
     context = { 'query_set': qs}
     return render(request, 'restaurant/rest-list.html', context)
-       
-           
-    
-    # for i in Restaurant.objects.order_by('Res_Name'):
-    #     print (i)
-  
-    
+
+
 
 def foodList(request):
-    return render(request, 'restaurant/food-list.html')
+
+    lab = request.GET.get('Label')
+    qs = Menu.objects.all()
+    # labId = Label.objects.get(Label_Name=lab)
+    
+    # if labId != '' and lab is not None:
+    #     qs = qs.filter(Menu_Label_Id = labId)
+    # else:
+    #     qs = qs
+    context = {'query_set' : qs}
+    return render(request, 'restaurant/food-list.html', context)
 

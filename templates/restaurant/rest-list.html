@@ -8,18 +8,19 @@
    
    <form method = 'GET'>
         <h2 style = "color: black"> Filter with Cuisine</h2>
-    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'></label>
+    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
      <datalist id = "cuisine">
     {% getCuisine as c %}  
     {% for element in c %}
    
-    <option value = '{{element.Cuisine_parent}}'>'
+    <option value = '{{element.Cuisine_parent}}'>
     {% endfor %}
     </datalist>
         <button type = "submit">Search</button> 
     </form>
-    <form method = 'GET'>
-        <button type = "submit">Alphabetical</button>
+    <form action = '#' method = 'GET'>
+        
+        <button type = "submit" name = 'sort'>Sort</button>
     </form>
   
 </div>
