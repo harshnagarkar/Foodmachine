@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from restaurant.models import Restaurant
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MaxValueValidator
 # Create your models here.
 
 class UserProfile(models.Model):
@@ -11,7 +12,8 @@ class UserProfile(models.Model):
    # phone = models.CharField(max_length=256, blank=True, null=True)
    userType = models.CharField(max_length=1, choices=(('c',  ('Client')), ('r', ('Restaurant')),('d',  ('Delivery'))),default='c')
    userRestaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE,null=True)
-   Payment = models.IntegerField(max_length=15,null=True)
+   Payment = models.IntegerField(
+       validators=[MaxValueValidator(999999999999999)], null=True)
    Address = models.CharField(max_length=100,null=True)
    Phone = PhoneNumberField(null=True,blank=False)
    

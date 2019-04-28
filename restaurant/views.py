@@ -94,6 +94,8 @@ def restaurantPage(request, restaurantName):
             return render(request, 'restaurant/restaurants.html', {'Restaurant':resDetail})
          else:
             return render(request, 'restaurant/nonadminsinglerestaurant.html', {'Restaurant':resDetail})
+    else:
+        return render(request,'restaurant/nonadminsinglerestaurant.html',{'Restaurant':resDetail})
 
 def processMenu(request):
     return render(request,'create-menu.html')
@@ -159,29 +161,36 @@ def updateStatus(request):
 
 def restList(request):
 
-    if request.method == 'GET':
-        form = RestList(request.GET, request.FILES)
-        Cuis_list = Cuisine.objects.all()
-        Cuis_filt = CuisineFilter(request.GET, queryset = Cuis_list)
-        
-        if form.is_valid():
-            CuisineName = form.cleaned_data.get('Cuisine')
-            CuisineId = Cuisine.objects.get(cuisine_parent = CuisineName)
-            print (CuisineId)
-            
-            #RestaurantsID = Restaurant.get.all() 
-            return render(request, 'restaurant/rest-list.html', {'filter': Cuis_filt})
-        else: 
-            print(form.errors)
-            return render(request,'restaurant/rest-list.html')
+   
+    #form = RestList(request.POST, request.FILES)
+    #Cuis_list = Cuisine.objects.all()
+        # = CuisineFilter(request.GET, queryset = Cuis_list)
+    cuis = request.GET.get('Cuisine')
+    qs = Restaurant.objects.all()
+    cuisId = Cuisine.objects.get(Cuisine_parent = cuis)
+    #comparison = qs.values('Cuisine_Type')
+    comparison = qs.filter(Cuisine_Type = cuisId).values('Cuisine_Type')
+    print(cuisId)
+    print(comparison)
+    try:
+        if  cuisId != '' and cuisId is not None:
+            print("Success")
+            qs = qs.filter(Cuisine_Type = cuisId)
+        else:
+            qs = qs
+    except:
+        print("Error")
+
+    context = { 'query_set': qs}
+    return render(request, 'restaurant/rest-list.html', context)
+       
            
-    else:
-        
-        return render(request, 'restaurant/rest-list.html')
+    
     # for i in Restaurant.objects.order_by('Res_Name'):
     #     print (i)
   
     
+
 def foodList(request):
     return render(request, 'restaurant/food-list.html')
 

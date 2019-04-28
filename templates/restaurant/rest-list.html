@@ -4,17 +4,19 @@
 <h1>Restaurant list webpage</h1>
  {% load restags %}
 <div>
-    <h2 style = "color: black"> Filter with Cuisine</h2>
+   
+   
+   <form method = 'GET'>
+        <h2 style = "color: black"> Filter with Cuisine</h2>
     <input list = "cuisine" name = 'Cuisine' placeholder = 'American'></label>
-    <datalist id = "cuisine">
+     <datalist id = "cuisine">
     {% getCuisine as c %}  
     {% for element in c %}
+   
     <option value = '{{element.Cuisine_parent}}'>'
     {% endfor %}
-   </datalist>
-   <form method = 'GET'>
-       
-        <button type = "submit">Search</button>
+    </datalist>
+        <button type = "submit">Search</button> 
     </form>
     <form method = 'GET'>
         <button type = "submit">Alphabetical</button>
@@ -31,11 +33,11 @@
 <div class= "row">
        
         {% getRest as get %}
-        {% for ele in get %}
+        {% for ele in query_set %}
         <div class="column">
-                {% csrf_token %}
+                
                 <div class="card" style=" height:auto; width:auto; padding: 10px;">
-                    {% csrf_token %}
+                    
                     <img src="{{ele.Res_Pic.url}}" style=" height: 200px; width: 200px;" >
                     <div style="height: 25px"><font size = "5" color = "black">{{ele.Res_Name}}</font></div>
                     <input type = "text"  id = "menuID" type = "hidden">

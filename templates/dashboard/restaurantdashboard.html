@@ -24,10 +24,12 @@
         <tr><td>Profile</td></tr>
         {% load dashboardtags %}
         {% with user.username|getProfile as profile%}
-        <tr><td>Gender: {{profile.gender}}</td><td>Phone: {{profile.phone}}</td></tr>
+        <tr><td>Phone: {{profile.phone}}</td></tr>
         {% endwith %}
         </tbody>
     </tbody>
 </table>
+
+<a href = "updatePassword"> Update Password </a>
 </div>
 {% endblock content %}

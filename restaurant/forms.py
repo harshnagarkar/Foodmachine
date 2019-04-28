@@ -60,4 +60,4 @@ class RestList(forms.Form):
 	cuisine = forms.CharField(max_length = 20)
 	class Meta:
 		model = Cuisine
-		fields = ('Cuisine')
+		fields = ('cuisine')
