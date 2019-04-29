@@ -23,7 +23,6 @@
 
 <!-- ajax works in from $.ajax. Function ajax is just a wrapper -->
 <script language="JavaScript" type="text/javascript">
-  var jvar = {}
       function ajaxcall() {
           $.ajax(
             {
@@ -32,8 +31,7 @@
               data: localStorage.getItem('cart'), 
               success: function (data) {
                 //this when ajax gets sucessfull message from server
-                jvar = data
-                console.log(jvar)
+                console.log(data)
               }
             })
         }

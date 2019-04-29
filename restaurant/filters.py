@@ -1,13 +1,13 @@
-from .models import Cuisine, Restaurant
-import django_filters
+# from .models import Cuisine, Restaurant
+# import django_filters
 
-class CuisineFilter(django_filters.FilterSet):
+# class CuisineFilter(django_filters.FilterSet):
 
     
-    class Meta:
-        model = Cuisine
-        fields = ['Cuisine_parent']
-
-# class AlphabeticalFilter(django_filters.FilterSet):
 #     class Meta:
-#         model = Restaurant
+#         model = Cuisine
+#         fields = ['Cuisine_parent']
+
+# # class AlphabeticalFilter(django_filters.FilterSet):
+# #     class Meta:
+# #         model = Restaurant

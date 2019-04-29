@@ -3,7 +3,6 @@ body
 {
     font-family: Tahoma, Geneva, sans-serif;
     color: #fff;
-    background: url({% static'img/pic1.jpg' %}) no-repeat;
     background-size: cover;
 }
 

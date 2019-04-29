@@ -207,15 +207,41 @@
     var printingdata = ""
     var total = 0.0
 
-    function updateQuantity(){
-      var processid = String(this.id)
+    function updateQuantity(menuname,quan){
+      // console.log(menuname)
+      var processid = menuname
       var processbutton = processid+"input"
-      console.log(processid+" "+processbutton)
-      var quanval = document.getElementById(processbutton)
+      // console.log(processbutton)
+      var quanval = parseInt(document.getElementById(processbutton).value)
+      // console.log(quanval)
       var datastring = localStorage.getItem('cart')
       var data = JSON.parse(datastring)
       data["%s",processid][1]['quantity'] = quanval
       localStorage.setItem('cart',JSON.stringify(data))
+      var changequan = JSON.parse(localStorage.getItem('quantity'))
+      var change = quan-quanval
+      if(change < 0){
+        changequan = parseInt(changequan['Quantity'])+Math.abs(change)
+        console.log(changequan)
+        localStorage.setItem('quantity',JSON.stringify({'Quantity':changequan}))
+      }
+      else{
+        changequan = parseInt(changequan['Quantity'])-Math.abs(change)
+        console.log(changequan)
+        localStorage.setItem('quantity',JSON.stringify({'Quantity':changequan}))
+      }
+      location.reload();
+    }
+
+    function removeItem(menuname){
+      var data = JSON.parse(localStorage.getItem('cart'))
+      var quanchange = data["%s",menuname][1]['quantity']
+      delete data["%s",menuname]
+      localStorage.setItem('cart',JSON.stringify(data))
+      var change = JSON.parse(localStorage.getItem('quantity'))
+      console.log(change['Quantity'])
+      change['Quantity'] = parseInt(change['Quantity'])-Math.abs(quanchange)
+      localStorage.setItem('quantity',JSON.stringify(change))
       location.reload();
     }
     function printdata() {
@@ -228,11 +254,26 @@
         total += totalitemprice
         printingdata += ' <tr> <td class="col-md-3">\n<div class="media"> \n <div class="media-body">\n <h5 class="media-heading">' + key + '</h5></div> </div> </td> \n'
         printingdata += '<td class="text-center">' + dataprice + '</td>\n'
-        printingdata += '<td class="text-center"><input id="' + key+'input'+ '" value = ' + dataquantity + '><button type="button" onclick=\"updateQuantity()\" id= "'+key+'">Update</button></td>\n'
+        inname = key+'input'
+        printingdata += '<td class="text-center"><input id="' +inname+ '" value = ' + dataquantity + '><button type="button" onclick=\"updateQuantity( \''+key+'\','+dataquantity+')\" id= "'+key+'">Update</button></td>\n'
         printingdata += '<td class="text-right">' + totalitemprice + '</td> \n'
-        printingdata += '</tr> \n'
+        printingdata += '<td><button type="button"  onclick=\"removeItem( \'' + key + '\')\"> Delete </button></td></tr> \n'
       }
     }
+
+        function ajaxcall() {
+          $.ajax(
+            {
+              type: "POST",
+              url: "/cart/total",
+              data: localStorage.getItem('cart'),
+              success: function (data) {
+                //this when ajax gets sucessfull message from server
+                console.log(data)
+              }
+            })
+        }
+        ajaxcall()
     printdata()
   </script>
 <body> 
@@ -288,15 +329,15 @@
                             <div class="panel-body">
                                     <div class="col-md-12">
                                         <strong>Subtotal (# item)</strong>
-                                        <div class="pull-right"><span>$</span><span><script> document.write(total)</script></span></div>
+                                        <div class="pull-right"><span>$</span><span><script> document.write(total.toFixed(2))</script></span></div>
                                     </div>
                                     <div class="col-md-12">
                                         <strong>Tax</strong>
-                                        <div class="pull-right"><span>$</span><span><script> document.write(total*0.07)</script></span></div>
+                                        <div class="pull-right"><span>$</span><span><script> document.write((total*0.07).toFixed2)</script></span></div>
                                     </div>
                                     <div class="col-md-12">
                                         <strong>Order Total</strong>
-                                        <div class="pull-right"><span>$</span><span><script>document.write(total+total*0.07)</script></span></div>
+                                        <div class="pull-right"><span>$</span><span><script>document.write((total+total*0.07).toFixed(2))</script></span></div>
                                         <hr>
                                     </div>
                                     
@@ -318,36 +359,21 @@
                     <thead>
                                     <tr>
                           <td><strong>Your Cart: # item</strong></td>
-                          <td>This iswhat is cart</td>
+                          <td>This is what in cart</td>
                           <td></td>
                           <td></td>
                           <td></td>
                                     </tr>
                     </thead>
                     <tbody>
-                      <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                      <!-- <tr>
-                        <td class="col-md-3">
-                            <div class="media">
-                                 <div class="media-body">
-                                     <h5 class="media-heading"> Product Name</h5>
-                                     <h5 class="media-heading"> Product Code</h5>
-                                 </div>
-                            </div>
-                        </td>
-                        <td class="text-center">$10.99</td>
-                        <td class="text-center">1</td>
-                        <td class="text-right">$32.99</td>
-                      <td><a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a></td>
-                      <td><a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
-                      </tr> -->
+          
                       <script>document.write(printingdata)</script>
                     </tbody>
                   </table> 
+                  <h2><button type="button" onclick="window.location.href = '/cart/order/';"></button></h2>
                             </div>
                         </div>
-                        <!--SHIPPING METHOD END-->
-                    </div>
+                          </div>
                     </div>
                     </div>
     </div>>
