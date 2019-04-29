@@ -168,22 +168,24 @@ def restList(request):
         # = CuisineFilter(request.GET, queryset = Cuis_list)
     cuis = request.GET.get('Cuisine')
     qs = Restaurant.objects.all()
-    cuisId = Cuisine.objects.get(Cuisine_parent = cuis)
+    sorting = request.GET.get('sort')
     #comparison = qs.values('Cuisine_Type')
-    comparison = qs.filter(Cuisine_Type = cuisId).values('Cuisine_Type')
-    print(cuisId)
-    print(comparison)
     try:
-        if  cuisId != '' and cuis is not None:
+
+        if  cuis != '' and cuis is not None:
+            cuisId = Cuisine.objects.get(Cuisine_parent = cuis)
             print("Success")
             qs = qs.filter(Cuisine_Type = cuisId)
+        
         else:
             qs = qs
             print("Test")
     except:
         print("Error")
 
-
+    if sorting:
+        qs = qs.order_by('Res_Name')
+        print("Worked")
     # print(request.GET.get('sort'))
     # if(request.GET.get('sort')):
        

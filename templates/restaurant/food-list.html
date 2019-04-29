@@ -4,13 +4,14 @@
 {% load restags %}
 {% getLabel as l %}
 <form method = 'GET'>
+    Label:
     <input list = "label" name = 'Label' placeholder = 'Entree'>
     <datalist id = "label">
     {% for element in l %}
         <option value = '{{element.Label_Name}}'>
     {% endfor %}
     </datalist>
-    
+    Cuisine:
     <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
     <datalist id = "cuisine">
    {% getCuisine as c %}  
@@ -19,8 +20,8 @@
    <option value = '{{element.Cuisine_parent}}'>
    {% endfor %}
    </datalist>
-
-   <input type = 'search' placeholder = 'noodles' name = 'searching'>
+   Search for item:
+   <input type = 'search' placeholder = 'Search...' name = 'searching'>
    <i class = 'fa fa-search'></i>
        <button type = "submit">Filter</button> 
     </form>
