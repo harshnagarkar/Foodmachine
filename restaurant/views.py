@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from orders.models import *
+from .filters import CuisineFilter
 
 
 def initialcreateRestaurant(request):
@@ -182,6 +183,7 @@ def restList(request):
     except:
         print("Error")
 
+
     # print(request.GET.get('sort'))
     # if(request.GET.get('sort')):
        
@@ -194,7 +196,6 @@ def restList(request):
         
     context = { 'query_set': qs}
     return render(request, 'restaurant/rest-list.html', context)
-
 
 
 def foodList(request):
