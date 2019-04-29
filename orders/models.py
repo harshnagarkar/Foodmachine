@@ -9,7 +9,8 @@ class Orders(models.Model):
     Order_Id = models.AutoField(primary_key=True)
     Restaurant_Id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     Preferences = models.CharField(max_length=300)
-    Status  = models.CharField(max_length=1, choices=(('s',  ('submitted')), ('r', ('Restaurant')),('d',  ('Delivery'))),default='s')
+    Status = models.CharField(max_length=1, choices=(('s',  ('submitted')), (
+        'r', ('Restaurant')), ('d',  ('Delivery')), ('e',  ('Declined'))), default='s')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='user')
     Price = models.FloatField(null=True, blank=True, default=None)
     Payment = models.IntegerField(null = True,validators=[MaxValueValidator(999999999999999)])
