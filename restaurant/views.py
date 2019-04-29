@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from itertools import chain
 # Create your views here.
-from restaurant.models import Restaurant,Menu, Label, Review, Cuisine
+from restaurant.models import Restaurant, Menu, Label, Review, Cuisine
 from restaurant.forms import *
 from django.http import HttpResponseRedirect,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -201,12 +201,15 @@ def foodList(request):
 
     lab = request.GET.get('Label')
     qs = Menu.objects.all()
-    # labId = Label.objects.get(Label_Name=lab)
-    
-    # if labId != '' and lab is not None:
-    #     qs = qs.filter(Menu_Label_Id = labId)
-    # else:
-    #     qs = qs
+    try:
+        labId = Label.objects.get(Label_Name=lab)
+        print(labId)
+        if labId != '' and lab is not None:
+            qs = qs.filter(Menu_Label_Id = labId)
+        else:
+            qs = qs
+    except:
+        print("Error")
     context = {'query_set' : qs}
     return render(request, 'restaurant/food-list.html', context)
 
