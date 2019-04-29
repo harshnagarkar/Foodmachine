@@ -1,11 +1,11 @@
 {% extends "layout.html" %} { extends "../layout.html" }
 {% block content %}
-<h1 style="width: fit-content;background-color: white;align-items: center">food list webpage</h1>
+<h1 style="width: fit-content;background-color: white;align-items: center">Food Menu Card</h1>
 {% load restags %}
 {% getLabel as l %}
-<form method = 'GET' style="margin-left: 20px; background-color: white; padding: 10px; border-radius: 5px; width: auto">
+<form method = 'GET' style="margin-left: 20px; background-color: white; padding: 10px; border-radius: 5px; width: auto; color: black">
     Label:
-    <input list = "label" name = 'Label' placeholder = 'Entree'>
+    <input list = "label" name = 'Label' placeholder = 'Entree' style="color: black;">
     <datalist id = "label">
         <option value=""></option>
     {% for element in l %}
@@ -13,7 +13,7 @@
     {% endfor %}
     </datalist>
     Cuisine:
-    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
+    <input list = "cuisine" name = 'Cuisine' placeholder = 'American' style="color: black;">
     <datalist id = "cuisine">
         <option value=""></option>
    {% getCuisine as c %}  
@@ -23,7 +23,7 @@
    {% endfor %}
    </datalist>
    Search for item:
-   <input type = 'search' placeholder = 'Search...' name = 'searching'>
+   <input type = 'search' placeholder = 'Search...' name = 'searching' style="color: black;">
    <i class = 'fa fa-search'></i>
        <button type = "submit">Filter</button> 
     </form>
