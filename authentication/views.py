@@ -148,6 +148,8 @@ def updatePass(request):
 			
 			updatePassword(request.user, passw)
 			return redirect('/dashboard/updatePassword')
+		else:
+			return redirect('/dashboard/updatePassword')
 
 	else:
 		return render(request, 'dashboard/updatePassword.html')
