@@ -1,9 +1,12 @@
 {% extends 'layout.html' %}{% block content %}
 {% load restags %}
 {% load static %}
-
-<h1>{{Restaurant.Res_Name}}</h1>
+<div style="background-color: white">
+<h1 >{{Restaurant.Res_Name}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
+<h3>{{Restaurant.Res_Address}}</h3>
+<h3>{{Restaurant.Res_Contact}}</h3>
+</div>
 <br>
     <script>
 

@@ -11,6 +11,7 @@ import sendgrid
 from django.http import HttpResponse
 from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
 from authentication.tests import emails
+from orders.models import *
 # Create your views here.
 from django.shortcuts import redirect
 def home(request):
@@ -41,11 +42,17 @@ def userView(request):
 
 		else:
 			if context.userprofile.userType== 'c':
-				return render(request, 'dashboard/Userdashboard.html')
+				my = Orders.objects.filter(user= request.user)
+				return render(request, 'dashboard/Userdashboard.html',{'User':context},{'My',my})
 			elif context.userprofile.userType == 'r':
-				return render(request, 'dashboard/restaurantdashboard.html')
+				res = context.userprofile.userRestaurant
+				context =  Orders.objects.filter(Restaurant_Id=res, Status='s') | Orders.objects.filter(Restaurant_Id=res, Status='r')
+				youorder= Orders.objects.filter(Restaurant_Id=res,Status='d')
+				return render(request, 'dashboard/Ownerdashboard.html', {'Orders': context, 'My': youorder})
 			elif context.userprofile.userType == 'd':
-				return render(request, 'dashboard/deliverydashboard.html')
+				context = Orders.objects.filter(Deliverer=None)
+				youorder = Orders.objects.filter(Deliverer=request.user)
+				return render(request, 'dashboard/deliverydashboard.html',{'Orders':context,'My':youorder})
 
 	else:
 		HttpResponseRedirect("/")
