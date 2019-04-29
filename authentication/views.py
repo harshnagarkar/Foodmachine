@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
 from authentication.tests import emails
 # Create your views here.
-
+from django.shortcuts import redirect
 def home(request):
 		return render(request, 'home.html')
 
@@ -20,12 +20,33 @@ def userView(request):
 	print (request.user)
 	if request.user.is_authenticated:
 		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-		if context.userprofile.userType== 'c':
-			return render(request, 'dashboard/Userdashboardnew.html', {'User':context})
-		elif context.userprofile.userType == 'r':
-			return render(request, 'dashboard/restaurantdashboard.html')
-		elif context.userprofile.userType == 'd':
-			return render(request, 'dashboard/deliverydashboard.html')
+
+		if request.method == "POST":
+			form = UpdateProfile(request.POST)
+			print("form")
+			print(form.errors)
+			if form.is_valid():
+				context.first_name = form.cleaned_data.get('fName')
+				context.last_name = form.cleaned_data.get('lName')
+				context.email = form.cleaned_data.get('uEmail')
+				context.userprofile.Phone = "+1"+form.cleaned_data.get('uPhone')
+				context.userprofile.Address = form.cleaned_data.get('uAddress')
+				context.userprofile.Payment = form.cleaned_data.get('uPayment')
+
+				context.save()
+				context.userprofile.save()
+				return redirect('/dashboard/')
+			else:
+				return redirect('/dashboard/')
+
+		else:
+			if context.userprofile.userType== 'c':
+				return render(request, 'dashboard/Userdashboard.html')
+			elif context.userprofile.userType == 'r':
+				return render(request, 'dashboard/restaurantdashboard.html')
+			elif context.userprofile.userType == 'd':
+				return render(request, 'dashboard/deliverydashboard.html')
+
 	else:
 		HttpResponseRedirect("/")
 	# else:
@@ -58,7 +79,7 @@ def makeUser(request):
 			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,UserType=types,UserRestaurant=None)
 			emails(email)
 			return render(request, 'cong.html', {"username": username})
-			
+		
 
 	else:
 		form = SignUpForm()
