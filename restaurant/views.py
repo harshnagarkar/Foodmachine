@@ -199,17 +199,35 @@ def restList(request):
 
 def foodList(request):
 
-    lab = request.GET.get('Label')
     qs = Menu.objects.all()
+    lab = request.GET.get('Label')
+    #print(lab)
+    search = request.GET.get('searching')
+    
+    cuis = request.GET.get('Cuisine')
+    
+   
     try:
-        labId = Label.objects.get(Label_Name=lab)
-        print(labId)
-        if labId != '' and lab is not None:
+        
+       
+        
+        if lab != '' and lab is not None:
+            labId = Label.objects.get(Label_Name=lab)
             qs = qs.filter(Menu_Label_Id = labId)
+        if cuis != '' and cuis is not None:
+            cuisId = Cuisine.objects.get(Cuisine_parent = cuis)
+            print("There")
+            qs = qs.filter(Menu_Cuisine = cuisId)
+        elif search != '' and search is not None:
+            print("General Kenobi")
+            qs = qs.filter(Menu_Item__icontains = search).distinct()
         else:
             qs = qs
+       
     except:
         print("Error")
+
     context = {'query_set' : qs}
+    print(context)
     return render(request, 'restaurant/food-list.html', context)
 
