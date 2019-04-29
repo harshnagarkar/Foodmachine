@@ -42,12 +42,13 @@ def userView(request):
 
 		else:
 			if context.userprofile.userType== 'c':
-				
-				return render(request, 'dashboard/Userdashboard.html')
+				my = Orders.objects.filter(user= request.user)
+				return render(request, 'dashboard/Userdashboard.html',{'User':context},{'My',my})
 			elif context.userprofile.userType == 'r':
 				res = context.userprofile.userRestaurant
-				context =  Orders.objects.filter(Restaurant_Id=3, Status='s') | Orders.objects.filter(Restaurant_Id=3, Status='r')
-				return render(request, 'dashboard/Ownerdashboard.html',{'Orders':context})
+				context =  Orders.objects.filter(Restaurant_Id=res, Status='s') | Orders.objects.filter(Restaurant_Id=res, Status='r')
+				youorder= Orders.objects.filter(Restaurant_Id=res,Status='d')
+				return render(request, 'dashboard/Ownerdashboard.html', {'Orders': context, 'My': youorder})
 			elif context.userprofile.userType == 'd':
 				context = Orders.objects.filter(Deliverer=None)
 				youorder = Orders.objects.filter(Deliverer=request.user)

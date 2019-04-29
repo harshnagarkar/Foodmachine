@@ -303,7 +303,7 @@
             $.ajax(
                 {
                     type: "POST",
-                    url: "/restaurant/status/",
+                    url: "/restaurant/delivery/",
                     data: JSON.stringify([{'Orderid': Orderid }, { 'Status': status }]),
                     success: function (data) {
                         //this when ajax gets sucessfull message from server
@@ -392,7 +392,7 @@
                                             <figure class="media">
                                                 <figcaption class="media-body">
                                                     <h6 style="color: black; font-size: 22px;"
-                                                        class="title text-truncate">{{ord.Ord_Id}} </h6>
+                                                        class="title text-truncate">{{ord.Order_Id}} </h6>
                                                     <dl class="param param-inline small">
                                                         <dt>Items: </dt>
                                                         {{ord.Menu_Item}}
@@ -409,8 +409,8 @@
                                             </div> <!-- price-wrap .// -->
                                         </td>
                                         <td class="text-right">
-                                            <button type="button" id='{{ord.Ord_Id}}a'
-                                                onclick="ajaxOrderCall('{{ord.Ord_Id}}','d')">Accept</button>
+                                            <button type="button" id='{{ord.Order_Id}}a'
+                                                onclick="ajaxOrderCall('{{ord.Order_Id}}','d')">Accept</button>
                                         </td>
                                     </tr>
 
@@ -453,9 +453,7 @@
                                             <var class="price">{{ord.Price}}</var>
                                         </div> <!-- price-wrap .// -->
                                     </td>
-                                    <td class="text-right">
-                                    <button type="button" id='{{ord.Ord_Id}}a' onclick="ajaxOrderCall('{{ord.Order_Id}}','r')">Accept</button>
-                                    </td>
+
                                 </tr>
                         
                                 {%endfor%}

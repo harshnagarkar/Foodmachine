@@ -175,7 +175,7 @@ def updateStatus(request):
 @csrf_exempt
 def deliveryStatus(request):
     # status = Orders.objects.get()
-    if request.method == 'POST' and user.is_authenticated:
+    if request.method == 'POST' and request.user.is_authenticated:
          user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
          orderno = request.body
          orderno = json.loads(orderno)
