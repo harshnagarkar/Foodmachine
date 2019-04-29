@@ -1,5 +1,5 @@
 <!doctype html>
-
+{% csrf_token %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Restaurant Owner Dashboard</title>
@@ -283,11 +283,12 @@
             $.ajax(
             {
               type: "POST",
-              url: "/restaurant/order/",
-              data: JSON.stringify({Orderid:status}),
+              url: "/restaurant/status/",
+              data: JSON.stringify([{'Orderid':Orderid},{'Status':status}]),
               success: function (data) {
                 //this when ajax gets sucessfull message from server
-                document.getElementById(Orderid+'a').disabled = true;
+                console.log(data)
+                location.reload()
               }
             })
         }
@@ -366,7 +367,7 @@
                                       <td>
                                         <figure class="media">
                                           <figcaption class="media-body">
-                                            <h6 style="color: black; font-size: 22px;" class="title text-truncate">{{ord.Ord_Id}} </h6>
+                                            <h6 style="color: black; font-size: 22px;" class="title text-truncate">{{ord.Order_Id}} </h6>
                                             <dl class="param param-inline small">
                                               <dt>Items: </dt>
                                                 {{ord.Menu_Item}}
@@ -383,9 +384,12 @@
                                         </div> <!-- price-wrap .// -->
                                       </td>
                                       <td class="text-right">
-                                         <button type="button" id='{{ord.Ord_Id}}a'onclick="ajaxOrderCall('{{ord.Ord_Id}}','s')">Accept</button>
-                                        <button type="button" id='{{ord.Ord_Id}}d' onclick="ajaxOrderCall('{{ord.Ord_Id}}','d')">Decline</button>
-                                        <button type="button" id='{{ord.Ord_Id}}p' onclick="ajaxOrderCall('{{ord.Ord_Id}}','r')">Pick Up</button>
+                                        {%if ord.Status == 's'%}
+                                         <button type="button" id='{{ord.Ord_Id}}a'onclick="ajaxOrderCall('{{ord.Order_Id}}','r')">Accept</button>
+                                        <button type="button" id='{{ord.Ord_Id}}d' onclick="ajaxOrderCall('{{ord.Order_Id}}','e')">Decline</button>
+                                        {%else%}
+                                        <button type="button" id='{{ord.Ord_Id}}p' onclick="ajaxOrderCall('{{ord.Order_Id}}','d')"> Ready Pick Up</button>
+                                        {%endif%}
                                        
                                       </td>
                                     </tr>
