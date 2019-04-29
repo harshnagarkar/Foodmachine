@@ -1,6 +1,16 @@
-<html>
+{%extends 'layout.html' %}{%block content %}
+<div style="text-align: center; height: 60vh;">
+<h1> Your order is</h1><br> 
 
-<body>
-    {{order.Status}}
-</body>
-</html>
+ {%if order.Status == 's'%}
+ <h2>Submitted</h2>
+ {%elif order.Status == 'r'%}
+ <h2>Cooking</h2>
+ {%elif order.Status == 'd'%}
+ <h2>Your order will be delivered soon</h2>
+ {%endif%}
+
+ <h4>If order is not received in 40 min please call us</h4>
+</div>
+
+{%endblock%}
