@@ -2,6 +2,8 @@ from django.db import models
 from restaurant.models import *
 from django.core.validators import MaxValueValidator
 # Create your models here.
+
+
 class Orders(models.Model):
     Menu_Item = models.CharField(max_length=300)
     Order_Id = models.AutoField(primary_key=True)

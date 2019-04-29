@@ -2,20 +2,48 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h1>Restaurant list webpage</h1>
+ {% load restags %}
+<div>
+   
+   
+   <form method = 'GET'>
+        <h2 style = "color: black"> Filter with Cuisine</h2>
+    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'></label>
+     <datalist id = "cuisine">
+    {% getCuisine as c %}  
+    {% for element in c %}
+   
+    <option value = '{{element.Cuisine_parent}}'>'
+    {% endfor %}
+    </datalist>
+        <button type = "submit">Search</button> 
+    </form>
+    <form method = 'GET'>
+        <button type = "submit">Alphabetical</button>
+    </form>
+  
+</div>
+
+<!--Need to filter; Default, Cuisines, Alphabetical order
+    Use ajax to dynamically reload the page with each filter
+    For Cuisine, use drop down box with available cuisines
+    if customer selects a certain cuisine, dynamically reload with only Restaurants with that Cuisine
+    For alphabetical order, simply scan the first letter of each Restaurant's name and sortl
+    if first letters match, compare second letters, and so on-->
 <div class= "row">
-        {% load restags %}
+       
         {% getRest as get %}
-        {% for ele in get %}
+        {% for ele in query_set %}
         <div class="column">
-                {% csrf_token %}
+                
                 <div class="card" style=" height:auto; width:auto; padding: 10px;">
-                    {% csrf_token %}
+                    
                     <img src="{{ele.Res_Pic.url}}" style=" height: 200px; width: 200px;" >
                     <div style="height: 25px"><font size = "5" color = "black">{{ele.Res_Name}}</font></div>
                     <input type = "text"  id = "menuID" type = "hidden">
                     <p class="price">{{ele.Res_Address}}</p>
                     <p class = "price">{{ele.Res_Contact}} </p>
-                    <p style="font-size: 10px">{{ele.Res_Description}} </p>
+                    <p style="font-size: 15px">{{ele.Res_Description}} </p>
                     <!-- <p>
                             <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
                         </p> -->
