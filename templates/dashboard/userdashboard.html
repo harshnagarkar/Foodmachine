@@ -4,9 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>User Dashboard</title>
     <!--<link href="style.css" rel="stylesheet" type="text/css" />-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
     <link rel="shortcut icon" type="image/favicon" href="img/favicon.ico">
 </head>
@@ -282,59 +287,39 @@ body
  
 })();
 
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href") // activated tab
+    alert(target);
+  });
+
 </script>
 
 
 <body>
-        <nav class="topnav">
-                <div class="container">
-                  <ul class="navbar-left">
-                    <a href="home.html">Home</a>
-                    <a href="restaurants.html">Restaurants</a>
-                  </ul> <!--end navbar-left -->
-              
-                  <ul class="navbar-right">
-                    <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
-                  </ul> <!--end navbar-right -->
-                </div> <!--end container -->
-              </nav>
+      <nav class="topnav">
+        <div class="container">
+          <a class="navbar-brand" href="/">FOOD Machine</a>
+          <a class="active" href="/">Home</a>
+          <a href="#contact">Contact</a>
+          <input type="text" placeholder="Search..">
+          {% if user.is_authenticated %}
+          <a class="active" href="/dashboard/">{{user.username}}</a>
+          <a class="" href="/logout/"> Logout </a>
+          {% else %}
+          <a class="active" href="{% url 'login' %}?next={{request.path}}">Login</a>
+          {% endif %}
+          <ul class="navbar-right">
+            <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
+                  <script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
+                </span></a></li>
+          </ul>
+          <!--end navbar-right -->
+        </div>
+      </nav>
               
               
               <div class="container">
-                <div class="shopping-cart">
-                  <div class="shopping-cart-header">
-                    <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-                    <div class="shopping-cart-total">
-                      <span class="lighter-text">Total:</span>
-                      <span class="main-color-text">$2,229.97</span>
-                    </div>
-                  </div> <!--end shopping-cart-header -->
-              
-                  <ul class="shopping-cart-items">
-                    <li class="clearfix">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                      <span class="item-name">Sony DSC-RX100M III</span>
-                      <span class="item-price">$849.99</span>
-                      <span class="item-quantity">Quantity: 01</span>
-                    </li>
-              
-                    <li class="clearfix">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item2.jpg" alt="item1" />
-                      <span class="item-name">KS Automatic Mechanic...</span>
-                      <span class="item-price">$1,249.99</span>
-                      <span class="item-quantity">Quantity: 01</span>
-                    </li>
-              
-                    <li class="clearfix">
-                      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item3.jpg" alt="item1" />
-                      <span class="item-name">Kindle, 6" Glare-Free To...</span>
-                      <span class="item-price">$129.99</span>
-                      <span class="item-quantity">Quantity: 01</span>
-                    </li>
-                  </ul>
-              
-                  <a href="#" class="button">Checkout</a>
-                </div> <!--end shopping-cart -->
+                
               </div> <!--end container -->
 
 
@@ -342,15 +327,7 @@ body
         <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="profile-img">
-                                <img src="img/avatar.png" alt=""/>
-                                <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                    <input type="file" name="file"/>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-6">
                             <div class="profile-head">
                                         <h5>
@@ -421,9 +398,10 @@ body
                                                 <div class="col-md-6">
                                                     <label>Phone</label>
                                                 </div>
+                                                {% with User.userprofile as profile%}
                                                 <div class="col-md-6">
                                                     <p>
-                                                      <input type = "text" value = "{{User.userprofile.Phone}}" name = "uPhone">
+                                                      <input type = "text" value = "{{profile.Phone}}" name = "uPhone">
                                                     </p>
                                                 </div>
                                             </div>
@@ -433,7 +411,7 @@ body
                                               </div>
                                               <div class = "col-md-6">
                                                 <p>
-                                                  <input type = "text" value = "{{User.userprofile.Address}}" name = "uAddress">
+                                                  <input type = "text" value = "{{profile.Address}}" name = "uAddress">
                                                 </p>
                                               </div>
                                             </div>
@@ -443,10 +421,11 @@ body
                                                 </div>
                                                 <div class = "col-md-6">
                                                   <p>
-                                                    <input type = "number" value = "{{User.userprofile.Payment}}" name = "uPayment">
+                                                    <input type = "number" value = "{{profile.Payment}}" name = "uPayment">
                                                   </p>
                                                 </div>
                                               </div>
+                                              {%endwith%}
                                             <div class = "row">
                                               <div class = "col-md-6">
                                                 <a href = "updatePassword">Update Password</a>
@@ -458,45 +437,50 @@ body
                                           </form>
                                             
                                 </div>
+                            
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Item</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>{{orders.Menu_Item}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Price</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>{{orders.Price}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Description</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Tasty</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Delivery Status</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>{{orders.Status}}</p>
-                                                </div>
-                                            </div>
+                                            <table class="table table-hover shopping-cart-wrap">
+                                              <thead class="text-muted">
+                                                <tr>
+                                                  <th scope="col" style="color: black">Order</th>
+                                                  <th scope="col" width="120" style="color: black;">Items</th>
+                                                  <th scope="col" width="120" style="color: black;">Price</th>
+                                                  <th scope="col" width="200" class="text-right" style="color: black;">Action</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                {% for ord in My %}
+                                            
+                                                <tr>
+                                                  <td>
+                                                    <figure class="media">
+                                                      <figcaption class="media-body">
+                                                        <h6 style="color: black; font-size: 22px;" class="title text-truncate">{{ord.Order_Id}} </h6>
+                                                        <dl class="param param-inline small">
+                                                          <dt>Items: </dt>
+                                                          {{ord.Menu_Item}}
+                                                        </dl>
+                                                      </figcaption>
+                                                    </figure>
+                                                  </td>
+                                                  <td>
+                                            
+                                                  </td>
+                                                  <td>
+                                                    <div class="price-wrap">
+                                                      <var class="price">{{ord.Price}}</var>
+                                                    </div> <!-- price-wrap .// -->
+                                                  </td>
+                                            
+                                                </tr>
+                                            
+                                                {%endfor%}
                                             </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>           
+                           
             </div>
 
 </body>

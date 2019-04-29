@@ -9,8 +9,10 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from orders.models import *
 # from .filters import CuisineFilter
-
-
+from django.http import JsonResponse
+import json
+from orders.models import *
+from django.views.decorators.csrf import csrf_exempt
 def initialcreateRestaurant(request):
     return render(request,'restaurant/createRestaurant.html')
 
@@ -150,15 +152,44 @@ def menuEdit(request, part_id = None):
 
 
 
+@csrf_exempt
 def updateStatus(request):
-    status = Orders.objects.get()
-    if request.method == 'POST':
+    # status = Orders.objects.get()
+    if request.method == 'POST' and request.user.is_authenticated:
          user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
          res = user.userprofile.userRestaurant
-         orderno = request.POST.get('on')
-         order = Orders.objects.get(Order_Id=orderno)
-         order.Status = request.POST.status
-         order.save()
+         orderno = request.body
+         orderno = json.loads(orderno)
+         print(orderno)
+         order = Orders.objects.get(Order_Id=orderno[0]['Orderid'])
+         if order.Restaurant_Id == res:
+            order.Status = orderno[1]['Status']
+            order.save()
+            return HttpResponse('200 Okay')
+         else:
+            return HttpResponse('500 Internal sever error')
+    else:
+         return HttpResponse('500 Internal sever error')
+
+
+@csrf_exempt
+def deliveryStatus(request):
+    # status = Orders.objects.get()
+    if request.method == 'POST' and request.user.is_authenticated:
+         user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+         orderno = request.body
+         orderno = json.loads(orderno)
+         print(orderno)
+         order = Orders.objects.get(Order_Id=orderno[0]['Orderid'])
+         if order.Deliverer == None and user.userprofile.userType=='d':
+            order.Status = orderno[1]['Status']
+            order.Deliverer = request.user
+            order.save()
+            return HttpResponse('200 Okay')
+         else:
+            return HttpResponse('500 Internal sever error')
+    else:
+         return HttpResponse('500 Internal sever error')
 
 def restList(request):
 

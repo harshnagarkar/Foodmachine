@@ -45,3 +45,9 @@ def getLabel():
     context = Label.objects.values('Label_Name')
     return context
 
+# @register.simple_tag
+# def menuString(jstring):
+#     returnstring = ""
+#     data = json.loads(jstring)
+#     for(k,v in data):
+#         returnstring += str(k)+

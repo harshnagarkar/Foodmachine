@@ -65,14 +65,16 @@ def databaseEntry(mig,rig,status,userorder,price,pref=""):
 def checkoutpage(request):
     user = request.user
     user = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-    # if(user.userprofile.Payment != None and user.userprofile.Address != None and user.userprofile.Phone != None):
-    return render(request, "orders/shoppinigCart.html", {'User': user})
-    # else:
-    # return render(request,'orders/datamissing.html')
+    if(user.userprofile.Payment != None and user.userprofile.Address != None and user.userprofile.Phone != None):
+        return render(request, "orders/shoppinigCart.html", {'User': user})
+    else:
+        return render(request,'orders/datamissing.html')
 
 def updatePref(request):
     if request.type =="POST":
         pref = json.loads(request.body)
+        # id = pref[0]['orderno']
+        #
         request.session['pref'] = pref['content']
         return HttpResponse('200 Okay')
 
@@ -94,4 +96,7 @@ def orderProcessing(request):
 def orderStatus(request,orderid):
     print(orderid)
     order = Orders.objects.get(Order_Id=orderid)
-    return render(request,'orders/status.html',{'order':order})
+    if order.user == request.user:
+        return render(request,'orders/status.html',{'order':order})
+    else:
+        return render(request,'404.html')
