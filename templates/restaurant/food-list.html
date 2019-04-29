@@ -1,12 +1,13 @@
 {% extends "layout.html" %} { extends "../layout.html" }
 {% block content %}
-<h1>food list webpage</h1>
+<h1 style="width: fit-content;background-color: white;align-items: center">food list webpage</h1>
 {% load restags %}
 {% getLabel as l %}
-<form method = 'GET'>
+<form method = 'GET' style="margin-left: 20px; background-color: white; padding: 10px; border-radius: 5px; width: auto">
     Label:
     <input list = "label" name = 'Label' placeholder = 'Entree'>
     <datalist id = "label">
+        <option value=""></option>
     {% for element in l %}
         <option value = '{{element.Label_Name}}'>
     {% endfor %}
@@ -14,6 +15,7 @@
     Cuisine:
     <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
     <datalist id = "cuisine">
+        <option value=""></option>
    {% getCuisine as c %}  
    {% for element in c %}
   

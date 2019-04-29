@@ -123,12 +123,8 @@ h1{
     <div class="container">
       <a class="navbar-brand" href="/">FOOD Machine</a>
       <a class="active" href="/">Home</a>
-      <a href="/login/">Log In</a>
       <a href="/restaurant/rest-list/">Restaurants</a>
       <a href = "/restaurant/food-list/">Food Listings</a>
-      <a href="#about">About</a>
-    </nav>
-      <a href="#contact">Contact</a>
       <input type="text" placeholder="Search..">
       {% if user.is_authenticated %}
       <a class="active" href="/dashboard/">{{user.username}}</a>
