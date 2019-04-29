@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 from orders.models import *
-from .filters import CuisineFilter
+# from .filters import CuisineFilter
 
 
 def initialcreateRestaurant(request):

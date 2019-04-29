@@ -1,8 +1,9 @@
+{% load static %}
 body
 {
     font-family: Tahoma, Geneva, sans-serif;
     color: #fff;
-    background: url(img/pic1.jpg)no-repeat;
+    background: url({% static'img/pic1.jpg' %}) no-repeat;
     background-size: cover;
 }
 
