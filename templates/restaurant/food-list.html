@@ -4,15 +4,27 @@
 {% load restags %}
 {% getLabel as l %}
 <form method = 'GET'>
-    <input list = "label" name = 'Label' placeholder = 'American'>
+    Label:
+    <input list = "label" name = 'Label' placeholder = 'Entree'>
     <datalist id = "label">
     {% for element in l %}
         <option value = '{{element.Label_Name}}'>
     {% endfor %}
     </datalist>
-    <button type = "submit">Search</button> 
-</form>
-
+    Cuisine:
+    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
+    <datalist id = "cuisine">
+   {% getCuisine as c %}  
+   {% for element in c %}
+  
+   <option value = '{{element.Cuisine_parent}}'>
+   {% endfor %}
+   </datalist>
+   Search for item:
+   <input type = 'search' placeholder = 'Search...' name = 'searching'>
+   <i class = 'fa fa-search'></i>
+       <button type = "submit">Filter</button> 
+    </form>
 
     <div class="row">
             {% for M in query_set %}
