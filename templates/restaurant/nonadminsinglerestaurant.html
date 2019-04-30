@@ -1,10 +1,248 @@
-{% extends 'layout.html' %}{% block content %}
-{% load restags %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Foodmachine
+    </title>
+
+    <link href="{% static 'stylesheets/style.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/favicon" href="{%static 'img/favicon.ico'%}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
 {% load static %}
 
+<body background="{% static 'img/pic1.jpg' %}" style=" ">
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        .lighter-text {
+            color: #ABB0BE;
+        }
+
+        .main-color-text {
+            color: $main-color;
+        }
+
+        .navbar-left {
+            float: left;
+        }
+
+        .navbar-right {
+            float: right;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: rgba(44, 62, 80, 0.7);
+        }
+
+        /* Style the links inside the navigation bar */
+        .topnav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        /* Change the color of links on hover */
+        .topnav a:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* Style the "active" element to highlight the current page */
+        .topnav a.active {
+            background-color: black;
+            color: white;
+        }
+
+        /* Style the search box inside the navigation bar */
+        .topnav input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px;
+        }
+
+        /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+        @media screen and (max-width: 600px) {
+
+            .topnav a,
+            .topnav input[type=text] {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
+
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+
+
+        .container {
+            margin: auto;
+            width: 80%;
+        }
+
+        .badge {
+            background-color: #6394F8;
+            border-radius: 10px;
+            color: white;
+            display: inline-block;
+            font-size: 12px;
+            line-height: 1;
+            padding: 3px 7px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .shopping-cart {
+            margin: 20px 0;
+            float: right;
+            background: white;
+            width: 320px;
+            position: relative;
+            border-radius: 3px;
+            padding: 20px;
+
+
+            .shopping-cart-header {
+                border-bottom: 1px solid #E8E8E8;
+                padding-bottom: 15px;
+
+                .shopping-cart-total {
+                    float: right;
+                }
+            }
+
+            .shopping-cart-items {
+
+                padding-top: 20px;
+
+                li {
+                    margin-bottom: 18px;
+                }
+
+                img {
+                    float: left;
+                    margin-right: 12px;
+                }
+
+                .item-name {
+                    display: block;
+                    padding-top: 10px;
+                    font-size: 16px;
+                }
+
+                .item-price {
+                    color: $main-color;
+                    margin-right: 8px;
+                }
+
+                .item-quantity {
+                    color: $light-text;
+                }
+            }
+
+        }
+
+        .shopping-cart:after {
+            bottom: 100%;
+            left: 89%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-bottom-color: white;
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        .cart-icon {
+            color: #515783;
+            font-size: 24px;
+            margin-right: 7px;
+            float: left;
+        }
+
+        .button {
+            background: $main-color;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+            border-radius: 3px;
+            font-size: 16px;
+            margin: 25px 0 15px 0;
+
+            &:hover {
+                background: lighten($main-color, 3%);
+            }
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <nav class="topnav">
+        <div class="container">
+            <a class="navbar-brand" href="/">FOOD Machine</a>
+            <ul class="navbar-left">
+                <a href="/">Home</a>
+                <a href="/restaurant/rest-list/">Restaurants</a>
+                <a href="/restaurant/food-list/">Food Listings</a>
+            </ul>
+            <!--end navbar-left -->
+            {% if user.is_authenticated %}
+            <a class="active" href="/dashboard/">{{user.username}}</a>
+            <a class="" href="/logout/"> Logout </a>
+            {% else %}
+            <a class="active" href="{% url 'login' %}?next={{request.path}}">Login</a>
+            {% endif %}
+            <ul class="navbar-right">
+                <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
+                            <script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
+                            </span></a></li>
+            </ul>
+            <!--end navbar-right -->
+        </div>
+        <!--end container -->
+    </nav>
+
+{% load restags %}
+{% load static %}
+<div style="background: white">
 <h1>{{Restaurant.Res_Name}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
+<h2>{{Restaurant.Res_Address}}</h2>
+<h3>{{Restaurant.Res_Contact}}</h3>
 <br>
+</div>
 <script>
 
 
@@ -139,4 +377,54 @@
     <br>
     {% endfor %}
 </div>
-{% endblock content %}
+    <footer class="page-footer font-small blue pt-4" style="background:rgb(26, 30, 46)">
+    
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+    
+            <!-- Grid row -->
+            <div class="row">
+    
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+    
+                    <!-- Content -->
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Thank you for choosing us as your food delivery.</p>
+    
+                </div>
+                <!-- Grid column -->
+    
+                <hr class="clearfix w-100 d-md-none pb-3">
+    
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+    
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Links</h5>
+    
+                    <ul class="list-unstyled">
+                        <li><a href="#about-us" class="py-2 d-block" style="color: rgb(161, 134, 42)">About Us</a></li>
+                        <li><a href="restaurants.html" class="py-2 d-block" style="color: rgb(161, 134, 42)">Restaurants</a>
+                        </li>
+                        <li><a href="restaurants.html" class="py-2 d-block" style="color: rgb(161, 134, 42)">Menu</a></li>
+    
+                    </ul>
+    
+                </div>
+                <!-- Grid column -->
+    
+            </div>
+            <!-- Grid row -->
+    
+        </div>
+        <!-- Footer Links -->
+    
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright: FOOD Machine</div>
+        <!-- Copyright -->
+    
+    </footer>
+    </body>
+    
+    </html>
