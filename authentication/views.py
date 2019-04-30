@@ -19,43 +19,49 @@ def home(request):
 
 def userView(request):
 	print (request.user)
-	if request.user.is_authenticated:
-		context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
+	if not request.user.is_authenticated:
+		redirect('/login/')
+	try:
+		if request.user.is_authenticated:
+			context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
 
-		if request.method == "POST":
-			form = UpdateProfile(request.POST)
-			print("form")
-			print(form.errors)
-			if form.is_valid():
-				context.first_name = form.cleaned_data.get('fName')
-				context.last_name = form.cleaned_data.get('lName')
-				context.email = form.cleaned_data.get('uEmail')
-				context.userprofile.Phone = "+1"+form.cleaned_data.get('uPhone')
-				context.userprofile.Address = form.cleaned_data.get('uAddress')
-				context.userprofile.Payment = form.cleaned_data.get('uPayment')
+			if request.method == "POST":
+				form = UpdateProfile(request.POST)
+				print("form")
+				print(form.errors)
+				if form.is_valid():
+					context.first_name = form.cleaned_data.get('fName')
+					context.last_name = form.cleaned_data.get('lName')
+					context.email = form.cleaned_data.get('uEmail')
+					context.userprofile.Phone = "+1"+form.cleaned_data.get('uPhone')
+					context.userprofile.Address = form.cleaned_data.get('uAddress')
+					context.userprofile.Payment = form.cleaned_data.get('uPayment')
 
-				context.save()
-				context.userprofile.save()
-				return redirect('/dashboard/')
+					context.save()
+					context.userprofile.save()
+					return redirect('/dashboard/')
+				else:
+					return redirect('/dashboard/')
+
 			else:
-				return redirect('/dashboard/')
+				if context.userprofile.userType== 'c':
+					my = Orders.objects.filter(user= request.user)
+					return render(request, 'dashboard/Userdashboard.html',{'User':context},{'My',my})
+				elif context.userprofile.userType == 'r':
+					res = context.userprofile.userRestaurant
+					context =  Orders.objects.filter(Restaurant_Id=res, Status='s') | Orders.objects.filter(Restaurant_Id=res, Status='r')
+					youorder= Orders.objects.filter(Restaurant_Id=res,Status='d')
+					return render(request, 'dashboard/Ownerdashboard.html', {'Orders': context, 'My': youorder})
+				elif context.userprofile.userType == 'd':
+					context = Orders.objects.filter(Deliverer=None)
+					youorder = Orders.objects.filter(Deliverer=request.user)
+					return render(request, 'dashboard/deliverydashboard.html',{'Orders':context,'My':youorder})
 
 		else:
-			if context.userprofile.userType== 'c':
-				my = Orders.objects.filter(user= request.user)
-				return render(request, 'dashboard/Userdashboard.html',{'User':context},{'My',my})
-			elif context.userprofile.userType == 'r':
-				res = context.userprofile.userRestaurant
-				context =  Orders.objects.filter(Restaurant_Id=res, Status='s') | Orders.objects.filter(Restaurant_Id=res, Status='r')
-				youorder= Orders.objects.filter(Restaurant_Id=res,Status='d')
-				return render(request, 'dashboard/Ownerdashboard.html', {'Orders': context, 'My': youorder})
-			elif context.userprofile.userType == 'd':
-				context = Orders.objects.filter(Deliverer=None)
-				youorder = Orders.objects.filter(Deliverer=request.user)
-				return render(request, 'dashboard/deliverydashboard.html',{'Orders':context,'My':youorder})
-
-	else:
-		HttpResponseRedirect("/")
+			HttpResponseRedirect("/login/")
+	except:
+		redirect('/login/')
+	
 	# else:
 		# return HttpResponsePermanentRedirect("/login")
 
