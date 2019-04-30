@@ -2,7 +2,7 @@
 {% extends 'layout.html'%}{% block content%}
 {% load static %}
 
-<div class="signin">
+<div class="signin" style="width: fit-content">
 {% if not user.is_authenticated %}
 <form method="post">
     {% csrf_token %}
