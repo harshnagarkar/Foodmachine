@@ -30,15 +30,29 @@ def userView(request):
 				print("form")
 				print(form.errors)
 				if form.is_valid():
+					context = User.objects.get(username=request.user.username)
+					profile = UserProfile.objects.get(user=request.user)
+					print("log1")
 					context.first_name = form.cleaned_data.get('fName')
+					print(context.first_name)
 					context.last_name = form.cleaned_data.get('lName')
 					context.email = form.cleaned_data.get('uEmail')
-					context.userprofile.Phone = "+1"+form.cleaned_data.get('uPhone')
-					context.userprofile.Address = form.cleaned_data.get('uAddress')
-					context.userprofile.Payment = form.cleaned_data.get('uPayment')
+					profile.Phone = "+1"+form.cleaned_data.get('uPhone')
+					profile.Address = form.cleaned_data.get('uAddress')
+					profile.Payment = form.cleaned_data.get('uPayment')
 
+					# User.objects.filter(context).update(first_name = form.cleaned_data.get('fName'))
+					# fst_name = form.cleaned_data.get('fName')
+					# lst_name = form.cleaned_data.get('lName')
+					# uemail = form.cleaned_data.get('uEmail')
+					# usrPhone = "+1"+form.cleaned_data.get('uPhone')
+					# usrAddress = form.cleaned_data.get('uAddress')
+					# usrPayment = form.cleaned_data.get('uPayment')
+
+					# updateProf(request.user.username, fst_name, lst_name, uemail, usrPhone, usrAddress, usrPayment)
+				
 					context.save()
-					context.userprofile.save()
+					profile.save()
 					return redirect('/dashboard/')
 				else:
 					return redirect('/dashboard/')
@@ -159,10 +173,10 @@ def updatePass(request):
 		if form.is_valid():
 			passw = form.cleaned_data.get('confirmPass')
 			
-			updatePassword(request.user, passw)
+			updatePassword(request.user.username, passw)
 			return redirect('/dashboard/updatePassword')
 		else:
-			return redirect('/dashboard/updatePassword')
+			return redirect('404.html')
 
 	else:
 		return render(request, 'dashboard/updatePassword.html')

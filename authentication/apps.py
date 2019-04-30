@@ -30,9 +30,23 @@ def loginuser(request):
 
 
 def updatePassword(Username,Password):
-   u = User.objects.get(username__exact=Username)
+   u = User.objects.get(username=Username)
    u.set_password(Password)
    u.save()
 
 class AuthenticationConfig(AppConfig):
     name = 'authentication'
+
+
+def updateProf(username, firstName, lastName, email, phone, address, pay):
+
+    u = User.objects.get(username__exact = username)
+    u.first_name = firstName
+    u.last_name = lastName
+    u.email = email
+    u.userprofile.Phone = phone
+    u.userprofile.Address = address
+    u.userprofile.Payment = pay
+
+    u.save()
+    u.userprofile.save()
