@@ -256,7 +256,7 @@
         printingdata += '<td class="text-center">' + dataprice + '</td>\n'
         inname = key+'input'
         printingdata += '<td class="text-center"><input id="' +inname+ '" value = ' + dataquantity + '><button type="button" onclick=\"updateQuantity( \''+key+'\','+dataquantity+')\" id= "'+key+'">Update</button></td>\n'
-        printingdata += '<td class="text-right">' + totalitemprice + '</td> \n'
+        printingdata += '<td class="text-right">' + totalitemprice.toFixed(2) + '</td> \n'
         printingdata += '<td><button type="button"  onclick=\"removeItem( \'' + key + '\')\"> Delete </button></td></tr> \n'
       }
     }
@@ -334,7 +334,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <strong>Tax</strong>
-                                        <div class="pull-right"><span>$</span><span><script> document.write((total*0.07).toFixed2)</script></span></div>
+                                        <div class="pull-right"><span>$</span><span><script> document.write((total*0.07).toFixed(2))</script></span></div>
                                     </div>
                                     <div class="col-md-12">
                                         <strong>Order Total</strong>
