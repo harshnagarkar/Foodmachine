@@ -1,27 +1,29 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
-{% if user.is_authenticated %}
 <!-- <h1>Restaurant list webpage</h1> -->
  {% load restags %}
 <div>
    
    
-   <form method = 'GET'>
-        <h2 style = "color: black"> Filter with Cuisine</h2>
-    <input list = "cuisine" name = 'Cuisine' placeholder = 'American'>
+   <form method = 'GET' style="background-color: white;width: auto;">
+        <h5 style = "color: black"> Filter with Cuisine:</h5>
+    <input style= "color: black" list = "cuisine" name = 'Cuisine' placeholder = 'American'>
      <datalist id = "cuisine">
     {% getCuisine as c %}  
     {% for element in c %}
    
-    <option value = '{{element.Cuisine_parent}}'>
+    <option style = "color: black" value = '{{element.Cuisine_parent}}'>{{element.Cusine_parent}}</option>
     {% endfor %}
     </datalist>
         <button type = "submit">Search</button> 
+        <button type = "Submit" name = "sort" style = "color: black; border-style: dotted;" value = "Sort from A-Z" style="background: white;">
+                Sort All Restaurants (A-Z)
+            </button>
     </form>
-    <form action = '#' method = 'GET'>
-        <input type = "Submit" name = "sort" style = "color: black; border-style: dotted;" value = "Sort from A-Z">
+    <!-- <form action = '#' method = 'GET'>
+       
         <!-- <button type = "submit" name = 'sort'>Sort</button> -->
-    </form>
+    </form> -->
   
 </div>
 
@@ -87,5 +89,5 @@
 
     </tbody>
 </table> -->
-{% endif %}
-{% endblock content %}
+
+{% endblock %}

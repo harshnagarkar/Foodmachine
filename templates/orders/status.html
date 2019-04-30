@@ -9,6 +9,7 @@
  {%elif order.Status == 'd'%}
  <h2>Your order will be delivered soon</h2>
  {%endif%}
+ <script>localStorage.removeItem('cart');localStorage.removeItem('quantity');</script>
 
  <h4>If order is not received in 40 min please call us</h4>
 </div>

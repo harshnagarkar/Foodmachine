@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}{% block content %}
 {% load restags %}
 {% load static %}
-<div style="background-color: white">
+<div style="background-color: white;width: auto">
 <h1 >{{Restaurant.Res_Name}}</h1>
 <h2>{{Restaurant.Res_Description}}</h2>
 <h3>{{Restaurant.Res_Address}}</h3>
@@ -104,7 +104,7 @@
             }
         
             }
-            
+            window.location.reload(true)
         }
         
 
@@ -154,6 +154,4 @@
             <br>
             <br>
             {% endfor %}
-  <button  onclick="buttonfun()">Create a menu Item</button>
-</div>
-{% endblock content %}
+ {%endblock%}

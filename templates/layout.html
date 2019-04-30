@@ -204,8 +204,8 @@
 				<a class="navbar-brand" href="/">FOOD Machine</a>
 			  <ul class="navbar-left">
 				<a href="/">Home</a>
-				<a href="../rest-list/">Restaurants</a>
-				<a href = "../food-list/">Food Listings</a>
+				<a href="/restaurant/rest-list/">Restaurants</a>
+				<a href = "/restaurant/food-list/">Food Listings</a>
 			  </ul> <!--end navbar-left -->
 			{% if user.is_authenticated %}
 			<a class="active" href="/dashboard/">{{user.username}}</a>
@@ -214,7 +214,7 @@
 			<a class="active" href="{% url 'login' %}?next={{request.path}}">Login</a>
 			{% endif %}
 			  <ul class="navbar-right">
-				<li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script></span></a></li>
+				<li><a href="/cart/checkout" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script></span></a></li>
 			  </ul> <!--end navbar-right -->
 			</div> <!--end container -->
 		  </nav>

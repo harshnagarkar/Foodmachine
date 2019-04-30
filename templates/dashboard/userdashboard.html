@@ -301,7 +301,6 @@ body
           <a class="navbar-brand" href="/">FOOD Machine</a>
           <a class="active" href="/">Home</a>
           <a href="#contact">Contact</a>
-          <input type="text" placeholder="Search..">
           {% if user.is_authenticated %}
           <a class="active" href="/dashboard/">{{user.username}}</a>
           <a class="" href="/logout/"> Logout </a>
@@ -309,7 +308,7 @@ body
           <a class="active" href="{% url 'login' %}?next={{request.path}}">Login</a>
           {% endif %}
           <ul class="navbar-right">
-            <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
+            <li><a href="/cart/checkout/" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
                   <script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
                 </span></a></li>
           </ul>
@@ -443,7 +442,7 @@ body
                                               <thead class="text-muted">
                                                 <tr>
                                                   <th scope="col" style="color: black">Order</th>
-                                                  <th scope="col" width="120" style="color: black;">Items</th>
+                                                  <th scope="col" width="120" style="color: black;">Items{Item_name{Quanity:price}}</th>
                                                   <th scope="col" width="120" style="color: black;">Price</th>
                                                   <th scope="col" width="200" class="text-right" style="color: black;">Action</th>
                                                 </tr>

@@ -248,6 +248,7 @@ def foodList(request):
         if lab != '' and lab is not None:
             labId = Label.objects.get(Label_Name=lab)
             qs = qs.filter(Menu_Label_Id = labId)
+            print("Hello")
         if cuis != '' and cuis is not None:
             cuisId = Cuisine.objects.get(Cuisine_parent = cuis)
             print("There")
