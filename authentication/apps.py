@@ -6,7 +6,7 @@ import datetime
 from django.utils import timezone 
 from django.contrib.auth import authenticate, login
 
-
+#user creation function
 def userCreate(UserName, Password, Email, First_Name, Last_Name, UserType,UserRestaurant,Is_Staff='0'):
     try:
         user = User.objects.create_user(username=UserName, email=Email, password=Password, date_joined=datetime.datetime.now(),is_staff=Is_Staff,first_name=First_Name,last_name= Last_Name)
@@ -17,18 +17,20 @@ def userCreate(UserName, Password, Email, First_Name, Last_Name, UserType,UserRe
     except:
         return "Username exsist"
 
-def loginuser(request):
-    username = request.POST('username')
-    password = request.POST('password')
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        return user
 
-    else:
-        return 'Invalid Login details. Please try again!'
+# def loginuser(request):
+#     username = request.POST('username')
+#     password = request.POST('password')
+#     user = authenticate(request, username=username, password=password)
+#     if user is not None:
+#         return user
+
+#     else:
+#         return 'Invalid Login details. Please try again!'
 
 
 
+#update Password
 def updatePassword(Username,Password):
    u = User.objects.get(username=Username)
    u.set_password(Password)
@@ -37,7 +39,7 @@ def updatePassword(Username,Password):
 class AuthenticationConfig(AppConfig):
     name = 'authentication'
 
-
+#update profile function
 def updateProf(username, firstName, lastName, email, phone, address, pay):
 
     u = User.objects.get(username__exact = username)

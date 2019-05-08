@@ -6,9 +6,10 @@ from authentication.models import UserProfile,User
 
 register = template.Library()
 
-
+#get profile content
 @register.filter(name='getProfile')
 def getProfile(usr):
     print(usr)
     context = User.objects.get(pk = (User.objects.get(username=usr).id))
     return context.userprofile.__dict__
+

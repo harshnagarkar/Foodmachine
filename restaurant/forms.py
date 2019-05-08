@@ -23,11 +23,11 @@ class MenuCreation(forms.Form):
 
 class MenuUpdate(forms.Form):
 
-	Item = forms.CharField(label = 'Item', max_length = 50)
+	Item = forms.CharField(label = 'Item', max_length = 50,required=False)
 	Description = forms.CharField(label = 'Description', max_length = 100)
 	Price = forms.DecimalField(label = 'Price', max_digits = 30, decimal_places = 2)
 	Cuisine = forms.CharField(label = 'Cuisine', max_length = 20, required = False)
-	Label = forms.CharField(max_length = 20, required = True)
+	Label = forms.CharField(max_length = 20, required = False)
 	Picture = forms.ImageField(label = 'Picture', help_text = "Upload image: ", required = False)
 
 	class Meta:
