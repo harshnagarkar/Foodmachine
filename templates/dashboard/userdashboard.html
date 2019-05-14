@@ -288,7 +288,7 @@ body
 })();
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var target = $(e.target).attr("href") // activated tab
+    var target = $(e.target).attr("href") 
     alert(target);
   });
 
@@ -312,17 +312,13 @@ body
                   <script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
                 </span></a></li>
           </ul>
-          <!--end navbar-right -->
         </div>
       </nav>
               
               
               <div class="container">
                 
-              </div> <!--end container -->
-
-
-              <!--Start User Dashboard-->
+              </div> 
         <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
@@ -468,7 +464,7 @@ body
                                                   <td>
                                                     <div class="price-wrap">
                                                       <var class="price">{{ord.Price}}</var>
-                                                    </div> <!-- price-wrap .// -->
+                                                    </div> 
                                                   </td>
                                             
                                                 </tr>

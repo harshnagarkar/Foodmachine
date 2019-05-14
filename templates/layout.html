@@ -206,7 +206,7 @@
 				<a href="/">Home</a>
 				<a href="/restaurant/rest-list/">Restaurants</a>
 				<a href = "/restaurant/food-list/">Food Listings</a>
-			  </ul> <!--end navbar-left -->
+			  </ul> 
 			{% if user.is_authenticated %}
 			<a class="active" href="/dashboard/">{{user.username}}</a>
 			<a class="" href="/logout/"> Logout </a>
@@ -215,42 +215,31 @@
 			{% endif %}
 			  <ul class="navbar-right">
 				<li><a href="/cart/checkout" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script></span></a></li>
-			  </ul> <!--end navbar-right -->
-			</div> <!--end container -->
+			  </ul> 
+			</div> 
 		  </nav>
 		  
-		  
-
-<!-- Footer -->
-
 
 		{% block content %}
 		{% endblock content %}
 	</div>
 	<footer class="page-footer font-small blue pt-4" style="background:rgb(26, 30, 46)">
 	
-		<!-- Footer Links -->
 		<div class="container-fluid text-center text-md-left">
 	
-			<!-- Grid row -->
 			<div class="row">
 	
-				<!-- Grid column -->
 				<div class="col-md-6 mt-md-0 mt-3">
 	
-					<!-- Content -->
 					<h5 class="text-uppercase">Footer Content</h5>
 					<p>Thank you for choosing us as your food delivery.</p>
 	
 				</div>
-				<!-- Grid column -->
-	
+
 				<hr class="clearfix w-100 d-md-none pb-3">
 	
-				<!-- Grid column -->
 				<div class="col-md-3 mb-md-0 mb-3">
 	
-					<!-- Links -->
 					<h5 class="text-uppercase">Links</h5>
 	
 					<ul class="list-unstyled">
@@ -261,17 +250,12 @@
 					</ul>
 	
 				</div>
-				<!-- Grid column -->
 	
 			</div>
-			<!-- Grid row -->
-	
+		
 		</div>
-		<!-- Footer Links -->
-	
-		<!-- Copyright -->
+		
 		<div class="footer-copyright text-center py-3">© 2018 Copyright: FOOD Machine</div>
-		<!-- Copyright -->
 	
 	</footer>
 </body>

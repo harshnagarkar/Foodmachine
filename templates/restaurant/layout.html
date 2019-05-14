@@ -46,7 +46,6 @@
 			background-color: rgba(44, 62, 80, 0.7);
 		}
 
-		/* Style the links inside the navigation bar */
 		.topnav a {
 			float: left;
 			display: block;
@@ -56,20 +55,16 @@
 			text-decoration: none;
 			font-size: 17px;
 		}
-
-		/* Change the color of links on hover */
 		.topnav a:hover {
 			background-color: black;
 			color: white;
 		}
 
-		/* Style the "active" element to highlight the current page */
 		.topnav a.active {
 			background-color: black;
 			color: white;
 		}
 
-		/* Style the search box inside the navigation bar */
 		.topnav input[type=text] {
 			float: right;
 			padding: 6px;
@@ -79,7 +74,6 @@
 			font-size: 17px;
 		}
 
-		/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 		@media screen and (max-width: 600px) {
 
 			.topnav a,
@@ -217,7 +211,6 @@
 				<a href="../rest-list/">Restaurants</a>
 				<a href="../food-list/">Food Listings</a>
 			</ul>
-			<!--end navbar-left -->
 			{% if user.is_authenticated %}
 			<a class="active" href="/dashboard/">{{user.username}}</a>
 			<a class="" href="/logout/"> Logout </a>
@@ -229,14 +222,11 @@
 							<script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
 							</span></a></li>
 			</ul>
-			<!--end navbar-right -->
 		</div>
-		<!--end container -->
 	</nav>
 
 
 
-	<!-- Footer -->
 
 
 	{% block content %}
@@ -244,28 +234,21 @@
 	</div>
 	<footer class="page-footer font-small blue pt-4" style="background:rgb(26, 30, 46)">
 
-		<!-- Footer Links -->
 		<div class="container-fluid text-center text-md-left">
 
-			<!-- Grid row -->
 			<div class="row">
 
-				<!-- Grid column -->
 				<div class="col-md-6 mt-md-0 mt-3">
 
-					<!-- Content -->
 					<h5 class="text-uppercase">Footer Content</h5>
 					<p>Thank you for choosing us as your food delivery.</p>
 
 				</div>
-				<!-- Grid column -->
-
+				
 				<hr class="clearfix w-100 d-md-none pb-3">
 
-				<!-- Grid column -->
 				<div class="col-md-3 mb-md-0 mb-3">
 
-					<!-- Links -->
 					<h5 class="text-uppercase">Links</h5>
 
 					<ul class="list-unstyled">
@@ -278,17 +261,10 @@
 					</ul>
 
 				</div>
-				<!-- Grid column -->
 
 			</div>
-			<!-- Grid row -->
-
 		</div>
-		<!-- Footer Links -->
-
-		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">© 2018 Copyright: FOOD Machine</div>
-		<!-- Copyright -->
 
 	</footer>
 </body>

@@ -12,7 +12,7 @@ from django.http import HttpResponse
 from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
 from authentication.tests import emails
 from orders.models import *
-# Create your views here.
+
 from django.shortcuts import redirect
 def home(request):
 		return render(request, 'home.html')
@@ -40,17 +40,6 @@ def userView(request):
 					profile.Phone = "+1"+form.cleaned_data.get('uPhone')
 					profile.Address = form.cleaned_data.get('uAddress')
 					profile.Payment = form.cleaned_data.get('uPayment')
-
-					# User.objects.filter(context).update(first_name = form.cleaned_data.get('fName'))
-					# fst_name = form.cleaned_data.get('fName')
-					# lst_name = form.cleaned_data.get('lName')
-					# uemail = form.cleaned_data.get('uEmail')
-					# usrPhone = "+1"+form.cleaned_data.get('uPhone')
-					# usrAddress = form.cleaned_data.get('uAddress')
-					# usrPayment = form.cleaned_data.get('uPayment')
-
-					# updateProf(request.user.username, fst_name, lst_name, uemail, usrPhone, usrAddress, usrPayment)
-				
 					context.save()
 					profile.save()
 					return redirect('/dashboard/')
@@ -77,13 +66,7 @@ def userView(request):
 	except:
 		redirect('/login/')
 	
-	# else:
-		# return HttpResponsePermanentRedirect("/login")
-
 from .forms import SignUpForm
-#class SignUpView():
-#	template_name = 'templates/sgnup.html'
-# form = SignUpForm(request.POST)
 
 def makeUser(request):
 	username = "N/A"
@@ -99,11 +82,11 @@ def makeUser(request):
 			confirmpass = form.cleaned_data.get('confirmPass')
 			email = form.cleaned_data.get('Email')
 			types = form.cleaned_data.get('types')
-			# answer = form.cleaned_data.get('secAnswer')
-			# questions = form.cleaned_data.get('questions')
+			
+			
 			Emailuser = email
 			print (Emailuser)
-			# print(question)
+			
 			userCreate(UserName=username,Password=confirmpass,Email=email,First_Name=fname,Last_Name=lname,UserType=types,UserRestaurant=None)
 			emails(email)
 			return render(request, 'cong.html', {"username": username})
@@ -114,30 +97,6 @@ def makeUser(request):
 	print (form.errors)
 	return render(request, 'cong.html', {"username" : 'Username exsisted Sorry.'})
 
-
-# def restaurantUser(request):
-# 	# context = User.objects.get(pk=(User.objects.get(username=request.user.username).id))
-# 	if request.method == "POST":
-# 		form = RestaurantForm(request.POST)
-# 		print(form.errors)
-# 		print(form.is_valid())
-# 		if form.is_valid():
-# 			username = form.cleaned_data.get('username')
-# 			fname = form.cleaned_data.get('FirstName')
-# 			lname = form.cleaned_data.get('LastName')
-# 			passw = form.cleaned_data.get('pass')
-# 			confirmpass = form.cleaned_data.get('confirmPass')
-# 			email = form.cleaned_data.get('Email')
-# 			answer = form.cleaned_data.get('secAnswer')
-# 			questions = form.cleaned_data.get('questions')
-# 			usertype = form.cleaned_data('usertype')
-# 			# print(question)
-# 			restaurantUserCreate(UserName=username, Password=confirmpass, Email=email, First_Name=fname,Last_Name=lname, Answer=answer, Question=questions, UserType=usertype, UserRestaurant=None)
-
-# 	else:
-# 		form = RestaurantForm()
-
-# 	return render(request, 'restaurant/sucessRestaurant.html', {"username": request.user.username})
 
 
 def sendEmail(request):
@@ -184,12 +143,3 @@ def updatePass(request):
 			
 
 
-# 	if request.method == "POST":
-# 		form = UpdatePassword(request.POST)
-# 		print(form.error)
-# 		if(form.is_valid()):
-# 			confirmPass= form.cleaned_data.get('confirmPass')
-# 			username = form.cleaned_data.get('username')
-# 			updatePassword(username,confirmPass)
-# 		else:
-# 			form = UpdatePassword()

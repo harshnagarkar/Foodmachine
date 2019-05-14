@@ -113,7 +113,6 @@
                         {
                             type: "POST",
                             url: "/cart/total",
-                            // [{'orderno' : },{'status': }]
                             data:  localStorage.getItem('cart') ,
                             success: function () {
                                 console.log("sent tdata")
@@ -135,9 +134,6 @@
                         
                         <p class="price">${{M.Menu_ItemPrice}}</p>
                         <p style="font-size: 10px">{{M.Menu_Item_Description|truncatechars:69}} </p>
-                        <!-- <p>
-                                <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
-                            </p> -->
                             <p>
                                 <a href = "/restaurant/edit/{{M.Menu_Item_Id}}/"><i class = "edit">Edit</i></a>
                             </p>

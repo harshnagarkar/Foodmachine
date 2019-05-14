@@ -9,20 +9,17 @@ class UserForm(forms.Form):
 		fields = ('first_name', 'last_name', 'email')
 		
 class MenuCreation(forms.Form):
-	# Rest = forms.CharField(label = 'Rest', max_length = 75)
 	Item = forms.CharField(label = 'Item', max_length = 50)
 	Description = forms.CharField(label = 'Description', max_length = 100)
 	Price = forms.DecimalField(label = 'Price', max_digits = 30, decimal_places = 2)
 	Cuisine = forms.CharField(label = 'Cuisine', max_length = 20, required = False)
 	Label = forms.CharField(max_length = 20, required = True)
 	Picture = forms.ImageField(label = 'Picture', help_text = "Upload image: ", required = False)
-
 	class Meta:
 		model = Menu
 		fields = ('Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
 
 class MenuUpdate(forms.Form):
-
 	Item = forms.CharField(label = 'Item', max_length = 50,required=False)
 	Description = forms.CharField(label = 'Description', max_length = 100)
 	Price = forms.DecimalField(label = 'Price', max_digits = 30, decimal_places = 2)
@@ -33,14 +30,6 @@ class MenuUpdate(forms.Form):
 	class Meta:
 		model = Menu
 		fields = ('Item', 'Description', 'Price', 'Cuisine', 'Label', 'Picture')
-	
-
-
-
-# class LabelCreation(forms.ModelForm):
-# 	class Meta:
-# 		models = Label
-# 		fields = ('Label_Name')
 
 
 class RestaurantCreation(forms.Form):

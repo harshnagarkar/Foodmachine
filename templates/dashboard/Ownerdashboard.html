@@ -4,7 +4,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Restaurant Owner Dashboard</title>
-    <!--<link href="style.css" rel="stylesheet" type="text/css" />-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -48,7 +47,6 @@
             background-color:rgba(44,62,80,0.7);
           }
           
-          /* Style the links inside the navigation bar */
           .topnav a {
             float: left;
             display: block;
@@ -59,19 +57,16 @@
             font-size: 17px;
           }
           
-          /* Change the color of links on hover */
           .topnav a:hover {
             background-color: black;
             color: white;
           }
           
-          /* Style the "active" element to highlight the current page */
           .topnav a.active {
             background-color: black;
             color: white;
           }
           
-          /* Style the search box inside the navigation bar */
           .topnav input[type=text] {
             float: right;
             padding: 6px;
@@ -81,7 +76,6 @@
             font-size: 17px;
           }
           
-          /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
           @media screen and (max-width: 600px) {
             .topnav a, .topnav input[type=text] {
               float: none;
@@ -287,7 +281,6 @@
               url: "/restaurant/status/",
               data: JSON.stringify([{'Orderid':Orderid},{'Status':status}]),
               success: function (data) {
-                //this when ajax gets sucessfull message from server
                 console.log(data)
                 location.reload()
               }
@@ -295,7 +288,7 @@
         }
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var target = $(e.target).attr("href") // activated tab
+            var target = $(e.target).attr("href") 
             alert(target);
           });
         
@@ -316,7 +309,6 @@
                 <ul class="navbar-right">
                   <li><a href="/cart/checkout" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script></span></a></li>
                 </ul>
-                <!--end navbar-right -->
               </div>
         </nav>
 
@@ -345,10 +337,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!-- <div class="col-md-4">
-                            <div class="profile-work">
-                            </div>
-                        </div> -->
                         <div class="col-md-8">
                           <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -384,7 +372,7 @@
                                       <td>
                                         <div class="price-wrap">
                                           <var class="price">{{ord.Price}}</var>
-                                        </div> <!-- price-wrap .// -->
+                                        </div> 
                                       </td>
                                       <td class="text-right">
                                         {%if ord.Status == 's'%}
@@ -436,7 +424,7 @@
                                 <td>
                                   <div class="price-wrap">
                                     <var class="price">{{ord.Price}}</var>
-                                  </div> <!-- price-wrap .// -->
+                                  </div> 
                                 </td>
                               </tr>
                               {%endwith%}

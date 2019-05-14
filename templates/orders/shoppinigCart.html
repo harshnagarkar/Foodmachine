@@ -42,7 +42,6 @@
         background-color:rgba(44,62,80,0.7);
       }
       
-      /* Style the links inside the navigation bar */
       .topnav a {
         float: left;
         display: block;
@@ -53,19 +52,16 @@
         font-size: 17px;
       }
       
-      /* Change the color of links on hover */
       .topnav a:hover {
         background-color: black;
         color: white;
       }
       
-      /* Style the "active" element to highlight the current page */
       .topnav a.active {
         background-color: black;
         color: white;
       }
       
-      /* Style the search box inside the navigation bar */
       .topnav input[type=text] {
         float: right;
         padding: 6px;
@@ -75,7 +71,6 @@
         font-size: 17px;
       }
       
-      /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
       @media screen and (max-width: 600px) {
         .topnav a, .topnav input[type=text] {
           float: none;
@@ -208,12 +203,9 @@
     var total = 0.0
 
     function updateQuantity(menuname,quan){
-      // console.log(menuname)
       var processid = menuname
       var processbutton = processid+"input"
-      // console.log(processbutton)
       var quanval = parseInt(document.getElementById(processbutton).value)
-      // console.log(quanval)
       var datastring = localStorage.getItem('cart')
       var data = JSON.parse(datastring)
       data["%s",processid][1]['quantity'] = quanval
@@ -271,7 +263,6 @@
               url: "/cart/total",
               data: localStorage.getItem('cart'),
               success: function (data) {
-                //this when ajax gets sucessfull message from server
                 console.log(data)
               }
             })
@@ -287,45 +278,23 @@
             <a href="/restaurant/rest-list/">Restaurants</a>
             <a href="/restaurant/food-list/">Food Listings</a>
             <a href="/dashboard/">My Account</a>
-          </ul> <!--end navbar-left -->
-      
+          </ul> 
           <ul class="navbar-right">
             <li><a href="/cart/checkout/" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script></span></a></li>
-          </ul> <!--end navbar-right -->
-        </div> <!--end container -->
+          </ul> 
+        </div> 
       </nav>
       
       
-      <div class="container"><!--
-        <div class="shopping-cart">
-          <div class="shopping-cart-header">
-            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
-            <div class="shopping-cart-total">
-              <span class="lighter-text">Total:</span>
-              <span class="main-color-text">$2,229.97</span>
-            </div>
-          </div> --><!--end shopping-cart-header -->
-     <!-- 
-          <ul class="shopping-cart-items">
-            <li class="clearfix">
-              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-              <span class="item-name">Sony DSC-RX100M III</span>
-              <span class="item-price">$849.99</span>
-              <span class="item-quantity">Quantity: 01</span>
-            </li>
-      
-          </ul>-->
-      
-          <!-- <a href="#" class="button">Checkout</a> -->
-        </div> <!--end shopping-cart -->
-      </div> <!--end container -->
+      <div class="container">
+        </div> 
+      </div> 
 
   <div class="container">
     <div class="row">
        <br>
                 <div class="col-md-12">
                     <div class="col-md-4 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
-                        <!--REVIEW ORDER-->
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">
                                 <h4>Review Order</h4>
@@ -350,12 +319,10 @@
                             </div>
                             
                         </div>
-                        <!--REVIEW ORDER END-->
 
                       
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
-                        <!--SHIPPING METHOD-->
                         <div class="panel panel-default">
                             <div class="panel-heading text-center"><h4>Current Cart</h4></div>
                             <div class="panel-body">
