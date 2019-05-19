@@ -1,30 +1,29 @@
 {% extends "layout.html" %} {extends "../layout.html"}
 {% block content %}
 <!-- <h1>Restaurant list webpage</h1> -->
- {% load restags %}
+{% load restags %}
 <div>
-   
-   
-   <form method = 'GET' style="background-color: white;width: auto;">
-        <h5 style = "color: black"> Filter with Cuisine:</h5>
-    <input style= "color: black" list = "cuisine" name = 'Cuisine' placeholder = 'American'>
-     <datalist id = "cuisine">
-    {% getCuisine as c %}  
-    {% for element in c %}
-   
-    <option style = "color: black" value = '{{element.Cuisine_parent}}'>{{element.Cusine_parent}}</option>
-    {% endfor %}
-    </datalist>
-        <button type = "submit">Search</button> 
-        <button type = "Submit" name = "sort" style = "color: black; border-style: dotted;" value = "Sort from A-Z" style="background: white;">
-                Sort All Restaurants (A-Z)
-            </button>
+
+
+    <form method='GET' style="background-color: white;width: auto;">
+        <h5 style="color: black"> Filter with Cuisine:</h5>
+        <input style="color: black" list="cuisine" name='Cuisine' placeholder='American'>
+        <datalist id="cuisine">
+            {% getCuisine as c %}
+            {% for element in c %}
+
+            <option style="color: black" value='{{element.Cuisine_parent}}'>{{element.Cusine_parent}}</option>
+            {% endfor %}
+        </datalist>
+        <button type="submit">Search</button>
+        <button type="Submit" name="sort" style="color: black; border-style: dotted;" value="Sort from A-Z"
+            style="background: white;">
+            Sort All Restaurants (A-Z)
+        </button>
     </form>
-    <!-- <form action = '#' method = 'GET'>
-       
-        <!-- <button type = "submit" name = 'sort'>Sort</button> -->
+
     </form> -->
-  
+
 </div>
 
 <!--Need to filter; Default, Cuisines, Alphabetical order
@@ -33,61 +32,33 @@
     if customer selects a certain cuisine, dynamically reload with only Restaurants with that Cuisine
     For alphabetical order, simply scan the first letter of each Restaurant's name and sortl
     if first letters match, compare second letters, and so on-->
-<div class= "row">
-       
-        {% getRest as get %}
-        {% for ele in query_set %}
-        <div class="column">
-                
-                <div class="card" style=" height:auto; width:auto; padding: 10px;">
-                    
-                    <img src="{{ele.Res_Pic.url}}" style=" height: 200px; width: 200px;" >
-                    <div style="height: 25px"><font size = "5" color = "black">{{ele.Res_Name}}</font></div>
-                    <input type = "text"  id = "menuID" type = "hidden">
-                    <p class="price">{{ele.Res_Address}}</p>
-                    <p class = "price">{{ele.Res_Contact}} </p>
-                    <p style="font-size: 15px">{{ele.Res_Description}} </p>
-                    <!-- <p>
-                            <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
-                        </p> -->
-                        <a style="position: relative; bottom: 0px" href = "../{{ele.Res_Name}}">
-                            <button class="button" style="width: 100px" >View Menu</button>
-                        </a>
-                        <!-- <p>
-                            <a href = "../{{ele.Res_Name}}"><i class = "edit">View Menu</i></a>
-                        </p> -->
-                    
-                   
-                </div>
-            
+<div class="row">
+
+    {% getRest as get %}
+    {% for ele in query_set %}
+    <div class="column">
+
+        <div class="card" style=" height:auto; width:auto; padding: 10px;">
+
+            <img src="{{ele.Res_Pic.url}}" style=" height: 200px; width: 200px;">
+            <div style="height: 25px">
+                <font size="5" color="black">{{ele.Res_Name}}</font>
+            </div>
+            <input type="text" id="menuID" type="hidden">
+            <p class="price">{{ele.Res_Address}}</p>
+            <p class="price">{{ele.Res_Contact}} </p>
+            <p style="font-size: 15px">{{ele.Res_Description}} </p>
+            <a style="position: relative; bottom: 0px" href="../{{ele.Res_Name}}">
+                <button class="button" style="width: 100px">View Menu</button>
+            </a>
+
         </div>
-        <br>
-        <br>
-        {% endfor %}
+
+    </div>
+    <br>
+    <br>
+    {% endfor %}
 
 </div>
-<!-- <table>
-    <tbody>
-        <tr>
-            <td>Title</td>
-            <td>Address</td>
-            <td>Contact</td>
-            <td>Description</td>
-        </tr>
-        
-            {% load restags %}
-            {% getRest as get %}
-            {% for ele in get %}
-            <tr>
-                <td>{{ele.Res_Name}}</td>
-                <td>{{ele.Res_Address}}</td>
-                <td>{{ele.Res_Contact}}</td>
-                <td>{{ele.Res_Description}}</td>
-                <td><input type = 'button' name = 'view'>View Menu</td>
-            </tr> 
-        {% endfor %}
-
-    </tbody>
-</table> -->
 
 {% endblock %}

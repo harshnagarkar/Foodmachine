@@ -2,29 +2,31 @@
 <html>
 
 {% block content %}
-    <body>
-        <form>
-          <h1>Restaurant Name</h1>
-          <p>{{Res_Menu}}</p>
-          <p>{{restaurant.contact}}</p>
-          
-          <h2>Appetizers</h2>
-          {{check to see if restaurant has any appetizer items}}
-          <p>{{menu.item}}............${{menu.price}}</p>
-          <h2>Entrees</h2>
-          {{check to see if restaurant has any entree items}}
-        
-          <p>{{menu.item}}............${{menu.price}}</p>
-          <h2>Side Dishes</h2>
-          {{check to see if restaurant has any side dish items}}
-          <p>{{menu.item}}............${{menu.price}}</p>
-          <h2>Desserts</h2>
-          {{check to see if restaurant has any dessert items}}
-          <p>{{menu.item}}............${{menu.price}}</p>
-          <h2>Beverages</h2>
-          {{check to see if restaurant has any beverage items}}
-          <p>{{menu.item}}............${{menu.price}}</p>
-        </form>
-    </body>
+
+<body>
+  <form>
+    <h1>Restaurant Name</h1>
+    <p>{{Res_Menu}}</p>
+    <p>{{restaurant.contact}}</p>
+
+    <h2>Appetizers</h2>
+    {{check to see if restaurant has any appetizer items}}
+    <p>{{menu.item}}............${{menu.price}}</p>
+    <h2>Entrees</h2>
+    {{check to see if restaurant has any entree items}}
+
+    <p>{{menu.item}}............${{menu.price}}</p>
+    <h2>Side Dishes</h2>
+    {{check to see if restaurant has any side dish items}}
+    <p>{{menu.item}}............${{menu.price}}</p>
+    <h2>Desserts</h2>
+    {{check to see if restaurant has any dessert items}}
+    <p>{{menu.item}}............${{menu.price}}</p>
+    <h2>Beverages</h2>
+    {{check to see if restaurant has any beverage items}}
+    <p>{{menu.item}}............${{menu.price}}</p>
+  </form>
+</body>
 {% endblock content %}
+
 </html>

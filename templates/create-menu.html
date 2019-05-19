@@ -1,75 +1,70 @@
 {% load static %}
 {% load restags %}
+
 <head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link href="{% static 'stylesheets/style.css' %}" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-        <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="{% static 'stylesheets/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+    <link rel="shortcut icon" type="image/favicon" href="{% static 'img/favicon.ico' %}">
 </head>
 <script>
-function refreshParent()
-{
-window.opener.location.reload(true);
-}
+    function refreshParent() {
+        window.opener.location.reload(true);
+    }
 </script>
 <style>
-    h3{
+    h3 {
         color: white;
     }
-    label{
+
+    label {
         color: white;
     }
 </style>
-<body background="{% static 'img/pic1.jpg' %}"  onunload="javascript:refreshParent()">
+
+<body background="{% static 'img/pic1.jpg' %}" onunload="javascript:refreshParent()">
     <div class="container">
-    {% if user.is_authenticated %}
-<form action = "/restaurant/createdmenu/" enctype="multipart/form-data" method="POST" onsubmit="add()">
-    {% csrf_token %}
-    <h2>PLease enter details below</h2>
-    <label>Item</label>
-    <input type = 'text' name = 'Item' placeholder = 'Item Name'>
-   
-  <label for = "Description"> Create Item Description:</label>
-  <input type = 'text' name = 'Description' placeholder = 'A delicate meat...' > 
-   <br>
-   <label for = "Price">Create Item Price: </label><input type = 'number' step = 'any' name = 'Price' placeholder = '0.00'>
-   <br>
-   <label for = "Label">Choose Item Label: 
-   <input list = 'label' name = 'Label' placeholder = 'Appetizer'></label>
-   <datalist id = 'label'>
-       {% getLabel as lab %}
-     {% for e in lab %}
-     <option>{{e.Label_Name}}</option>
-     {% endfor %}
-   </datalist>
-   <br>
-   <input type = 'file' name = 'Picture'>
-   <br>
-   <label>Pick a Cuisine Type: 
-   <input list = "cuisine" name = 'Cuisine' placeholder = 'Fast food'></label>
-   
-   <datalist id = "cuisine">
-    {% getCuisine as c %}  
-    {% for element in c %}
-      
-    <option value = '{{element.Cuisine_parent}}'>'
-    {% endfor %}
-   </datalist>
- 
-   <br>
-    <input  type="submit" name="Submit" >
-    <!--<div ><h3 id = 'success'>Item Successfully Added to Menu</h3></div>-->
-    <!-- <script>
-       function add(){
-            var x = document.getElementById('success')
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 200);
-        }
-    </script> -->
-    {% else %}
-    Please login to add menu.
-    {%endif%}
+        {% if user.is_authenticated %}
+        <form action="/restaurant/createdmenu/" enctype="multipart/form-data" method="POST" onsubmit="add()">
+            {% csrf_token %}
+            <h2>PLease enter details below</h2>
+            <label>Item</label>
+            <input type='text' name='Item' placeholder='Item Name'>
+
+            <label for="Description"> Create Item Description:</label>
+            <input type='text' name='Description' placeholder='A delicate meat...'>
+            <br>
+            <label for="Price">Create Item Price: </label><input type='number' step='any' name='Price'
+                placeholder='0.00'>
+            <br>
+            <label for="Label">Choose Item Label:
+                <input list='label' name='Label' placeholder='Appetizer'></label>
+            <datalist id='label'>
+                {% getLabel as lab %}
+                {% for e in lab %}
+                <option>{{e.Label_Name}}</option>
+                {% endfor %}
+            </datalist>
+            <br>
+            <input type='file' name='Picture'>
+            <br>
+            <label>Pick a Cuisine Type:
+                <input list="cuisine" name='Cuisine' placeholder='Fast food'></label>
+
+            <datalist id="cuisine">
+                {% getCuisine as c %}
+                {% for element in c %}
+
+                <option value='{{element.Cuisine_parent}}'>'
+                    {% endfor %}
+            </datalist>
+
+            <br>
+            <input type="submit" name="Submit">
+            {% else %}
+            Please login to add menu.
+            {%endif%}
     </div>
-</form>
+    </form>
 </body>

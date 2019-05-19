@@ -55,6 +55,7 @@
 			text-decoration: none;
 			font-size: 17px;
 		}
+
 		.topnav a:hover {
 			background-color: black;
 			color: white;
@@ -219,8 +220,11 @@
 			{% endif %}
 			<ul class="navbar-right">
 				<li><a href="/cart/checkout" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
-							<script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
-							</span></a></li>
+							<script>
+								var data = JSON.parse(localStorage.getItem('quantity'))['Quantity'];
+								document.write(data);
+							</script>
+						</span></a></li>
 			</ul>
 		</div>
 	</nav>
@@ -244,7 +248,7 @@
 					<p>Thank you for choosing us as your food delivery.</p>
 
 				</div>
-				
+
 				<hr class="clearfix w-100 d-md-none pb-3">
 
 				<div class="col-md-3 mb-md-0 mb-3">

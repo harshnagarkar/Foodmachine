@@ -1,34 +1,36 @@
-
 {% extends 'layout.html'%}{% block content%}
 {% load static %}
 
 <div class="signin" style="width: fit-content">
-{% if not user.is_authenticated %}
-<form method="post">
-    {% csrf_token %}
-<h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
-<input type="text" name="username" placeholder="Username" /><br /><br />
-<input type="password" name="password" placeholder="Password" /><br /><br />
-<input type="submit" value="Log In" style=" border-radius: 5px; color: gray; "/></a><br /><br />
-</form>
+    {% if not user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        <h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
+        <input type="text" name="username" placeholder="Username" /><br /><br />
+        <input type="password" name="password" placeholder="Password" /><br /><br />
+        <input type="submit" value="Log In" style=" border-radius: 5px; color: gray; " /></a><br /><br />
+    </form>
 </div>
 <div id="containerr" style="text-align: center; background-color: white">
-{% if form.non_field_errors %}
-<font size="0.6">
-<ul class='form-errors'>
-    {% for error in form.non_field_errors %}
-    <li>{{ error }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-</font>
-    <a href="/password_reset/" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forget password</a><br>
-Don't have account?<a href="/dashboard/registration/"  style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">&nbsp;Sign Up</a>
-{% else %}
-You have already logged in
-Go to Homepage <a href="/" >Click Here</a>
-{%endif%}
+    {% if form.non_field_errors %}
+    <font size="0.6">
+        <ul class='form-errors'>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </font>
+    <a href="/password_reset/" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forget
+        password</a><br>
+    Don't have account?<a href="/dashboard/registration/"
+        style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">&nbsp;Sign Up</a>
+    {% else %}
+    You have already logged in
+    Go to Homepage <a href="/">Click Here</a>
+    {%endif%}
 </div>
 {% endblock %}
 </body>
+
 </html>

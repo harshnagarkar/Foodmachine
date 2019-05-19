@@ -1,44 +1,48 @@
 {% extends "layout.html" %}
 
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Foodmachine</title>
-<link href="logn.css" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-<link rel="shortcut icon" type="image/favicon" href="./favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Foodmachine</title>
+  <link href="logn.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+  <link rel="shortcut icon" type="image/favicon" href="./favicon.ico">
 </head>
 
 <body>
-   <div class="signin" >
-<form>
-<h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br/>Log In</h2>
-<input type="text" name="username" placeholder="Username"/><br /><br />
-<input type="password" name="password" placeholder="Password" /><br /><br />
-<a href="cong.html"><input type="button" value="Log In" /></a><br /><br />
-<div id="container" style="background-color: bisque" >
-<a href="re.html" style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Reset password?</a>
-    <a href="for.html" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forget password</a>
-    </div><br /><br /><br /><br /><br /><br />
+  <div class="signin">
+    <form>
+      <h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
+      <input type="text" name="username" placeholder="Username" /><br /><br />
+      <input type="password" name="password" placeholder="Password" /><br /><br />
+      <a href="cong.html"><input type="button" value="Log In" /></a><br /><br />
+      <div id="container" style="background-color: bisque">
+        <a href="re.html" style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Reset
+          password?</a>
+        <a href="for.html" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forget
+          password</a>
+      </div><br /><br /><br /><br /><br /><br />
 
-{% block content %}
-<divs style="background-color: blanchedalmond" >
-  <h3>Login</h3>
-  <form method="post" style="background-color: blanchedalmond; width: 350px; border-radius: 5px;" >
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-   <br>
-  <p><strong>-- OR --</strong></p>
-  <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
-  
+      {% block content %}
+      <divs style="background-color: blanchedalmond">
+        <h3>Login</h3>
+        <form method="post" style="background-color: blanchedalmond; width: 350px; border-radius: 5px;">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Login</button>
+        </form>
+        <br>
+        <p><strong>-- OR --</strong></p>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
 
 
-Don't have account?<a href="/dashboard/registration/" style="font-family:'Play', sans-serif;">&nbsp;Sign Up</a>
 
-</form>
-</div>
+        Don't have account?<a href="/dashboard/registration/" style="font-family:'Play', sans-serif;">&nbsp;Sign Up</a>
+
+    </form>
+  </div>
 
 </body>{% endblock content %}
+
 </html>

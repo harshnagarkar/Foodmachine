@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import json
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
+
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from restaurant.models import *
@@ -19,8 +19,6 @@ def cartpricecalculator(request):
     responsedata ={}
     if request.method == 'POST':
         data = json.loads(request.body)
-        # print(data)
-        # print(data['MeatZZa'][1]['quantity'])
         total = 0
         mid = {}
         rid = ""
@@ -32,11 +30,8 @@ def cartpricecalculator(request):
                 if not rig == rid:
                     return HttpResponseServerError()
             total += priceval
-        #     # mvdata = {mig:v}
             mid[k] = {v[1]['quantity']: priceval}
-            # print(mid)
             print(k+" ",priceval)
-        #   responsedata[k] = priceval
         tax = total*0.07
         request.session['pref'] =''
         request.session['mid'] = json.dumps(mid)
@@ -73,8 +68,8 @@ def checkoutpage(request):
 def updatePref(request):
     if request.type =="POST":
         pref = json.loads(request.body)
-        # id = pref[0]['orderno']
-        #
+        
+        
         request.session['pref'] = pref['content']
         return HttpResponse('200 Okay')
 
@@ -83,11 +78,6 @@ def orderProcessing(request):
     if user.userprofile.userType == 'c':
         orderId = databaseEntry(mig=request.session['mid'],pref=request.session['pref'],rig=request.session['rid'],status='s',userorder=request.user,price=request.session['total'])
         rurl = '/cart/status/'+str(orderId)+"/"
-        # subject = "You just placed an order right now"+str(orderId)
-        # Message = "Your order has been submitted sucessfully. Your link to check status is \n"+ rurl
-        # me = 'admin@foodmachine.ml'
-        # to = request.user.email
-        # send_mail(subject,Message,me,to,fail_silently=False)
         return redirect(rurl)
     else:
         return render(request,'orders/notorder.html')

@@ -1,19 +1,22 @@
 from django import forms
 from django.contrib.auth.models import AbstractUser, User
 
-class SignUpForm(forms.Form): 
+
+class SignUpForm(forms.Form):
 
     username = forms.CharField(label='username', max_length=100)
-    FirstName = forms.CharField(label='FirstName', max_length = 100)
-    LastName = forms.CharField(label = 'LastName', max_length = 100)
+    FirstName = forms.CharField(label='FirstName', max_length=100)
+    LastName = forms.CharField(label='LastName', max_length=100)
     passw = forms.CharField(widget=forms.PasswordInput)
     confirmPass = forms.CharField(widget=forms.PasswordInput)
     types = forms.CharField(max_length=1, label='what type are you?')
-    Email = forms.EmailField( max_length=70)
+    Email = forms.EmailField(max_length=70)
+
     class Meta:
         model = User
-        fields = ('username','Email','FirstName','LastName','passw', 'confirmPass')
-        
+        fields = ('username', 'Email', 'FirstName',
+                  'LastName', 'passw', 'confirmPass')
+
 
 class RestaurantForm(forms.Form):
 
@@ -38,7 +41,6 @@ class RestaurantForm(forms.Form):
                   'passw', 'confirmPass', 'questions', 'secAnswer')
 
 
-
 class UpdatePassword(forms.Form):
     newPassword = forms.CharField(widget=forms.PasswordInput)
     confirmPassword = forms.CharField(widget=forms.PasswordInput)
@@ -47,14 +49,15 @@ class UpdatePassword(forms.Form):
         model = User
         fields = ('newPassword', 'confirmPassword')
 
+
 class UpdateProfile(forms.Form):
 
     fName = forms.CharField(label='fName', max_length=100)
-    lName = forms.CharField(label = 'lName', max_length = 100)
-    uEmail = forms.EmailField(label = 'uEmail')
-    uPhone = forms.CharField(label = 'uPhone')
-    uAddress = forms.CharField(label = 'uAddress')
-    uPayment = forms.CharField(label = 'uPayment')
+    lName = forms.CharField(label='lName', max_length=100)
+    uEmail = forms.EmailField(label='uEmail')
+    uPhone = forms.CharField(label='uPhone')
+    uAddress = forms.CharField(label='uAddress')
+    uPayment = forms.CharField(label='uPayment')
 
     class Meta:
         model = User

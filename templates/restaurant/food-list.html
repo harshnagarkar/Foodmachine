@@ -2,7 +2,6 @@
 {% block content %}
 <h1 style="width: fit-content;background-color: white;align-items: center">Food Menu Card</h1>
 <script>
-
     function buttonfun() {
         window.open("/restaurant/createmenu/", "mywindow", "width=400,height=550")
     }
@@ -10,18 +9,21 @@
     window.onunload = refreshParent;
 </script>
 <script>
-
-
     function addtocart(mitem, mprice) {
         var url = window.location.pathname;
         if (localStorage.getItem('res') == null) {
             localStorage.setItem('res', url.substring(url.lastIndexOf('/') + 1))
             if (localStorage.getItem('cart') == null) {
-                // var mobj = {}
-                // var countQ ={}
-                // var price = String(mprice)
-                var mobj = { [String(mitem)]: [{ 'price': mprice }, { 'quantity': 1 }] }
-                var countQ = { 'Quantity': 1 }
+                var mobj = {
+                    [String(mitem)]: [{
+                        'price': mprice
+                    }, {
+                        'quantity': 1
+                    }]
+                }
+                var countQ = {
+                    'Quantity': 1
+                }
                 var storeobj = JSON.stringify(mobj)
                 var storeCountq = JSON.stringify(countQ)
                 localStorage.setItem('cart', storeobj)
@@ -40,9 +42,12 @@
                     var storeCountq = JSON.stringify(parsequant)
                     localStorage.setItem('cart', storeobj)
                     localStorage.setItem('quantity', storeCountq)
-                }
-                else {
-                    obj['%s', mitem] = [{ "price": mprice }, { 'quantity': 1 }]
+                } else {
+                    obj['%s', mitem] = [{
+                        "price": mprice
+                    }, {
+                        'quantity': 1
+                    }]
                     parsequant['Quantity']++
                     var storeobj = JSON.stringify(obj)
                     console.log(localStorage.getItem('cart'))
@@ -51,16 +56,20 @@
                     localStorage.setItem('quantity', storeCountq)
                 }
             }
-        }
-        else {
+        } else {
             if (localStorage.getItem('res') == url.substring(url.lastIndexOf('/') + 1)) {
 
                 if (localStorage.getItem('cart') == null) {
-                    // var mobj = {}
-                    // var countQ ={}
-                    // var price = String(mprice)
-                    var mobj = { [String(mitem)]: [{ 'price': mprice }, { 'quantity': 1 }] }
-                    var countQ = { 'Quantity': 1 }
+                    var mobj = {
+                        [String(mitem)]: [{
+                            'price': mprice
+                        }, {
+                            'quantity': 1
+                        }]
+                    }
+                    var countQ = {
+                        'Quantity': 1
+                    }
                     var storeobj = JSON.stringify(mobj)
                     var storeCountq = JSON.stringify(countQ)
                     localStorage.setItem('cart', storeobj)
@@ -79,9 +88,12 @@
                         var storeCountq = JSON.stringify(parsequant)
                         localStorage.setItem('cart', storeobj)
                         localStorage.setItem('quantity', storeCountq)
-                    }
-                    else {
-                        obj['%s', mitem] = [{ "price": mprice }, { 'quantity': 1 }]
+                    } else {
+                        obj['%s', mitem] = [{
+                            "price": mprice
+                        }, {
+                            'quantity': 1
+                        }]
                         parsequant['Quantity']++
                         var storeobj = JSON.stringify(obj)
                         console.log(localStorage.getItem('cart'))
@@ -90,8 +102,7 @@
                         localStorage.setItem('quantity', storeCountq)
                     }
                 }
-            }
-            else {
+            } else {
                 alert('You cannot order from multiple restaurant in same order. Please use one restaurant per order');
             }
 
@@ -101,75 +112,71 @@
 
 
     function ajaxcall() {
-        $.ajax(
-            {
-                type: "POST",
-                url: "/cart/total",
-                // [{'orderno' : },{'status': }]
-                data: localStorage.getItem('cart'),
-                success: function () {
-                    console.log("sent tdata")
-                }
-            })
+        $.ajax({
+            type: "POST",
+            url: "/cart/total",
+            data: localStorage.getItem('cart'),
+            success: function () {
+                console.log("sent tdata")
+            }
+        })
     }
 
     ajaxcall()
 </script>
 {% load restags %}
 {% getLabel as l %}
-<form method = 'GET' style="margin-left: 20px; background-color: white; padding: 10px; border-radius: 5px; width: auto; color: black">
+<form method='GET'
+    style="margin-left: 20px; background-color: white; padding: 10px; border-radius: 5px; width: auto; color: black">
     Label:
-    <input list = "label" name = 'Label' placeholder = 'Entree' style="color: black;">
-    <datalist id = "label">
+    <input list="label" name='Label' placeholder='Entree' style="color: black;">
+    <datalist id="label">
         <option value=""></option>
-    {% for element in l %}
-        <option value = '{{element.Label_Name}}'>
-    {% endfor %}
+        {% for element in l %}
+        <option value='{{element.Label_Name}}'>
+            {% endfor %}
     </datalist>
     Cuisine:
-    <input list = "cuisine" name = 'Cuisine' placeholder = 'American' style="color: black;">
-    <datalist id = "cuisine">
+    <input list="cuisine" name='Cuisine' placeholder='American' style="color: black;">
+    <datalist id="cuisine">
         <option value=""></option>
-   {% getCuisine as c %}  
-   {% for element in c %}
-  
-   <option value = '{{element.Cuisine_parent}}'>
-   {% endfor %}
-   </datalist>
-   Search for item:
-   <input type = 'search' placeholder = 'Search...' name = 'searching' style="color: black;">
-   <i class = 'fa fa-search'></i>
-       <button type = "submit">Filter</button> 
-    </form>
+        {% getCuisine as c %}
+        {% for element in c %}
 
-    <div class="row">
-            {% for M in query_set %}
-            <div class="column">
-                
-                <div class="card" style=" height:auto; width:auto; padding: 10px;">
-                   
-                    <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;">
-                    <div style="height: 25px">
-                        <font size="5" color="black">{{M.Menu_Item}}</font>
-                    </div>
-                    <input type="text" value="{{M.Menu_Item_Id}}" id="menuID" type="hidden">
-                    <p class="price">${{M.Menu_ItemPrice}}</p>
-                    <p style="font-size: 10px">{{M.Menu_Item_Description}} </p>
-                    <!-- <p>
-                                        <button onclick="confirmDelete(this.id)" id = "{{M.Menu_Item_Id}}">Delete</button>
-                                    </p> -->
-        
-                        <br>
-                        <div>
-                            <p style="position: relative; bottom: 0px"><button class="button" style="width: 200px"
-                                    onclick="addtocart( '{{M.Menu_Item}}', '{{M.Menu_ItemPrice}}' )">Add to cart</button>
-                        </div>
-        
-                </div>
-        
-            </div>
-            <br>
-            <br>
+        <option value='{{element.Cuisine_parent}}'>
             {% endfor %}
+    </datalist>
+    Search for item:
+    <input type='search' placeholder='Search...' name='searching' style="color: black;">
+    <i class='fa fa-search'></i>
+    <button type="submit">Filter</button>
+</form>
+
+<div class="row">
+    {% for M in query_set %}
+    <div class="column">
+
+        <div class="card" style=" height:auto; width:auto; padding: 10px;">
+
+            <img src="{{M.Menu_Pic.url}}" style=" height: 200px; width: 200px;">
+            <div style="height: 25px">
+                <font size="5" color="black">{{M.Menu_Item}}</font>
+            </div>
+            <input type="text" value="{{M.Menu_Item_Id}}" id="menuID" type="hidden">
+            <p class="price">${{M.Menu_ItemPrice}}</p>
+            <p style="font-size: 10px">{{M.Menu_Item_Description}} </p>
+
+            <br>
+            <div>
+                <p style="position: relative; bottom: 0px"><button class="button" style="width: 200px"
+                        onclick="addtocart( '{{M.Menu_Item}}', '{{M.Menu_ItemPrice}}' )">Add to cart</button>
+            </div>
+
         </div>
+
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+</div>
 {% endblock content %}

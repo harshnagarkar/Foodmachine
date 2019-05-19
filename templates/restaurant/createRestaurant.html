@@ -5,19 +5,20 @@
 
 {% if user.is_authenticated and  finding.userType != 'c' and finding.userType != 'd' %}
 <div style="align-self: center; width: auto; height: auto; margin: auto;">
-    <form action="/restaurant/sucessRestaurant/" method="POST" enctype="multipart/form-data" style ="align-self: center; background-color: wheat; ">
+    <form action="/restaurant/sucessRestaurant/" method="POST" enctype="multipart/form-data"
+        style="align-self: center; background-color: wheat; ">
         {% csrf_token %}
         <h2 style="color: #fff;">Create Restaurant</h2>
-        <input type="text" name="resname" placeholder="Restaurant Name" ><br><br>
+        <input type="text" name="resname" placeholder="Restaurant Name"><br><br>
         <input type="text" name="resaddress" placeholder="Address of the restaurant"><br><br>
         <input type="text" name="resdescription" placeholder="Restaurant Description"><br><br>
         <input type="tel" name="rescontact" placeholder="Contact phone number"><br><br>
         <label>Choose the list below or type
-        <input list="items" name="rescusine"></label>
-            <datalist id ="items">
-                {% getCuisine as Cpass %}
+            <input list="items" name="rescusine"></label>
+        <datalist id="items">
+            {% getCuisine as Cpass %}
             {% for cusine in Cpass %}
-            <option value= "{{cusine.Cuisine_parent}}"></option>{{cusine.Cuisine_parent}}</option>
+            <option value="{{cusine.Cuisine_parent}}"></option>{{cusine.Cuisine_parent}}</option>
             {% endfor %}
         </datalist>
         <br>
@@ -34,8 +35,8 @@
         </ul>
         {% endif %}
     </font>
-{% else %}
-You need to login, or you already own a restaurant.
-{% endif %}
-{%endwith%}
-{% endblock content%}
+    {% else %}
+    You need to login, or you already own a restaurant.
+    {% endif %}
+    {%endwith%}
+    {% endblock content%}

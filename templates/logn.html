@@ -1,26 +1,29 @@
 {# extends "layout.html" #}
-   <div class="signin">
-{# if not user.is_authenticated #}
-<form method="POST"> 
-    {% csrf_token %}
-<h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br/>Log In</h2>
-<input type="text" name="username" placeholder="Username"  autofocus required id="id_username"/><br /><br />
-<input type="password" name="password" placeholder="Password"  required id="id_password" /><br /><br />
-<button type="submit">Login</button><br /><br />
-<div id="container">
-<a href="re.html" style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Reset password?</a>
-    <a href="for.html" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forgot password</a>
-    <a href="home.html" style="font-family:Tahoma, Geneva, sans-serif;">Home</a>
-    </div><br /><br /><br /><br />
-    
-Don't have account?<a href="sgnup.html" style="font-family:'Play', sans-serif;">&nbsp;Sign Up</a>
+<div class="signin">
+    {# if not user.is_authenticated #}
+    <form method="POST">
+        {% csrf_token %}
+        <h2 style="color:#E9EC1D  ;"><span>Foodmachine </span> <br />Log In</h2>
+        <input type="text" name="username" placeholder="Username" autofocus required id="id_username" /><br /><br />
+        <input type="password" name="password" placeholder="Password" required id="id_password" /><br /><br />
+        <button type="submit">Login</button><br /><br />
+        <div id="container">
+            <a href="re.html" style=" margin-right:0px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Reset
+                password?</a>
+            <a href="for.html" style=" margin-left:30px; font-size:13px; font-family:Tahoma, Geneva, sans-serif;">Forgot
+                password</a>
+            <a href="home.html" style="font-family:Tahoma, Geneva, sans-serif;">Home</a>
+        </div><br /><br /><br /><br />
 
-</form>
-{# else #}
-<br><br><br><br><br><br><br><br>
-You are already logged 
-{# endif #}
+        Don't have account?<a href="sgnup.html" style="font-family:'Play', sans-serif;">&nbsp;Sign Up</a>
+
+    </form>
+    {# else #}
+    <br><br><br><br><br><br><br><br>
+    You are already logged
+    {# endif #}
 </div>
 
 </body>
+
 </html>

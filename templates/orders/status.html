@@ -1,17 +1,20 @@
 {%extends 'layout.html' %}{%block content %}
 <div style="text-align: center; height: 60vh; background: white ">
-<h1> Your order is</h1><br> 
+    <h1> Your order is</h1><br>
 
- {%if order.Status == 's'%}
- <h2>Submitted</h2>
- {%elif order.Status == 'r'%}
- <h2>Cooking</h2>
- {%elif order.Status == 'd'%}
- <h2>Your order will be delivered soon</h2>
- {%endif%}
- <script>localStorage.removeItem('cart');localStorage.removeItem('quantity');</script>
+    {%if order.Status == 's'%}
+    <h2>Submitted</h2>
+    {%elif order.Status == 'r'%}
+    <h2>Cooking</h2>
+    {%elif order.Status == 'd'%}
+    <h2>Your order will be delivered soon</h2>
+    {%endif%}
+    <script>
+        localStorage.removeItem('cart');
+        localStorage.removeItem('quantity');
+    </script>
 
- <h4>If order is not received in 40 min please call us</h4>
+    <h4>If order is not received in 40 min please call us</h4>
 </div>
 
 {%endblock%}

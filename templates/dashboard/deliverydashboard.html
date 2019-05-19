@@ -1,18 +1,19 @@
 <!doctype html>
 {% csrf_token %}
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Restaurant Owner Dashboard</title>
     <!--<link href="style.css" rel="stylesheet" type="text/css" />-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
         id="bootstrap-css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -299,25 +300,27 @@
     }
 </style>
 <script>
-     function ajaxOrderCall(Orderid, status) {
-            $.ajax(
-                {
-                    type: "POST",
-                    url: "/restaurant/delivery/",
-                    data: JSON.stringify([{'Orderid': Orderid }, { 'Status': status }]),
-                    success: function (data) {
-                        //this when ajax gets sucessfull message from server
-                        console.log(data)
-                        location.reload()
-                    }
-                })
-        }
+    function ajaxOrderCall(Orderid, status) {
+        $.ajax({
+            type: "POST",
+            url: "/restaurant/delivery/",
+            data: JSON.stringify([{
+                'Orderid': Orderid
+            }, {
+                'Status': status
+            }]),
+            success: function (data) {
+                //this when ajax gets sucessfull message from server
+                console.log(data)
+                location.reload()
+            }
+        })
+    }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var target = $(e.target).attr("href") // activated tab
         alert(target);
     });
-
 </script>
 
 <body>
@@ -334,8 +337,11 @@
             {% endif %}
             <ul class="navbar-right">
                 <li><a href="/cart/checkout/" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">
-                            <script>var data = JSON.parse(localStorage.getItem('quantity'))['Quantity']; document.write(data); </script>
-                            </span></a></li>
+                            <script>
+                                var data = JSON.parse(localStorage.getItem('quantity'))['Quantity'];
+                                document.write(data);
+                            </script>
+                        </span></a></li>
             </ul>
             <!--end navbar-right -->
         </div>
@@ -378,7 +384,8 @@
                                 <thead class="text-muted">
                                     <tr>
                                         <th scope="col" style="color: black">Order</th>
-                                        <th scope="col" width="120" style="color: black;">Items{Item_name{Quanity:price}}</th>
+                                        <th scope="col" width="120" style="color: black;">
+                                            Items{Item_name{Quanity:price}}</th>
                                         <th scope="col" width="120" style="color: black;">Price</th>
                                         <th scope="col" width="200" class="text-right" style="color: black;">Action</th>
                                     </tr>
@@ -431,12 +438,13 @@
                             </thead>
                             <tbody>
                                 {% for ord in My %}
-                        
+
                                 <tr>
                                     <td>
                                         <figure class="media">
                                             <figcaption class="media-body">
-                                                <h6 style="color: black; font-size: 22px;" class="title text-truncate">{{ord.Order_Id}} </h6>
+                                                <h6 style="color: black; font-size: 22px;" class="title text-truncate">
+                                                    {{ord.Order_Id}} </h6>
                                                 <dl class="param param-inline small">
                                                     <dt>Items: </dt>
                                                     {{ord.Menu_Item}}
@@ -454,7 +462,7 @@
                                     </td>
 
                                 </tr>
-                        
+
                                 {%endfor%}
                             </tbody>
                         </table>
