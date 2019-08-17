@@ -4,9 +4,9 @@ A django implementation of food delivery app.
 
 Food machine is a webapp developed upon django framework.
 We used
-1)Django inhouse functions.
+1) Django inhouse functions.
 This was done for logging people into system. Storing address etc.
-2)Webstorage Api
+2) Webstorage Api
 We use local storage to store the cart, inspiration from uber eats.
 
 3) Sendgrid Api and foodmachine.ml domain name from freenom
